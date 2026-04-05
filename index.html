@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<meta name="description" content="Multiply Masters – International Multiplication Platform for Grades 4–6 worldwide">
-<title>Multiply Masters – International Edition</title>
+<meta name="description" content="Numara – Nigeria Pilot Phase 0 · NERDC Primary 4–6 · Two-classroom RCT · Research edition">
+<title>Numara – Nigeria Pilot · Phase 0 · NERDC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/opendyslexic" rel="stylesheet">
@@ -56,7 +56,7 @@ body.hc{--bg:#000;--bg2:#111;--surface:#1a1a1a;--surface2:#222;--border:#555;--t
 body.lg{font-size:19px;}
 body.lg .g-prob{font-size:52px!important;}
 /* RTL */
-[dir="rtl"] .step-hdr,.pp-lbl-row,[dir="rtl"] .lb-row,[dir="rtl"] .sh-nav{flex-direction:row-reverse;}
+[dir="rtl"] .step-hdr,[dir="rtl"] .pp-lbl-row,[dir="rtl"] .lb-row,[dir="rtl"] .sh-nav{flex-direction:row-reverse;}
 [dir="rtl"] .sh-tabs{margin-left:0;margin-right:auto;}
 [dir="rtl"] .prog-lbl{flex-direction:row-reverse;}
 [dir="rtl"] .t-tabs{flex-direction:row-reverse;}
@@ -115,21 +115,71 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
 /* ══════════════════════════════════════════════
-   REGION SELECT SCREEN
+   REGION SELECT SCREEN — Smart Default Edition
+   First view: confirm card (no wall of options)
+   Advanced view: full language + curriculum grid
 ══════════════════════════════════════════════ */
-#region-select{background:linear-gradient(145deg,#1a1a3e 0%,#2d2d7e 50%,#1a3a2e 100%);}
-.region-wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px;text-align:center;}
-.globe-logo{font-size:64px;margin-bottom:8px;animation:pop .6s ease;}
-.intl-title{font-family:'Fredoka One',cursive;font-size:48px;color:#fff;line-height:1;}
-.intl-title span{color:#fbbf24;}
-.intl-sub{font-size:16px;color:rgba(255,255,255,.7);font-weight:600;margin:10px 0 36px;}
-.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:32px;}
-.lang-card{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:18px 14px;cursor:pointer;transition:all .2s;text-align:center;}
-.lang-card:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.4);transform:translateY(-3px);}
-.lang-card.selected{border-color:#fbbf24;background:rgba(251,191,36,.15);}
-.lang-flag{font-size:32px;display:block;margin-bottom:8px;}
-.lang-name{font-size:15px;font-weight:800;color:#fff;}
-.lang-native{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px;}
+#region-select{background:#f7f8fc;}
+.region-wrap{max-width:560px;margin:0 auto;padding:60px 20px 80px;}
+
+/* ── Smart-default confirm card ── */
+.rs-confirm-card{background:#fff;border-radius:18px;border:1px solid var(--border);padding:32px;box-shadow:var(--shadow-lg);}
+.rs-confirm-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.rs-confirm-icon{width:52px;height:52px;border-radius:14px;background:var(--indigo-lt);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.rs-confirm-rows{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.rs-confirm-row{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--border);background:#fff;gap:12px;}
+.rs-confirm-row:last-child{border-bottom:none;}
+.rs-confirm-row-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0;}
+.rs-confirm-row-label{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;min-width:80px;}
+.rs-confirm-row-value{font-size:14px;font-weight:800;color:var(--text);flex:1;}
+.rs-confirm-change{font-size:12px;font-weight:800;color:var(--indigo);cursor:pointer;text-decoration:none;flex-shrink:0;}
+.rs-confirm-change:hover{text-decoration:underline;}
+.rs-confirm-actions{display:flex;flex-direction:column;gap:10px;}
+.rs-skip-link{text-align:center;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;padding:6px;}
+.rs-skip-link:hover{color:var(--indigo);}
+
+/* ── Advanced selector (hidden until "Change" is clicked) ── */
+.rs-advanced{display:none;}
+.rs-advanced.open{display:block;}
+.rs-adv-header{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.rs-adv-back{font-size:13px;font-weight:800;color:var(--indigo);cursor:pointer;display:flex;align-items:center;gap:5px;}
+.rs-adv-back:hover{text-decoration:underline;}
+.rs-section-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:10px;}
+
+/* Language list — compact rows, not cards ── */
+.lang-list{display:flex;flex-direction:column;gap:4px;margin-bottom:20px;max-height:300px;overflow-y:auto;}
+.lang-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;cursor:pointer;border:1.5px solid transparent;background:var(--surface2);transition:all .15s;}
+.lang-row:hover{background:var(--indigo-lt);border-color:var(--indigo);}
+.lang-row.selected{border-color:var(--indigo);background:var(--indigo-lt);}
+.lang-row-flag{font-size:20px;flex-shrink:0;}
+.lang-row-name{font-size:14px;font-weight:800;flex:1;}
+.lang-row-native{font-size:12px;color:var(--muted);font-weight:600;}
+.lang-row-check{color:var(--indigo);font-size:16px;font-weight:900;opacity:0;}
+.lang-row.selected .lang-row-check{opacity:1;}
+
+/* Curriculum list — compact rows ── */
+.curr-list{display:flex;flex-direction:column;gap:4px;margin-bottom:20px;max-height:280px;overflow-y:auto;}
+.curr-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;cursor:pointer;border:1.5px solid transparent;background:var(--surface2);transition:all .15s;}
+.curr-row:hover{background:var(--green-lt);border-color:var(--green);}
+.curr-row.selected{border-color:var(--green);background:var(--green-lt);}
+.curr-row-flag{font-size:18px;flex-shrink:0;}
+.curr-row-name{font-size:13px;font-weight:800;flex:1;line-height:1.3;}
+.curr-row-region{font-size:11px;color:var(--muted);font-weight:600;}
+.curr-row-check{color:var(--green-dk);font-size:16px;font-weight:900;opacity:0;}
+.curr-row.selected .curr-row-check{opacity:1;}
+
+/* Search box ── */
+.rs-search{width:100%;padding:10px 14px 10px 36px;border:1.5px solid var(--border);border-radius:50px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;outline:none;background:var(--surface);color:var(--text);margin-bottom:10px;}
+.rs-search:focus{border-color:var(--indigo);}
+.rs-search-wrap{position:relative;margin-bottom:6px;}
+.rs-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;}
+
+/* Legacy classes kept for JS compatibility */
+.lang-grid,.lang-card,.lang-flag,.lang-name,.lang-native{display:none;}
+.curriculum-section,.curriculum-grid,.curr-card,.curr-flag,.curr-name,.curr-code{display:none;}
+.num-format-section,.nf-options,.nf-opt{display:none;}
+.wizard-steps,.wizard-step-indicator,.wizard-pane,.wizard-back-btn{display:none!important;}
+.continent-grid,.continent-btn,.country-list,.country-item{display:none;}
 .curriculum-section{background:rgba(255,255,255,.07);border-radius:var(--radius);padding:24px;margin-bottom:24px;text-align:left;}
 .curriculum-section h3{color:#fbbf24;font-size:16px;font-weight:800;margin-bottom:14px;text-align:center;}
 .curriculum-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
@@ -199,6 +249,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .sh-level{font-size:11px;color:var(--muted);}
 .xp-mini-track{height:6px;background:var(--border);border-radius:50px;overflow:hidden;margin-top:3px;width:100px;}
 .xp-mini-fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--purple));border-radius:50px;transition:width .5s ease;}
+[dir="rtl"] .xp-mini-fill{float:right;background:linear-gradient(270deg,var(--indigo),var(--purple));}
 .sh-tabs{display:flex;gap:6px;background:var(--surface);border-radius:50px;padding:4px;box-shadow:var(--shadow);}
 .sh-tab{padding:7px 16px;border-radius:50px;font-size:13px;font-weight:800;cursor:pointer;color:var(--muted);border:none;background:transparent;font-family:'Nunito',sans-serif;transition:all .15s;white-space:nowrap;}
 .sh-tab.active{background:var(--indigo);color:#fff;}
@@ -231,7 +282,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .skill-bar-lbl{font-size:12px;font-weight:800;min-width:160px;}
 .skill-bar-track{flex:1;height:9px;background:var(--border);border-radius:50px;overflow:hidden;}
 .skill-bar-fill{height:100%;border-radius:50px;}
+[dir="rtl"] .skill-bar-fill{float:right;}
 .skill-bar-pct{font-size:12px;font-weight:800;color:var(--muted);min-width:34px;text-align:right;}
+[dir="rtl"] .skill-bar-pct{text-align:left;}
 /* Achievement */
 .ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
 .ach-card{padding:14px 10px;text-align:center;border:2px solid var(--border);border-radius:var(--radius);opacity:.38;transition:all .2s;}
@@ -277,6 +330,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .prog-fill{height:100%;border-radius:50px;transition:width .4s ease;}
 .prog-fill.g{background:linear-gradient(90deg,var(--green),#059669);}
 .prog-fill.o{background:linear-gradient(90deg,var(--orange),#ef4444);}
+[dir="rtl"] .prog-fill{float:right;}
+[dir="rtl"] .prog-fill.g{background:linear-gradient(270deg,var(--green),#059669);}
+[dir="rtl"] .prog-fill.o{background:linear-gradient(270deg,var(--orange),#ef4444);}
 .step-card{background:var(--surface);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);border:2px solid var(--border);}
 .step-card.gc{border-color:#bbf7d0;background:#f0fdf4;}
 .step-card.oc{border-color:#fed7aa;background:#fff7ed;}
@@ -359,6 +415,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .timer-wrap{flex:1;min-width:80px;height:8px;background:var(--border);border-radius:50px;overflow:hidden;}
 .timer-fill{height:100%;border-radius:50px;transition:width .25s linear,background .5s;background:linear-gradient(90deg,var(--green),var(--yellow));}
 .timer-fill.hot{background:linear-gradient(90deg,var(--red),var(--orange));}
+[dir="rtl"] .timer-fill{float:right;background:linear-gradient(270deg,var(--green),var(--yellow));}
+[dir="rtl"] .timer-fill.hot{background:linear-gradient(270deg,var(--red),var(--orange));}
 .gcard{padding:20px;margin-bottom:12px;}
 .g-sec{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:9px;}
 .g-prob{font-family:'Fredoka One',cursive;font-size:48px;line-height:1.1;}
@@ -400,6 +458,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .xp-row{display:flex;align-items:center;gap:9px;}
 .xp-track{flex:1;height:6px;background:var(--border);border-radius:50px;overflow:hidden;}
 .xp-fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--purple));border-radius:50px;transition:width .5s ease;}
+[dir="rtl"] .xp-fill{float:right;background:linear-gradient(270deg,var(--indigo),var(--purple));}
 .xp-lbl{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap;}
 .fact-ref-panel{background:var(--surface);border-radius:var(--radius);padding:14px;border:1px solid var(--border);margin-bottom:12px;display:none;overflow-x:auto;}
 .fact-ref-panel.open{display:block;}
@@ -496,6 +555,82 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .modal h2{font-size:18px;font-weight:900;margin-bottom:7px;}
 .modal p{font-size:13px;color:var(--muted);margin-bottom:16px;}
 .modal-btns{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;}
+
+/* ══════════════════════════════════════════════
+   NIGERIA PILOT — RESEARCH DESIGN SYSTEM
+   Phase 0 overrides: cleaner, lighter, calmer
+══════════════════════════════════════════════ */
+
+/* ── LANDING REDESIGN ── */
+#landing{background:#f7f8fc;}
+.land-wrap{max-width:860px;margin:0 auto;padding:40px 20px 60px;text-align:left;}
+.land-hero{background:#fff;border-radius:18px;border:1px solid var(--border);padding:28px 32px;margin-bottom:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.land-hero-text{}
+.land-pilot-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--indigo);margin-bottom:6px;}
+.land-title{font-family:'Fredoka One',cursive;font-size:36px;color:var(--text);line-height:1.1;margin-bottom:6px;}
+.land-title span{color:var(--indigo);}
+.land-desc{font-size:14px;color:var(--muted);font-weight:600;line-height:1.6;max-width:480px;}
+.land-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.land-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:50px;font-size:12px;font-weight:800;}
+.land-badge-green{background:var(--green-lt);color:var(--green-dk);}
+.land-badge-indigo{background:var(--indigo-lt);color:var(--indigo-dk);}
+.land-badge-orange{background:var(--orange-lt);color:var(--orange-dk);}
+.role-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;flex-wrap:unset;}
+.role-card{width:auto;padding:24px;border-radius:16px;text-align:left;}
+.role-card h2{font-size:17px;}
+.role-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.role-icon-wrap{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.role-icon-wrap.student{background:var(--indigo-lt);}
+.role-icon-wrap.teacher{background:var(--green-lt);}
+.role-tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.role-tag{padding:3px 10px;border-radius:50px;font-size:11px;font-weight:800;background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+.land-footer-bar{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.land-stats{display:flex;gap:24px;}
+.land-stat{text-align:center;}
+.land-stat-n{font-family:'Fredoka One',cursive;font-size:22px;color:var(--indigo);}
+.land-stat-l{font-size:11px;font-weight:800;color:var(--muted);}
+.land-a11y-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+
+/* ── TEACHER DASHBOARD REDESIGN ── */
+.teacher-topbar{background:#fff;border-bottom:1px solid var(--border);padding:12px 20px;margin:-18px -14px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+.teacher-logo{font-family:'Fredoka One',cursive;font-size:20px;color:var(--text);}
+.teacher-logo span{color:var(--green);}
+.pilot-condition-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:50px;font-size:12px;font-weight:800;}
+.pilot-condition-badge.intervention{background:var(--indigo-lt);color:var(--indigo-dk);}
+.pilot-condition-badge.control{background:var(--green-lt);color:var(--green-dk);}
+.pilot-condition-badge.none{background:var(--orange-lt);color:var(--orange-dk);}
+.pilot-id-chip{font-family:monospace;font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 8px;color:var(--muted);}
+.t-tab.active{background:var(--indigo);color:#fff;}
+/* Research quick-bar on overview */
+.research-bar{background:var(--indigo-lt);border:1px solid var(--indigo);border-radius:var(--rsm);padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.research-bar-left{display:flex;align-items:center;gap:10px;}
+.research-bar-label{font-size:12px;font-weight:800;color:var(--indigo-dk);}
+.research-bar-counts{display:flex;gap:12px;}
+.research-bar-count{text-align:center;}
+.research-bar-count-n{font-family:'Fredoka One',cursive;font-size:18px;color:var(--indigo);}
+.research-bar-count-l{font-size:10px;font-weight:800;color:var(--muted);}
+.research-bar-btns{display:flex;gap:7px;flex-wrap:wrap;}
+/* Support flag tile replaces streak */
+.dash-tile.support{border-color:var(--red);}
+/* Student cards — research mode: remove score/streak, show accuracy + support flag */
+.scard-research{padding:14px;display:flex;align-items:center;gap:12px;}
+.scard-avatar{font-size:26px;flex-shrink:0;}
+.scard-info{flex:1;min-width:0;}
+.scard-name{font-size:14px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.scard-detail{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px;}
+.scard-acc{font-family:'Fredoka One',cursive;font-size:22px;flex-shrink:0;}
+.scard-flag{font-size:11px;font-weight:800;color:var(--red);margin-top:2px;}
+/* Export record counts */
+.export-count{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:50px;font-size:11px;font-weight:800;background:var(--indigo-lt);color:var(--indigo);}
+/* Standards tab hidden in pilot mode */
+.pilot-hide{display:none!important;}
+/* Assessment screen improvements */
+#assessment .assess-top{background:#fff;border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px;}
+#assessment .assess-body{max-width:540px;margin:0 auto;padding:24px 16px 60px;}
+#assessment .assess-question-card{background:#fff;border-radius:16px;border:1px solid var(--border);padding:40px 24px;text-align:center;margin-bottom:16px;}
+#assessment .assess-question-card .problem{font-family:'Fredoka One',cursive;font-size:64px;line-height:1;margin:16px 0 8px;}
+#assessment .assess-lock-notice{background:var(--indigo-lt);border-radius:var(--rsm);padding:10px 14px;font-size:12px;font-weight:700;color:var(--indigo-dk);text-align:center;}
+
 /* Offline banner */
 .offline-banner{background:var(--orange-lt);border:2px solid var(--orange);border-radius:var(--rsm);padding:10px 14px;font-size:13px;font-weight:800;color:var(--orange-dk);margin-bottom:14px;display:none;}
 .offline-banner.show{display:flex;align-items:center;gap:8px;}
@@ -514,6 +649,66 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
   .screen:not(#teacher){display:none!important;}
   .t-tabs,.teacher-topbar .btn,.plyr,.modal-bg{display:none!important;}
 }
+/* ══════════════════════════════════════════════
+   3-STEP CURRICULUM WIZARD
+══════════════════════════════════════════════ */
+.wizard-steps{display:flex;gap:0;margin-bottom:24px;border-radius:50px;overflow:hidden;border:2px solid rgba(255,255,255,.2);}
+.wizard-step-indicator{flex:1;padding:10px 6px;text-align:center;font-size:11px;font-weight:800;color:rgba(255,255,255,.4);background:rgba(255,255,255,.05);transition:all .2s;cursor:default;}
+.wizard-step-indicator.done{color:rgba(255,255,255,.9);background:rgba(74,222,128,.25);}
+.wizard-step-indicator.active{color:#fff;background:rgba(251,191,36,.3);}
+.wizard-pane{display:none;animation:fadeIn .3s ease;}
+.wizard-pane.active{display:block;}
+.continent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:6px;}
+.continent-btn{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:18px 10px;cursor:pointer;transition:all .2s;text-align:center;color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;}
+.continent-btn:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);transform:translateY(-2px);}
+.continent-btn.selected{border-color:#fbbf24;background:rgba(251,191,36,.2);}
+.continent-emoji{font-size:32px;display:block;margin-bottom:8px;}
+.country-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:8px;}
+.country-item{background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);border-radius:var(--rsm);padding:14px 16px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:10px;}
+.country-item:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5);}
+.country-item.selected{border-color:#4ade80;background:rgba(74,222,128,.15);}
+.country-flag{font-size:24px;flex-shrink:0;}
+.country-info{flex:1;min-width:0;}
+.country-name{font-size:13px;font-weight:800;color:#fff;line-height:1.2;}
+.country-code{font-size:10px;color:rgba(255,255,255,.5);margin-top:3px;font-weight:700;}
+.curr-search-wrap{position:relative;margin-bottom:14px;}
+.curr-search{width:100%;padding:10px 16px 10px 38px;border-radius:50px;border:2px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:#fff;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;outline:none;transition:border-color .2s;}
+.curr-search::placeholder{color:rgba(255,255,255,.4);}
+.curr-search:focus{border-color:#fbbf24;}
+.curr-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none;}
+.wizard-back-btn{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);border-radius:50px;padding:8px 18px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;margin-bottom:16px;}
+.wizard-back-btn:hover{background:rgba(255,255,255,.2);}
+.confirm-card{background:rgba(255,255,255,.08);border:2px solid rgba(74,222,128,.4);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
+.confirm-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);}
+.confirm-row:last-child{border-bottom:none;}
+.confirm-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5);min-width:100px;}
+.confirm-value{font-size:14px;font-weight:800;color:#fff;}
+.confirm-change{font-size:11px;color:#fbbf24;cursor:pointer;text-decoration:underline;margin-left:auto;font-weight:800;}
+.no-results{color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:14px;}
+
+
+/* ══════════════════════════════════════════════
+   DUAL BOX FORMAT
+══════════════════════════════════════════════ */
+/* Format chooser pill */
+.box-fmt-chooser{display:flex;gap:8px;margin-bottom:10px;align-items:center;}
+.box-fmt-pill{padding:5px 14px;border-radius:50px;font-size:12px;font-weight:800;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);transition:all .15s;font-family:'Nunito',sans-serif;}
+.box-fmt-pill:hover{border-color:var(--green);}
+.box-fmt-pill.active{border-color:var(--green);background:var(--green-lt);color:var(--green-dk);}
+.box-fmt-label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+/* Area Box — visual rectangle model */
+.area-box-wrap{background:var(--surface);border-radius:var(--rsm);padding:14px;margin-bottom:12px;border:1px solid var(--border);}
+.area-box-container{position:relative;width:100%;display:grid;gap:4px;}
+.area-col-headers{display:flex;gap:4px;padding-left:52px;}
+.area-col-hdr{flex:1;text-align:center;background:#dcfce7;border-radius:6px;padding:6px 4px;font-weight:900;font-size:14px;color:#15803d;}
+.area-row{display:flex;gap:4px;}
+.area-row-hdr{width:48px;flex-shrink:0;background:#dcfce7;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#15803d;}
+.area-cell{flex:1;border-radius:8px;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default;transition:all .2s;position:relative;}
+.area-cell.active-c{box-shadow:0 0 0 3px var(--green),0 4px 12px rgba(18,183,106,.25);}
+.area-cell .ceq{font-size:10px;font-weight:700;color:rgba(0,0,0,.4);margin-bottom:4px;}
+.area-cell .cval{font-family:'Fredoka One',cursive;font-size:22px;}
+
 </style>
 
 <style>
@@ -576,38 +771,128 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
 </div>
 
 <!-- ══════════════════════════════════════
-     SCREEN 1: REGION / LANGUAGE SELECT
+     SCREEN 1: SMART DEFAULT SETUP
+     Shows confirm card by default.
+     "Change" reveals full selector.
 ══════════════════════════════════════ -->
 <div class="screen active" id="region-select">
-  <div class="region-wrap" role="main" id="main-content" aria-labelledby="intl-title-heading">
-    <div class="globe-logo">🌍</div>
-    <h1 class="intl-title" id="intl-title-heading">Multiply <span>Masters</span></h1>
-    <div class="intl-sub" id="rs-sub">International Edition — Select your language and region</div>
+  <div class="region-wrap" role="main" id="main-content">
 
-    <!-- Language Selection -->
-    <div class="lang-grid" id="lang-grid"></div>
+    <!-- ── DEFAULT VIEW: smart confirm card ── -->
+    <div id="rs-default-view">
 
-    <!-- Curriculum Framework -->
-    <div class="curriculum-section">
-      <h3 id="rs-curr-title">📚 Choose Your Curriculum Framework</h3>
-      <div class="curriculum-grid" id="curr-grid"></div>
+      <!-- Logo mark -->
+      <div style="text-align:center;margin-bottom:28px;">
+        <div style="display:inline-flex;align-items:center;gap:10px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--indigo-lt);display:flex;align-items:center;justify-content:center;font-size:22px;">🔢</div>
+          <span style="font-family:'Fredoka One',cursive;font-size:28px;color:var(--text);">Nu<span style="color:var(--indigo);">mara</span></span>
+        </div>
+        <div style="font-size:13px;color:var(--muted);font-weight:700;margin-top:6px;" id="rs-sub">Multidigit multiplication mastery</div>
+      </div>
+
+      <!-- Smart confirm card -->
+      <div class="rs-confirm-card">
+        <div class="rs-confirm-header">
+          <div class="rs-confirm-icon">✓</div>
+          <div>
+            <div style="font-size:16px;font-weight:900;margin-bottom:2px;">Ready to start</div>
+            <div style="font-size:13px;color:var(--muted);font-weight:600;">We have set up Numara for your context. Confirm or change below.</div>
+          </div>
+        </div>
+
+        <div class="rs-confirm-rows">
+          <div class="rs-confirm-row">
+            <span class="rs-confirm-row-icon">🗣</span>
+            <span class="rs-confirm-row-label">Language</span>
+            <span class="rs-confirm-row-value" id="cf-lang">English</span>
+            <span class="rs-confirm-change" onclick="openAdvanced('lang')" role="button" tabindex="0">Change</span>
+          </div>
+          <div class="rs-confirm-row">
+            <span class="rs-confirm-row-icon">📚</span>
+            <span class="rs-confirm-row-label">Curriculum</span>
+            <span class="rs-confirm-row-value" id="cf-curr">NERDC (Nigeria)</span>
+            <span class="rs-confirm-change" onclick="openAdvanced('curr')" role="button" tabindex="0">Change</span>
+          </div>
+          <div class="rs-confirm-row">
+            <span class="rs-confirm-row-icon">🌍</span>
+            <span class="rs-confirm-row-label">Region</span>
+            <span class="rs-confirm-row-value" id="cf-region">Nigeria</span>
+          </div>
+          <div class="rs-confirm-row">
+            <span class="rs-confirm-row-icon">🔢</span>
+            <span class="rs-confirm-row-label" id="rs-numfmt-lbl">Numbers</span>
+            <span class="rs-confirm-row-value" id="cf-numfmt">1,200</span>
+            <span class="rs-confirm-change" onclick="openAdvanced('format')" role="button" tabindex="0">Change</span>
+          </div>
+        </div>
+
+        <div class="rs-confirm-actions">
+          <button class="btn btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:14px;" id="rs-continue-btn" onclick="confirmRegion()">
+            Start Numara →
+          </button>
+          <div class="rs-skip-link" onclick="openAdvanced('lang')">
+            🌍 Different country or language?
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Number Format -->
-    <div class="num-format-section">
-      <h3 id="rs-numfmt-title">🔢 Number Format</h3>
-      <div class="nf-options" id="nf-options"></div>
+    <!-- ── ADVANCED VIEW: language + curriculum selectors ── -->
+    <div id="rs-advanced-view" class="rs-advanced">
+      <div class="rs-adv-header">
+        <span class="rs-adv-back" onclick="closeAdvanced()" role="button" tabindex="0">← Back</span>
+        <span style="font-size:15px;font-weight:900;" id="rs-adv-title">Choose language</span>
+      </div>
+
+      <!-- Language section -->
+      <div id="adv-lang-section">
+        <div class="rs-section-label">Language</div>
+        <div class="rs-search-wrap">
+          <span class="rs-search-icon">🔍</span>
+          <input class="rs-search" id="adv-lang-search" placeholder="Search languages..." oninput="filterAdvLang(this.value)" aria-label="Search languages">
+        </div>
+        <div class="lang-list" id="adv-lang-list"></div>
+      </div>
+
+      <!-- Curriculum section -->
+      <div id="adv-curr-section" style="margin-top:4px;padding-top:16px;border-top:1px solid var(--border);">
+        <div class="rs-section-label">Curriculum</div>
+        <div class="rs-search-wrap">
+          <span class="rs-search-icon">🔍</span>
+          <input class="rs-search" id="adv-curr-search" placeholder="Search (e.g. NERDC, CAPS, CCSS)..." oninput="filterAdvCurr(this.value)" aria-label="Search curricula">
+        </div>
+        <div class="curr-list" id="adv-curr-list"></div>
+      </div>
+
+      <!-- Number format section -->
+      <div id="adv-format-section" style="margin-top:4px;padding-top:16px;border-top:1px solid var(--border);">
+        <div class="rs-section-label" id="rs-numfmt-title">Number format</div>
+        <div style="display:flex;flex-direction:column;gap:6px;" id="adv-format-list"></div>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px;font-size:15px;padding:13px;" onclick="applyAdvanced()">
+        ✓ Apply &amp; continue
+      </button>
+
+      <!-- Hidden stubs for JS compatibility -->
+      <div id="lang-grid" style="display:none;"></div>
+      <div id="continent-grid" style="display:none;"></div>
+      <div id="country-list" style="display:none;"></div>
+      <div id="curr-search-results" style="display:none;"></div>
+      <div id="wp2a" style="display:none;"></div>
+      <div id="wp2b" style="display:none;"></div>
+      <div id="wp3" style="display:none;"></div>
+      <div id="nf-options" style="display:none;"></div>
+      <div id="grade-lbl-options" style="display:none;"></div>
+      <div id="numfmt-override" style="display:none;"></div>
+      <div id="gradelbl-override" style="display:none;"></div>
+      <input id="lang-search" style="display:none;">
+      <input id="curr-search" style="display:none;">
+      <div id="ws1" style="display:none;"></div>
+      <div id="ws2" style="display:none;"></div>
+      <div id="ws3" style="display:none;"></div>
     </div>
 
-    <!-- Grade Label -->
-    <div class="num-format-section">
-      <h3 id="rs-gradelbl-title">🏫 Grade / Year Label</h3>
-      <div class="nf-options" id="grade-lbl-options"></div>
-    </div>
-
-    <button class="btn btn-primary" style="font-size:17px;padding:14px 40px;margin-top:8px;" id="rs-continue-btn" onclick="confirmRegion()">
-      Continue →
-    </button>
   </div>
 </div>
 
@@ -616,29 +901,76 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
 ══════════════════════════════════════ -->
 <div class="screen" id="landing">
   <div class="land-wrap" role="main" id="main-content">
-    <h1 class="land-logo">Multiply <span>Masters</span> 🧮</h1>
-    <div class="land-sub" id="land-sub">International Edition — Research-based multiplication mastery</div>
-    <div class="land-region-badge" onclick="showScreen('region-select')" id="region-badge">🌍 Change Region / Language</div>
-    <div class="curr-badge-row" id="curr-badge-row"></div>
+
+    <!-- Hero card -->
+    <div class="land-hero">
+      <div class="land-hero-text">
+        <div class="land-pilot-label" id="land-pilot-label">Nigeria Pilot · Phase 0 · NERDC</div>
+        <h1 class="land-title">Nu<span>mara</span></h1>
+        <div class="land-desc" id="land-sub">Multidigit multiplication mastery — box method and partial products</div>
+        <div class="land-badges">
+          <span class="land-badge land-badge-green">✓ Offline-ready</span>
+          <span class="land-badge land-badge-indigo" id="land-curr-badge">NERDC aligned</span>
+          <span class="land-badge land-badge-orange" id="land-lang-badge">English</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
+        <div class="curr-badge-row" id="curr-badge-row" style="justify-content:flex-end;"></div>
+        <button class="btn btn-ghost btn-sm" onclick="showScreen('region-select')" id="region-badge" style="font-size:12px;">🌍 Change region / language</button>
+      </div>
+    </div>
+
+    <!-- Role cards -->
     <div class="role-cards">
-      <div class="role-card sc" onclick="showScreen('student-login')">
-        <span class="role-icon">🎒</span>
-        <h2 id="land-student-lbl">Student</h2>
-        <p id="land-student-desc">Learn multiplication using Box Method and Partial Products</p>
-        <button class="btn btn-primary btn-wide" id="land-student-btn">Enter as Student</button>
+      <div class="role-card sc card" onclick="showScreen('student-login')" style="cursor:pointer;">
+        <div class="role-card-header">
+          <div class="role-icon-wrap student">🎒</div>
+          <div>
+            <h2 id="land-student-lbl">Student</h2>
+            <div style="font-size:12px;color:var(--muted);font-weight:700;">Learn and practise</div>
+          </div>
+        </div>
+        <p id="land-student-desc">Enter your name and class code to begin. Your progress is saved on this device.</p>
+        <div class="role-tag-row">
+          <span class="role-tag">Box method</span>
+          <span class="role-tag">Partial products</span>
+          <span class="role-tag">Primary 4–6</span>
+        </div>
+        <button class="btn btn-primary btn-wide" id="land-student-btn">Enter as student</button>
       </div>
-      <div class="role-card tc" onclick="enterTeacher()">
-        <span class="role-icon">👩‍🏫</span>
-        <h2 id="land-teacher-lbl">Teacher</h2>
-        <p id="land-teacher-desc">Monitor your class, view reports and track progress</p>
-        <button class="btn btn-green btn-wide" id="land-teacher-btn">Teacher Dashboard</button>
+      <div class="role-card tc card" onclick="enterTeacher()" style="cursor:pointer;">
+        <div class="role-card-header">
+          <div class="role-icon-wrap teacher">📋</div>
+          <div>
+            <h2 id="land-teacher-lbl">Teacher / Researcher</h2>
+            <div style="font-size:12px;color:var(--muted);font-weight:700;">Monitor and export</div>
+          </div>
+        </div>
+        <p id="land-teacher-desc">View live class activity, run fixed assessments, and export anonymised research data.</p>
+        <div class="role-tag-row">
+          <span class="role-tag">Live dashboard</span>
+          <span class="role-tag">Pre / post test</span>
+          <span class="role-tag">CSV export</span>
+        </div>
+        <button class="btn btn-green btn-wide" id="land-teacher-btn">Open dashboard</button>
       </div>
     </div>
-    <div class="access-row">
-      <button class="btn btn-ghost btn-sm" onclick="toggleAccess('hc')" id="hc-btn">🌗 High Contrast</button>
-      <button class="btn btn-ghost btn-sm" onclick="toggleAccess('lg')" id="lg-btn">🔤 Large Text</button>
-      <button class="btn btn-ghost btn-sm" onclick="toggleAccess('rtl')" id="rtl-btn">↔ RTL Mode</button>
+
+    <!-- Footer bar -->
+    <div class="land-footer-bar">
+      <div class="land-stats">
+        <div class="land-stat"><div class="land-stat-n">14</div><div class="land-stat-l">Languages</div></div>
+        <div class="land-stat"><div class="land-stat-n">20+</div><div class="land-stat-l">Curricula</div></div>
+        <div class="land-stat"><div class="land-stat-n">100%</div><div class="land-stat-l">Offline</div></div>
+      </div>
+      <div class="land-a11y-row">
+        <span style="font-size:11px;font-weight:800;color:var(--muted);">Accessibility:</span>
+        <button class="btn btn-ghost btn-sm" onclick="toggleAccess('hc')" id="hc-btn" style="font-size:12px;padding:6px 14px;">High contrast</button>
+        <button class="btn btn-ghost btn-sm" onclick="toggleAccess('lg')" id="lg-btn" style="font-size:12px;padding:6px 14px;">Large text</button>
+        <button class="btn btn-ghost btn-sm" onclick="toggleAccess('rtl')" id="rtl-btn" style="font-size:12px;padding:6px 14px;">RTL mode</button>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -688,7 +1020,7 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
           <div class="sh-level"><span id="sh-lv-lbl">Level</span> <span id="sh-lv">1</span></div>
         </div>
         <div style="margin-left:8px;">
-          <div style="font-size:10px;font-weight:800;color:var(--muted);">XP <span id="sh-xp">0</span>/<span id="sh-xpn">100</span></div>
+          <div style="font-size:10px;font-weight:800;color:var(--muted);" dir="ltr">XP <span id="sh-xp">0</span>/<span id="sh-xpn">100</span></div>
           <div class="xp-mini-track"><div class="xp-mini-fill" id="sh-xpbar" style="width:0%"></div></div>
         </div>
       </div>
@@ -814,6 +1146,11 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
             <button class="dpill active" onclick="setDemoAlgo('box',this)" id="demo-box-btn">⊞ Box</button>
             <button class="dpill" onclick="setDemoAlgo('pp',this)" id="demo-pp-btn">≡ Partial Products</button>
           </div>
+          <div style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:8px;" id="box-fmt-lbl">Box Display Format</div>
+          <div class="box-fmt-chooser">
+            <button class="box-fmt-pill active" id="fmt-table-btn" onclick="setBoxFormat('table',this)" aria-pressed="true">⊞ Table Box</button>
+            <button class="box-fmt-pill" id="fmt-area-btn" onclick="setBoxFormat('area',this)" aria-pressed="false">▭ Area Box</button>
+          </div>
           <div id="demo-area"></div>
           <button class="btn btn-primary btn-sm" onclick="genDemo()" style="margin-top:10px;" id="demo-new-btn">New Example</button>
         </div>
@@ -879,12 +1216,16 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
 <!-- TUTORIALS, GAME, RESULTS, TEACHER — same structure as v4 but with i18n labels -->
 <div class="screen" id="tut-box">
   <div class="tshell" role="main" id="main-content">
-    <div class="t-topbar">
+    <div class="t-topbar" style="flex-wrap:wrap;gap:8px;">
       <button class="btn btn-ghost btn-sm" onclick="showScreen('student-home')" id="tut-back-btn">← Back</button>
-      <div class="tut-std" id="tut-box-std">📋 Standards</div>
+      <div class="box-fmt-chooser" style="margin-bottom:0;" id="tut-box-fmt">
+        <button class="box-fmt-pill active" id="tut-fmt-table" onclick="setBoxFormat('table',this)">⊞ Table</button>
+        <button class="box-fmt-pill" id="tut-fmt-area" onclick="setBoxFormat('area',this)">▭ Area</button>
+      </div>
+      <div class="tut-std" id="tut-box-std" style="margin-left:auto;">📋 Standards</div>
     </div>
     <div class="prog-card">
-      <div class="prog-lbl"><span style="color:#15803d;font-weight:800;" id="bp-lbl">Progress</span><span id="bprog-lbl" style="color:#15803d;">1 / 7</span></div>
+      <div class="prog-lbl"><span style="color:#15803d;font-weight:800;" id="bp-lbl">Progress</span><span id="bprog-lbl" style="color:#15803d;" dir="ltr">1 / 7</span></div>
       <div class="prog-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="bprog-wrap"><div class="prog-fill g" id="bprog-fill" style="width:14%"></div></div>
     </div>
     <div class="step-card gc su" id="box-card"></div>
@@ -897,7 +1238,7 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
       <div class="tut-std" id="tut-pp-std">📋 Standards</div>
     </div>
     <div class="prog-card">
-      <div class="prog-lbl"><span style="color:#c2410c;font-weight:800;" id="pp-prog-lbl-lbl">Progress</span><span id="pprog-lbl" style="color:#c2410c;">1 / 7</span></div>
+      <div class="prog-lbl"><span style="color:#c2410c;font-weight:800;" id="pp-prog-lbl-lbl">Progress</span><span id="pprog-lbl" style="color:#c2410c;" dir="ltr">1 / 7</span></div>
       <div class="prog-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="14" id="pprog-wrap"><div class="prog-fill o" id="pprog-fill" style="width:14%"></div></div>
     </div>
     <div class="step-card oc su" id="pp-card"></div>
@@ -908,7 +1249,7 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
   <div class="gwrap" id="main-content" role="main">
     <div class="gtop" role="toolbar" aria-label="Game controls">
       <button class="btn btn-ghost btn-sm" onclick="confirmExit()" id="g-exit-btn" aria-label="Exit game"></button>
-      <div class="gstat" role="status" aria-label="Question progress"><span class="sr-only">Question</span>❓ <span id="g-qc" aria-live="polite">1/10</span></div>
+      <div class="gstat" role="status" aria-label="Question progress"><span class="sr-only">Question</span>❓ <span id="g-qc" aria-live="polite" dir="ltr">1/10</span></div>
       <div class="gstat" role="status" aria-label="Score"><span class="sr-only">Score:</span>⭐ <span id="g-sc" aria-live="polite">0</span></div>
       <div class="gstat" role="status" aria-label="Streak"><span class="sr-only">Streak:</span>🔥 <span id="g-str" aria-live="polite">0</span></div>
       <button style="background:var(--surface);border:1.5px solid var(--border);border-radius:50px;padding:5px 12px;font-size:11px;font-weight:800;cursor:pointer;color:var(--muted);font-family:'Nunito',sans-serif;" onclick="toggleFactRef()" id="g-ft-btn" aria-pressed="false" aria-label="Toggle multiplication facts table">✕ Table</button>
@@ -924,7 +1265,7 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
       <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;">
         <div>
           <div class="g-sec" id="g-prob-lbl">Problem</div>
-          <div class="g-prob" aria-label="" id="g-prob-aria"><div id="g-n1">24</div><div class="op" aria-hidden="true">× <span id="g-n2">14</span></div><div class="uline" aria-hidden="true"></div></div>
+          <div class="g-prob" aria-label="" id="g-prob-aria" dir="ltr"><div id="g-n1">24</div><div class="op" aria-hidden="true">× <span id="g-n2">14</span></div><div class="uline" aria-hidden="true"></div></div>
         </div>
         <div>
           <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
@@ -936,7 +1277,13 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
       </div>
     </div>
     <div class="card game-step-area" id="g-step-area" role="region" aria-labelledby="g-step-title">
-      <div class="g-sec" id="g-step-title">Fill in each cell</div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+        <div class="g-sec" id="g-step-title" style="margin-bottom:0;">Fill in each cell</div>
+        <div id="g-box-fmt-chooser" class="box-fmt-chooser" style="margin-bottom:0;display:none;">
+          <button class="box-fmt-pill active" id="g-fmt-table" onclick="setBoxFormat('table',this)" aria-pressed="true">⊞ Table</button>
+          <button class="box-fmt-pill" id="g-fmt-area" onclick="setBoxFormat('area',this)" aria-pressed="false">▭ Area</button>
+        </div>
+      </div>
       <div id="g-step-content" role="group" aria-label="Multiplication grid"></div>
       <div class="game-prompt" id="g-prompt" style="display:none;" role="note"><span aria-hidden="true">💡</span><span id="g-prompt-txt"></span></div>
       <button class="game-hint-btn" id="g-hint-btn" style="display:none;" onclick="toggleGameHint()" aria-expanded="false" aria-controls="g-hint-box">💡 <span id="g-hint-btn-lbl">Need a hint?</span> <span class="kbd">H</span></button>
@@ -966,9 +1313,9 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
       <div class="gfb" id="g-gfb" role="alert" aria-live="assertive" aria-atomic="true"></div>
     </div>
     <div class="xp-row">
-      <span class="xp-lbl" id="g-lv-lbl">Lv <span id="g-lv">1</span></span>
+      <span class="xp-lbl" id="g-lv-lbl" dir="ltr">Lv <span id="g-lv">1</span></span>
       <div class="xp-track"><div class="xp-fill" id="g-xp" style="width:0%"></div></div>
-      <span class="xp-lbl" id="g-xpl">0/100 XP</span>
+      <span class="xp-lbl" id="g-xpl" dir="ltr">0/100 XP</span>
     </div>
   </div>
 </div>
@@ -980,7 +1327,7 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
     <div class="r-sub" id="r-sub"></div>
     <div class="r-grid">
       <div class="r-tile card" role="status"><div class="r-val" id="r-sc" aria-labelledby="r-sc-lbl">0</div><div class="r-lbl" id="r-sc-lbl">Score</div></div>
-      <div class="r-tile card" role="status"><div class="r-val" id="r-cor" aria-labelledby="r-cor-lbl">0/10</div><div class="r-lbl" id="r-cor-lbl">Correct</div></div>
+      <div class="r-tile card" role="status"><div class="r-val" id="r-cor" aria-labelledby="r-cor-lbl" dir="ltr">0/10</div><div class="r-lbl" id="r-cor-lbl">Correct</div></div>
       <div class="r-tile card"><div class="r-val" id="r-acc">0%</div><div class="r-lbl" id="r-acc-lbl">Accuracy</div></div>
       <div class="r-tile card"><div class="r-val" id="r-best">0</div><div class="r-lbl" id="r-best-lbl">Best Streak</div></div>
       <div class="r-tile card"><div class="r-val" id="r-xp">0</div><div class="r-lbl" id="r-xp-lbl">XP</div></div>
@@ -1005,40 +1352,69 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
 <div class="screen" id="teacher">
   <div class="teacher-wrap" role="main" id="main-content">
     <div class="teacher-topbar">
-      <div class="teacher-logo">Multiply <span>Masters</span> 👩‍🏫</div>
-      <div class="room-code-display" id="t-room-code">MM2024</div>
-      <div class="gstat">👥 <span id="t-online">0</span></div>
+      <div class="teacher-logo">Nu<span>mara</span></div>
+      <div id="t-condition-badge" class="pilot-condition-badge none">⚠ No condition set</div>
+      <div class="pilot-id-chip" id="t-pilot-id-chip">—</div>
+      <div class="room-code-display" id="t-room-code" style="font-size:14px;padding:5px 12px;">MM2024</div>
+      <div class="gstat" style="font-size:12px;">👥 <span id="t-online">0</span> online</div>
       <div style="margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;">
-        <button class="btn btn-ghost btn-sm" onclick="addSimStudent()" id="t-sim-btn">+ Simulate</button>
-        <button class="btn btn-ghost btn-sm" onclick="window.print()" id="t-print-btn">🖨 Print</button>
-        <button class="btn btn-ghost btn-sm" onclick="showScreen('landing')" id="t-exit-btn">← Exit</button>
+        <button class="btn btn-ghost btn-sm" onclick="exportFullBundle()" id="t-export-btn" style="font-size:12px;">📤 Export data</button>
+        <button class="btn btn-ghost btn-sm" onclick="window.print()" id="t-print-btn" style="font-size:12px;">🖨 Print</button>
+        <button class="btn btn-ghost btn-sm" onclick="showScreen('landing')" id="t-exit-btn" style="font-size:12px;">← Exit</button>
       </div>
     </div>
     <nav class="t-tabs" style="margin-bottom:18px;" aria-label="Teacher sections" role="tablist">
       <button class="t-tab active" onclick="tTab('overview',this)" id="tt-overview">📊 Overview</button>
       <button class="t-tab" onclick="tTab('students',this)" id="tt-students">👥 Students</button>
       <button class="t-tab" onclick="tTab('reports',this)" id="tt-reports">📋 Reports</button>
-      <button class="t-tab" onclick="tTab('standards',this)" id="tt-standards">📚 Standards</button>
-      <button class="t-tab" onclick="tTab('controls',this)" id="tt-controls">⚙️ Controls</button>
+      <button class="t-tab pilot-hide" onclick="tTab('standards',this)" id="tt-standards">📚 Standards</button>
+      <button class="t-tab" onclick="tTab('controls',this)" id="tt-controls">⚙️ Pilot setup</button>
     </nav>
     <div class="t-panel active" id="tp-overview">
+
+      <!-- Research quick-bar -->
+      <div class="research-bar">
+        <div class="research-bar-left">
+          <span style="font-size:16px;">🔬</span>
+          <div>
+            <div class="research-bar-label">Nigeria Pilot · Phase 0 · NERDC</div>
+            <div style="font-size:11px;color:var(--indigo);font-weight:700;" id="rbar-condition-lbl">Configure condition in Pilot Setup tab</div>
+          </div>
+        </div>
+        <div class="research-bar-counts">
+          <div class="research-bar-count">
+            <div class="research-bar-count-n" id="rbar-sessions">0</div>
+            <div class="research-bar-count-l">Sessions</div>
+          </div>
+          <div class="research-bar-count">
+            <div class="research-bar-count-n" id="rbar-assessments">0</div>
+            <div class="research-bar-count-l">Assessments</div>
+          </div>
+        </div>
+        <div class="research-bar-btns">
+          <button class="btn btn-primary btn-sm" onclick="launchFixedAssessment('pre')" style="font-size:12px;">▶ Pre-test</button>
+          <button class="btn btn-green btn-sm" onclick="launchFixedAssessment('post')" style="font-size:12px;">▶ Post-test</button>
+          <button class="btn btn-ghost btn-sm" onclick="exportFullBundle()" style="font-size:12px;">📦 Export</button>
+        </div>
+      </div>
+
+      <!-- Metric tiles: replaced Best Streak with Support flag -->
       <div class="dash-grid">
-        <div class="card dash-tile gb"><div class="dash-val" id="d-students">0</div><div class="dash-lbl" id="d-students-lbl">Active Students</div></div>
-        <div class="card dash-tile"><div class="dash-val" id="d-attempts">0</div><div class="dash-lbl" id="d-attempts-lbl">Attempts</div></div>
-        <div class="card dash-tile ob"><div class="dash-val" id="d-accuracy">0%</div><div class="dash-lbl" id="d-accuracy-lbl">Accuracy</div></div>
-        <div class="card dash-tile pb"><div class="dash-val" id="d-streak">0</div><div class="dash-lbl" id="d-streak-lbl">Best Streak</div></div>
-        <div class="card dash-tile rb"><div class="dash-val" id="d-struggling">0</div><div class="dash-lbl" id="d-struggling-lbl">Need Support</div></div>
+        <div class="card dash-tile gb"><div class="dash-val" id="d-students">0</div><div class="dash-lbl" id="d-students-lbl">Active students</div></div>
+        <div class="card dash-tile"><div class="dash-val" id="d-attempts">0</div><div class="dash-lbl" id="d-attempts-lbl">Attempts today</div></div>
+        <div class="card dash-tile ob"><div class="dash-val" id="d-accuracy">0%</div><div class="dash-lbl" id="d-accuracy-lbl">Avg accuracy</div></div>
+        <div class="card dash-tile"><div class="dash-val" id="d-assessments-count">0</div><div class="dash-lbl">Assessments</div></div>
+        <div class="card dash-tile support"><div class="dash-val" id="d-struggling" style="color:var(--red);">0</div><div class="dash-lbl" id="d-struggling-lbl">Need support</div></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-        <div class="card" style="padding:18px;">
-          <div style="font-size:14px;font-weight:900;margin-bottom:12px;" id="lb-title">🏆 Live Leaderboard</div>
-          <div class="lb-list" id="lb-list"></div>
-        </div>
-        <div class="card" style="padding:18px;">
-          <div style="font-size:14px;font-weight:900;margin-bottom:12px;" id="log-title">⚡ Live Activity</div>
-          <div class="class-log" id="class-log"></div>
-        </div>
+
+      <!-- Activity log only — no leaderboard -->
+      <div class="card" style="padding:18px;">
+        <div style="font-size:14px;font-weight:900;margin-bottom:12px;" id="log-title">⚡ Live activity</div>
+        <div class="class-log" id="class-log"></div>
       </div>
+
+      <!-- Hidden lb-list stub so existing JS doesn't crash -->
+      <div id="lb-list" style="display:none;"></div>
     </div>
     <div class="t-panel" id="tp-students">
       <div style="font-size:17px;font-weight:900;margin-bottom:14px;" id="tp-students-title">Individual Student Performance</div>
@@ -1079,13 +1455,52 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
           <input class="inp" id="new-room-code" style="margin-bottom:8px;" placeholder="Room code">
           <button class="btn btn-green btn-sm" onclick="updateRoomCode()" id="ctrl-update-btn">Update</button>
         </div>
-        <div class="card ctrl-card">
-          <h4 id="ctrl-assess-h4">📊 Assessment</h4>
-          <p id="ctrl-assess-desc">Run pre or post assessments to measure growth</p>
-          <div style="display:flex;flex-direction:column;gap:7px;">
-            <button class="btn btn-primary btn-sm" onclick="alert(APP.t('preAssessment'))" id="ctrl-pre-btn">▶ Pre-Assessment</button>
-            <button class="btn btn-green btn-sm" onclick="alert(APP.t('postAssessment'))" id="ctrl-post-btn">▶ Post-Assessment</button>
+        <div class="card ctrl-card" id="research-setup-card">
+          <h4 style="color:var(--indigo);">🔬 Nigeria Pilot — Phase 0</h4>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">NERDC Primary 4–6 · Two-classroom RCT</p>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;">Classroom Condition</div>
+            <div style="display:flex;gap:6px;">
+              <button class="dpill" id="cond-intervention" onclick="setCondition('intervention',this)" style="flex:1;text-align:center;">🎮 Intervention</button>
+              <button class="dpill" id="cond-control" onclick="setCondition('control',this)" style="flex:1;text-align:center;">📝 Control</button>
+            </div>
+            <div id="cond-display" style="font-size:11px;color:var(--muted);margin-top:5px;text-align:center;">No condition set</div>
           </div>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;">Pilot Metadata</div>
+            <input class="inp" id="pilot-school" placeholder="School name" style="margin-bottom:5px;font-size:12px;">
+            <input class="inp" id="pilot-class" placeholder="Class / Grade (e.g. Primary 5A)" style="margin-bottom:5px;font-size:12px;">
+            <input class="inp" id="pilot-teacher" placeholder="Teacher ID or initials" style="font-size:12px;">
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="savePilotSetup()" style="width:100%;justify-content:center;margin-bottom:5px;">💾 Save Setup</button>
+          <div id="pilot-setup-status" style="font-size:11px;color:var(--green-dk);text-align:center;min-height:16px;"></div>
+        </div>
+        <div class="card ctrl-card">
+          <h4 id="ctrl-assess-h4">📊 Fixed Assessment</h4>
+          <p id="ctrl-assess-desc" style="font-size:11px;color:var(--muted);margin-bottom:10px;">20-item NERDC-aligned instrument. Identical for every student. Cannot be modified.</p>
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;">Administer to a student</div>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <button class="btn btn-primary btn-sm" onclick="launchFixedAssessment('pre')" id="ctrl-pre-btn">▶ Pre-Assessment</button>
+            <button class="btn btn-green btn-sm" onclick="launchFixedAssessment('post')" id="ctrl-post-btn">▶ Post-Assessment</button>
+          </div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">
+            <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;">Assessment records stored</div>
+            <div id="assess-count" style="font-family:'Fredoka One',cursive;font-size:24px;color:var(--indigo);">0</div>
+          </div>
+        </div>
+        <div class="card ctrl-card">
+          <h4>📤 Export Research Data</h4>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Anonymised. No names in output. Share with your researcher.</p>
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <button class="btn btn-teal btn-sm" onclick="exportSessionLogs()" style="justify-content:space-between;width:100%;">
+              ⬇ Session logs CSV <span class="export-count" id="export-session-count">0</span>
+            </button>
+            <button class="btn btn-teal btn-sm" onclick="exportAssessmentData()" style="justify-content:space-between;width:100%;">
+              ⬇ Assessment data CSV <span class="export-count" id="export-assess-count">0</span>
+            </button>
+            <button class="btn btn-ghost btn-sm" onclick="exportFullBundle()" style="justify-content:center;font-size:12px;">📦 Full research bundle (recommended)</button>
+          </div>
+          <div id="export-status" style="font-size:11px;color:var(--muted);margin-top:7px;text-align:center;min-height:16px;"></div>
         </div>
         <div class="card ctrl-card">
           <h4 id="ctrl-access-h4">♿ Accessibility</h4>
@@ -1105,12 +1520,10 @@ body.text-spacing p,body.text-spacing li,body.text-spacing div,body.text-spacing
           <div class="toggle-row"><div class="toggle-lbl" id="tc-rtl-lbl">RTL Layout</div><label class="toggle-switch"><input type="checkbox" onchange="toggleAccess('rtl')"><span class="toggle-slider"></span></label></div>
         </div>
         <div class="card ctrl-card">
-          <h4 id="ctrl-session-h4">🔄 Session</h4>
-          <div style="display:flex;flex-direction:column;gap:7px;">
-            <button class="btn btn-ghost btn-sm" onclick="startSim()" id="ctrl-start-sim-btn">▶ Start Simulation</button>
-            <button class="btn btn-ghost btn-sm" onclick="stopSim()" id="ctrl-stop-sim-btn">⏹ Stop</button>
-            <button class="btn btn-danger btn-sm" onclick="if(confirm(APP.t('resetConfirm')))resetClassData()" id="ctrl-reset-btn">⚠ Reset Data</button>
-          </div>
+          <h4 id="ctrl-session-h4">🔄 Data</h4>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Clear all stored session and assessment records from this device. Use only after exporting.</p>
+          <button class="btn btn-danger btn-sm" onclick="if(confirm(APP.t('resetConfirm')+' This cannot be undone.'))resetClassData()" id="ctrl-reset-btn" style="width:100%;justify-content:center;">⚠ Clear all research data</button>
+          <div style="font-size:10px;color:var(--muted);margin-top:8px;text-align:center;">Export first — this action is permanent</div>
         </div>
       </div>
     </div>
@@ -1212,8 +1625,9 @@ const LANGS = {
       achDescXP:'Reach Level 5',
       achDescNohint:'Finish a session with no hints',
       achDescBoth:'Complete both tutorials',
-      achDescGlobal:'Play the game',reportsEmptyTitle:'No student data yet',reportsEmptyDesc:'Reports will populate automatically once students log in with their name and class code and complete practice sessions.',subPerfect:'Absolutely flawless — every answer correct!',subAmazing:'Outstanding multiplication skills!',subGoodJob:'Good work — keep building on this!',subKeepGoing:'Practice makes permanent — you are improving!',subTryAgain:'Every attempt makes you stronger!',dyslexicFont:'OpenDyslexic Font',colourBlindSafe:'Colour-Blind Safe',reduceMotion:'Reduce Motion',textSpacing:'Text Spacing',readAloud:'Read Questions Aloud',extendedTime:'Extended Time',extendedTimeNote:'For students with IEPs/EHCPs requiring extended time.',skipToMain:'Skip to main content',ofText:'of',
+      achDescGlobal:'Play the game',reportsEmptyTitle:'No student data yet',reportsEmptyDesc:'Reports will populate automatically once students log in with their name and class code and complete practice sessions.',subPerfect:'Absolutely flawless — every answer correct!',subAmazing:'Outstanding multiplication skills!',subGoodJob:'Good work — keep building on this!',subKeepGoing:'Practice makes permanent — you are improving!',subTryAgain:'Every attempt makes you stronger!',dyslexicFont:'OpenDyslexic Font',colourBlindSafe:'Colour-Blind Safe',reduceMotion:'Reduce Motion',textSpacing:'Text Spacing',readAloud:'Read Questions Aloud',extendedTime:'Extended Time',extendedTimeNote:'For students with IEPs/EHCPs requiring extended time.',skipToMain:'Skip to main content',ofText:'of',tableBox:'⊞ Table Box',areaBox:'▭ Area Box',boxFmtLabel:'Box Display Format',wizardLang:'1 · Language',wizardCurr:'2 · Curriculum',wizardConfirm:'3 · Confirm',whereTeaching:'Where are you teaching?',searchCurricula:'Search curricula (e.g. CAPS, BNCC, CCSS)...',confirmSetup:'✓ Confirm your setup',startNumara:'Start Numara →',nextCurriculum:'Next: Choose Curriculum →',changeBtn:'Change',allRegions:'← All Regions',tutBoxStep2:'Step 1: Break Down the Numbers',tutBoxStep6:'Step 6: Add All Parts!',tutBoxBody:'The Box Method (Area Model) helps you see multiplication visually. Break numbers into place values, fill every cell yourself, then add the parts.',tutPPBody:'Partial Products means we multiply each part separately, then add. You supply every answer!',splitByPlaceValue:'Split by place value:',fillEveryCell:'You fill every cell!',multiplyEveryPair:'Multiply every pair — you fill every answer!',namesBox:['Top-Left','Top-Right','Bottom-Left','Bottom-Right'],namesPP:['First','Second','Third','Fourth'],placeHintBox:['Think: 3 tens × 2 tens = ? hundreds','Think: 3 tens × 6 ones = ?','Think: 4 ones × 2 tens = ?','Think: 4 ones × 6 ones = ?'],placeHintPP:['Think: 4 tens × 3 tens = ? hundreds','Think: 4 tens × 7 ones','Think: 2 ones × 3 tens','Think: 2 ones × 7 ones'],stepTitle2:'Step',calculate:'Calculate:',whatIs:'What is',equals:'= ?',progress2:'Progress',
       player:'Player',
+      offlineMsg:'📡 Offline — this game works without internet!',
     }
   },
   es: {
@@ -1293,7 +1707,7 @@ const LANGS = {
       achDescXP:'Alcance o Nível 5',
       achDescNohint:'Termine uma sessão sem dicas',
       achDescBoth:'Complete os dois tutoriais',
-      achDescGlobal:'Jogue o jogo',reportsEmptyTitle:'Aún no hay datos de estudiantes',reportsEmptyDesc:'Los informes se completarán automáticamente cuando los estudiantes inicien sesión con su nombre y código de clase.',subPerfect:'¡Impecable — todas las respuestas correctas!',subAmazing:'¡Habilidades de multiplicación sobresalientes!',subGoodJob:'¡Buen trabajo — sigue construyendo!',subKeepGoing:'¡La práctica hace al maestro — estás mejorando!',subTryAgain:'¡Cada intento te hace más fuerte!',dyslexicFont:'Fuente OpenDyslexic',colourBlindSafe:'Seguro para Daltónicos',reduceMotion:'Reducir Movimiento',textSpacing:'Espaciado de Texto',readAloud:'Leer Preguntas en Voz Alta',extendedTime:'Tiempo Extendido',extendedTimeNote:'Para estudiantes con necesidades de tiempo adicional.',skipToMain:'Ir al contenido principal',ofText:'de',dyslexicFont:'Fonte OpenDyslexic',colourBlindSafe:'Seguro para Daltônicos',reduceMotion:'Reduzir Movimento',textSpacing:'Espaçamento de Texto',readAloud:'Ler Perguntas em Voz Alta',extendedTime:'Tempo Estendido',extendedTimeNote:'Para alunos com necessidades de tempo adicional.',skipToMain:'Ir para o conteúdo principal',ofText:'de',reportsEmptyTitle:'Ainda não há dados de alunos',reportsEmptyDesc:'Os relatórios serão preenchidos automaticamente quando os alunos fizerem login com seu nome e código de turma.',subPerfect:'Absolutamente impecável — todas as respostas corretas!',subAmazing:'Habilidades de multiplicação excepcionais!',subGoodJob:'Bom trabalho — continue evoluindo!',subKeepGoing:'A prática leva à perfeição — você está melhorando!',subTryAgain:'Cada tentativa te torna mais forte!',
+      achDescGlobal:'Jogue o jogo',reportsEmptyTitle:'Aún no hay datos de estudiantes',reportsEmptyDesc:'Los informes se completarán automáticamente cuando los estudiantes inicien sesión con su nombre y código de clase.',subPerfect:'¡Impecable — todas las respuestas correctas!',subAmazing:'¡Habilidades de multiplicación sobresalientes!',subGoodJob:'¡Buen trabajo — sigue construyendo!',subKeepGoing:'¡La práctica hace al maestro — estás mejorando!',subTryAgain:'¡Cada intento te hace más fuerte!',dyslexicFont:'Fuente OpenDyslexic',colourBlindSafe:'Seguro para Daltónicos',reduceMotion:'Reducir Movimiento',textSpacing:'Espaciado de Texto',readAloud:'Leer Preguntas en Voz Alta',extendedTime:'Tiempo Extendido',extendedTimeNote:'Para estudiantes con necesidades de tiempo adicional.',skipToMain:'Ir al contenido principal',ofText:'de',tableBox:'⊞ Caja Tabla',areaBox:'▭ Caja de Área',boxFmtLabel:'Formato de Caja',wizardLang:'1 · Idioma',wizardCurr:'2 · Currículo',wizardConfirm:'3 · Confirmar',whereTeaching:'¿Dónde enseñas?',searchCurricula:'Buscar currículo (ej. CAPS, BNCC, SEP)...',confirmSetup:'✓ Confirma tu configuración',startNumara:'Iniciar Numara →',nextCurriculum:'Siguiente: Elegir Currículo →',changeBtn:'Cambiar',tutBoxStep2:'Paso 1: Descomponer los Números',tutBoxStep6:'Paso 6: ¡Suma todas las partes!',tutBoxBody:'El Método de Caja te ayuda a ver la multiplicación visualmente. Divide los números por valor posicional, rellena cada celda tú mismo, luego suma las partes.',tutPPBody:'Productos Parciales: multiplicamos cada parte por separado y luego sumamos. ¡Tú das todas las respuestas!',splitByPlaceValue:'Dividir por valor posicional:',fillEveryCell:'¡Tú rellenas cada celda!',multiplyEveryPair:'Multiplica cada par — ¡tú das todas las respuestas!',namesBox:['Arriba Izquierda','Arriba Derecha','Abajo Izquierda','Abajo Derecha'],namesPP:['Primero','Segundo','Tercero','Cuarto'],placeHintBox:['Piensa: 3 decenas × 2 decenas = ? centenas','Piensa: 3 decenas × 6 unidades = ?','Piensa: 4 unidades × 2 decenas = ?','Piensa: 4 unidades × 6 unidades = ?'],placeHintPP:['Piensa: 4 decenas × 3 decenas = ? centenas','Piensa: 4 decenas × 7 unidades','Piensa: 2 unidades × 3 decenas','Piensa: 2 unidades × 7 unidades'],stepTitle2:'Paso',calculate:'Calcular:',whatIs:'¿Cuánto es',equals:'= ?',progress2:'Progreso',allRegions:'← Todas las Regiones',dyslexicFont:'Fonte OpenDyslexic',colourBlindSafe:'Seguro para Daltônicos',reduceMotion:'Reduzir Movimento',textSpacing:'Espaçamento de Texto',readAloud:'Ler Perguntas em Voz Alta',extendedTime:'Tempo Estendido',extendedTimeNote:'Para alunos com necessidades de tempo adicional.',skipToMain:'Ir para o conteúdo principal',ofText:'de',reportsEmptyTitle:'Ainda não há dados de alunos',reportsEmptyDesc:'Os relatórios serão preenchidos automaticamente quando os alunos fizerem login com seu nome e código de turma.',subPerfect:'Absolutamente impecável — todas as respostas corretas!',subAmazing:'Habilidades de multiplicação excepcionais!',subGoodJob:'Bom trabalho — continue evoluindo!',subKeepGoing:'A prática leva à perfeição — você está melhorando!',subTryAgain:'Cada tentativa te torna mais forte!',
       player:'Jugador',
 
       regionLangTitle:'🌍 Région / Langue',rsSubtitle:'Édition Internationale — Sélectionnez votre langue et région',rsCurrTitle:'📚 Choisissez votre Programme',rsNumFmt:'🔢 Format des Nombres',rsGradeLabel:'🏫 Étiquette de Niveau',landSub:'Maîtrise de la multiplication basée sur la recherche',print:'🖨 Imprimer',exitDash:'← Quitter',update:'Mettre à jour',rtlLayout:'Mise en page RTL',nPlayers2:'2 Joueurs',nPlayers3:'3 Joueurs',nPlayers4:'4 Joueurs',coopSubTitle:'Travaillez ensemble — partagez les problèmes et célébrez le succès !',regionLangDesc:'Changez la langue et le programme de votre classe',
@@ -1399,8 +1813,8 @@ const LANGS = {
       achDescXP:'بلغ المستوى 5',
       achDescNohint:'أنهِ جلسة بدون تلميحات',
       achDescBoth:'أكمل كلا الدرسين',
-      achDescGlobal:'العب اللعبة',reportsEmptyTitle:'لا توجد بيانات طلاب بعد',reportsEmptyDesc:'ستُملأ التقارير تلقائياً بمجرد تسجيل دخول الطلاب باسمهم ورمز الفصل.',subPerfect:'ممتاز تماماً — كل الإجابات صحيحة!',subAmazing:'مهارات ضرب رائعة!',subGoodJob:'عمل جيد — استمر في البناء!',subKeepGoing:'التدريب يصنع الكمال — أنت تتحسن!',subTryAgain:'كل محاولة تجعلك أقوى!',dyslexicFont:'خط OpenDyslexic',colourBlindSafe:'آمن لعمى الألوان',reduceMotion:'تقليل الحركة',textSpacing:'تباعد النص',readAloud:'قراءة الأسئلة بصوت عالٍ',extendedTime:'وقت إضافي',extendedTimeNote:'للطلاب الذين يحتاجون إلى وقت إضافي.',skipToMain:'الانتقال إلى المحتوى الرئيسي',ofText:'من',
-      player:'لاعب',
+      achDescGlobal:'العب اللعبة',reportsEmptyTitle:'لا توجد بيانات طلاب بعد',reportsEmptyDesc:'ستُملأ التقارير تلقائياً بمجرد تسجيل دخول الطلاب باسمهم ورمز الفصل.',subPerfect:'ممتاز تماماً — كل الإجابات صحيحة!',subAmazing:'مهارات ضرب رائعة!',subGoodJob:'عمل جيد — استمر في البناء!',subKeepGoing:'التدريب يصنع الكمال — أنت تتحسن!',subTryAgain:'كل محاولة تجعلك أقوى!',dyslexicFont:'خط OpenDyslexic',colourBlindSafe:'آمن لعمى الألوان',reduceMotion:'تقليل الحركة',textSpacing:'تباعد النص',readAloud:'قراءة الأسئلة بصوت عالٍ',extendedTime:'وقت إضافي',extendedTimeNote:'للطلاب الذين يحتاجون إلى وقت إضافي.',skipToMain:'الانتقال إلى المحتوى الرئيسي',ofText:'من',tableBox:'⊞ صندوق الجدول',areaBox:'▭ صندوق المساحة',boxFmtLabel:'تنسيق الصندوق',wizardLang:'1 · اللغة',wizardCurr:'2 · المنهج',wizardConfirm:'3 · تأكيد',whereTeaching:'أين تدرّس؟',searchCurricula:'ابحث عن منهج (مثال: CAPS، BNCC)...',confirmSetup:'✓ تأكيد الإعداد',startNumara:'← ابدأ Numara',nextCurriculum:'التالي: اختر المنهج →',changeBtn:'تغيير',allRegions:'← جميع المناطق',
+      player:'لاعب',tutBoxStep2:'الخطوة 1: تحليل الأعداد',tutBoxStep6:'الخطوة 6: اجمع جميع الأجزاء!',tutBoxBody:'طريقة الصندوق تساعدك على رؤية الضرب بصرياً. فكّك الأعداد إلى قيم مكانية واملأ كل خلية بنفسك ثم اجمع.',tutPPBody:'الجداءات الجزئية: نضرب كل جزء على حدة ثم نجمع. أنت تقدم كل الإجابات!',splitByPlaceValue:'قسّم حسب القيمة المكانية:',fillEveryCell:'أنت تملأ كل خلية!',multiplyEveryPair:'اضرب كل زوج — أنت تقدم كل الإجابات!',namesBox:['يسار أعلى','يمين أعلى','يسار أسفل','يمين أسفل'],namesPP:['الأول','الثاني','الثالث','الرابع'],placeHintBox:['فكّر: 3 عشرات × 2 عشرات = ? مئات','فكّر: 3 عشرات × 6 آحاد = ?','فكّر: 4 آحاد × 2 عشرات = ?','فكّر: 4 آحاد × 6 آحاد = ?'],placeHintPP:['فكّر: 4 عشرات × 3 عشرات = ? مئات','فكّر: 4 عشرات × 7 آحاد','فكّر: 2 آحاد × 3 عشرات','فكّر: 2 آحاد × 7 آحاد'],stepTitle2:'الخطوة',calculate:'احسب:',whatIs:'ما هو',equals:'= ?',progress2:'التقدم',
     }
   },
   pt: {
@@ -1516,7 +1930,7 @@ const LANGS = {
       subGoodJob:'Bom trabalho — continue evoluindo!',
       subKeepGoing:'A prática leva à perfeição — você está melhorando!',
       subTryAgain:'Cada tentativa te torna mais forte!',
-      player:'Jogador',ofText:'de',skipToMain:'Ir para o conteúdo principal',dyslexicFont:'Fonte OpenDyslexic',colourBlindSafe:'Seguro para Daltônicos',reduceMotion:'Reduzir Movimento',readAloud:'Ler Perguntas em Voz Alta',extendedTime:'Tempo Estendido',extendedTimeNote:'Para alunos com necessidades de tempo adicional.',
+      player:'Jogador',ofText:'de',tableBox:'⊞ Caixa Tabela',areaBox:'▭ Caixa de Área',boxFmtLabel:'Formato da Caixa',wizardLang:'1 · Idioma',wizardCurr:'2 · Currículo',wizardConfirm:'3 · Confirmar',whereTeaching:'Onde você ensina?',searchCurricula:'Buscar currículo (ex. CAPS, BNCC, CCSS)...',confirmSetup:'✓ Confirmar configuração',startNumara:'Iniciar Numara →',nextCurriculum:'Próximo: Escolher Currículo →',changeBtn:'Alterar',allRegions:'← Todas as Regiões',skipToMain:'Ir para o conteúdo principal',dyslexicFont:'Fonte OpenDyslexic',colourBlindSafe:'Seguro para Daltônicos',reduceMotion:'Reduzir Movimento',readAloud:'Ler Perguntas em Voz Alta',extendedTime:'Tempo Estendido',extendedTimeNote:'Para alunos com necessidades de tempo adicional.',
     }
   },
   fr: {
@@ -1632,7 +2046,7 @@ const LANGS = {
       subGoodJob:'Bon travail — continue à progresser !',
       subKeepGoing:"La pratique rend parfait — tu t'améliores !",
       subTryAgain:'Chaque tentative te rend plus fort !',
-      player:'Joueur',ofText:'sur',skipToMain:'Aller au contenu principal',dyslexicFont:'Police OpenDyslexic',colourBlindSafe:'Mode Daltonien',reduceMotion:'Réduire les Animations',readAloud:'Lire les Questions à Voix Haute',extendedTime:'Temps Supplémentaire',extendedTimeNote:'Pour les élèves ayant besoin de temps supplémentaire.',
+      player:'Joueur',ofText:'sur',tableBox:'⊞ Boîte Tableau',areaBox:"▭ Boîte d'Aire",boxFmtLabel:'Format de Boîte',wizardLang:'1 · Langue',wizardCurr:'2 · Programme',wizardConfirm:'3 · Confirmer',whereTeaching:'Où enseignez-vous ?',searchCurricula:'Chercher un programme (ex. CAPS, BNCC, CM1)...',confirmSetup:'✓ Confirmer votre configuration',startNumara:'Commencer Numara →',nextCurriculum:'Suivant : Choisir le Programme →',changeBtn:'Modifier',allRegions:'← Toutes les Régions',skipToMain:'Aller au contenu principal',dyslexicFont:'Police OpenDyslexic',colourBlindSafe:'Mode Daltonien',reduceMotion:'Réduire les Animations',readAloud:'Lire les Questions à Voix Haute',extendedTime:'Temps Supplémentaire',extendedTimeNote:'Pour les élèves ayant besoin de temps supplémentaire.',
     }
   },
   ar: {
@@ -1897,8 +2311,8 @@ const LANGS = {
       achDescXP:'Fikia Ngazi 5',
       achDescNohint:'Maliza kikao bila vidokezo',
       achDescBoth:'Kamilisha mafunzo yote mawili',
-      achDescGlobal:'Cheza mchezo',reportsEmptyTitle:'Bado hakuna data ya wanafunzi',reportsEmptyDesc:'Ripoti zitajazwa moja kwa moja wanafunzi watakapoingia kwa jina lao na nambari ya darasa.',subPerfect:'Kamili kabisa — majibu yote sahihi!',subAmazing:'Ustadi wa kuzidisha wa hali ya juu!',subGoodJob:'Kazi nzuri — endelea kujenga!',subKeepGoing:'Mazoezi hufanya ukamilifu — unaboresha!',subTryAgain:'Kila jaribio linakufanya uwe na nguvu zaidi!',dyslexicFont:'Fonti ya OpenDyslexic',colourBlindSafe:'Salama kwa Upofu wa Rangi',reduceMotion:'Punguza Mwendo',textSpacing:'Nafasi ya Maandishi',readAloud:'Soma Maswali kwa Sauti',extendedTime:'Muda Uliopanuliwa',extendedTimeNote:'Kwa wanafunzi wanaohitaji muda zaidi.',skipToMain:'Nenda kwa maudhui makuu',ofText:'ya',
-      player:'Mchezaji',
+      achDescGlobal:'Cheza mchezo',reportsEmptyTitle:'Bado hakuna data ya wanafunzi',reportsEmptyDesc:'Ripoti zitajazwa moja kwa moja wanafunzi watakapoingia kwa jina lao na nambari ya darasa.',subPerfect:'Kamili kabisa — majibu yote sahihi!',subAmazing:'Ustadi wa kuzidisha wa hali ya juu!',subGoodJob:'Kazi nzuri — endelea kujenga!',subKeepGoing:'Mazoezi hufanya ukamilifu — unaboresha!',subTryAgain:'Kila jaribio linakufanya uwe na nguvu zaidi!',dyslexicFont:'Fonti ya OpenDyslexic',colourBlindSafe:'Salama kwa Upofu wa Rangi',reduceMotion:'Punguza Mwendo',textSpacing:'Nafasi ya Maandishi',readAloud:'Soma Maswali kwa Sauti',extendedTime:'Muda Uliopanuliwa',extendedTimeNote:'Kwa wanafunzi wanaohitaji muda zaidi.',skipToMain:'Nenda kwa maudhui makuu',ofText:'ya',tableBox:'⊞ Sanduku la Jedwali',areaBox:'▭ Sanduku la Eneo',boxFmtLabel:'Muundo wa Sanduku',wizardLang:'1 · Lugha',wizardCurr:'2 · Mtaala',wizardConfirm:'3 · Thibitisha',whereTeaching:'Unafundisha wapi?',searchCurricula:'Tafuta mtaala (mfano: CAPS, CBC, CCSS)...',confirmSetup:'✓ Thibitisha mpangilio wako',startNumara:'Anza Numara →',nextCurriculum:'Ifuatayo: Chagua Mtaala →',changeBtn:'Badilisha',allRegions:'← Maeneo Yote',
+      player:'Mchezaji',tutBoxStep2:'Hatua 1: Gawanya Nambari',tutBoxStep6:'Hatua 6: Jumlisha Sehemu Zote!',tutBoxBody:'Njia ya Sanduku inakusaidia kuona kuzidisha kwa picha. Gawanya nambari, jaza kila seli mwenyewe, kisha jumlisha.',tutPPBody:'Bidhaa Ndogo Ndogo: tunazidisha kila sehemu peke yake kisha tunaongeza. Wewe unatoa majibu yote!',splitByPlaceValue:'Gawanya kwa thamani ya nafasi:',fillEveryCell:'Wewe unajaza kila seli!',multiplyEveryPair:'Zidisha kila jozi.',namesBox:['Juu-Kushoto','Juu-Kulia','Chini-Kushoto','Chini-Kulia'],namesPP:['ya Kwanza','ya Pili','ya Tatu','ya Nne'],placeHintBox:['makumi 3 × makumi 2','makumi 3 × moja 6','moja 4 × makumi 2','moja 4 × moja 6'],placeHintPP:['makumi 4 × makumi 3','makumi 4 × moja 7','moja 2 × makumi 3','moja 2 × moja 7'],stepTitle2:'Hatua',calculate:'Hesabu:',whatIs:'Ni nini',equals:'= ?',progress2:'Maendeleo',
     }
   },
   hi: {
@@ -1978,8 +2392,8 @@ const LANGS = {
       achDescXP:'स्तर 5 तक पहुंचें',
       achDescNohint:'बिना संकेत के सत्र समाप्त करें',
       achDescBoth:'दोनों ट्यूटोरियल पूरे करें',
-      achDescGlobal:'खेल खेलें',reportsEmptyTitle:'अभी तक कोई छात्र डेटा नहीं',reportsEmptyDesc:'जब छात्र अपने नाम और कक्षा कोड से लॉगिन करेंगे तो रिपोर्ट स्वचालित रूप से भर जाएगी।',subPerfect:'बिल्कुल त्रुटिहीन — हर उत्तर सही!',subAmazing:'असाधारण गुणन कौशल!',subGoodJob:'अच्छा काम — आगे बढ़ते रहें!',subKeepGoing:'अभ्यास से ही सिद्धि होती है — आप सुधर रहे हैं!',subTryAgain:'हर प्रयास आपको मजबूत बनाता है!',dyslexicFont:'OpenDyslexic फ़ॉन्ट',colourBlindSafe:'वर्णान्धता-सुरक्षित',reduceMotion:'गति कम करें',textSpacing:'टेक्स्ट स्पेसिंग',readAloud:'प्रश्न जोर से पढ़ें',extendedTime:'विस्तारित समय',extendedTimeNote:'IEP/EHCP वाले छात्रों के लिए।',skipToMain:'मुख्य सामग्री पर जाएं',ofText:'में से',
-      player:'खिलाड़ी',
+      achDescGlobal:'खेल खेलें',reportsEmptyTitle:'अभी तक कोई छात्र डेटा नहीं',reportsEmptyDesc:'जब छात्र अपने नाम और कक्षा कोड से लॉगिन करेंगे तो रिपोर्ट स्वचालित रूप से भर जाएगी।',subPerfect:'बिल्कुल त्रुटिहीन — हर उत्तर सही!',subAmazing:'असाधारण गुणन कौशल!',subGoodJob:'अच्छा काम — आगे बढ़ते रहें!',subKeepGoing:'अभ्यास से ही सिद्धि होती है — आप सुधर रहे हैं!',subTryAgain:'हर प्रयास आपको मजबूत बनाता है!',dyslexicFont:'OpenDyslexic फ़ॉन्ट',colourBlindSafe:'वर्णान्धता-सुरक्षित',reduceMotion:'गति कम करें',textSpacing:'टेक्स्ट स्पेसिंग',readAloud:'प्रश्न जोर से पढ़ें',extendedTime:'विस्तारित समय',extendedTimeNote:'IEP/EHCP वाले छात्रों के लिए।',skipToMain:'मुख्य सामग्री पर जाएं',ofText:'में से',tableBox:'⊞ टेबल बॉक्स',areaBox:'▭ क्षेत्र बॉक्स',boxFmtLabel:'बॉक्स प्रारूप',wizardLang:'1 · भाषा',wizardCurr:'2 · पाठ्यक्रम',wizardConfirm:'3 · पुष्टि',whereTeaching:'आप कहाँ पढ़ाते हैं?',searchCurricula:'पाठ्यक्रम खोजें (जैसे CAPS, NCERT, CCSS)...',confirmSetup:'✓ अपनी सेटिंग की पुष्टि करें',startNumara:'Numara शुरू करें →',nextCurriculum:'अगला: पाठ्यक्रम चुनें →',changeBtn:'बदलें',allRegions:'← सभी क्षेत्र',
+      player:'खिलाड़ी',tutBoxStep2:'चरण 1: संख्याओं को तोड़ें',tutBoxStep6:'चरण 6: सभी भागों को जोड़ें!',tutBoxBody:'बॉक्स विधि आपको गुणा को दृश्य रूप से देखने में मदद करती है।',tutPPBody:'आंशिक गुणनफल: हर भाग को अलग से गुणा करते हैं फिर जोड़ते हैं।',splitByPlaceValue:'स्थानीय मान से विभाजित करें:',fillEveryCell:'आप हर सेल भरते हैं!',multiplyEveryPair:'हर जोड़ी को गुणा करें।',namesBox:['ऊपर-बाएं','ऊपर-दाएं','नीचे-बाएं','नीचे-दाएं'],namesPP:['पहला','दूसरा','तीसरा','चौथा'],placeHintBox:['3 दहाई × 2 दहाई','3 दहाई × 6 इकाई','4 इकाई × 2 दहाई','4 इकाई × 6 इकाई'],placeHintPP:['4 दहाई × 3 दहाई','4 दहाई × 7 इकाई','2 इकाई × 3 दहाई','2 इकाई × 7 इकाई'],stepTitle2:'चरण',calculate:'गणना करें:',whatIs:'क्या है',equals:'= ?',progress2:'प्रगति',
     }
   },
   zh: {
@@ -2059,8 +2473,8 @@ const LANGS = {
       achDescXP:'达到5级',
       achDescNohint:'无提示完成一局',
       achDescBoth:'完成两个教程',
-      achDescGlobal:'玩游戏',reportsEmptyTitle:'尚无学生数据',reportsEmptyDesc:'学生用姓名和班级代码登录并完成练习后，报告将自动填充。',subPerfect:'完美无瑕——每道题都答对了！',subAmazing:'乘法技能卓越！',subGoodJob:'干得好——继续保持！',subKeepGoing:'熟能生巧——你在进步！',subTryAgain:'每次尝试都让你更强大！',dyslexicFont:'OpenDyslexic字体',colourBlindSafe:'色盲友好模式',reduceMotion:'减少动画',textSpacing:'文字间距',readAloud:'朗读问题',extendedTime:'延长时间',extendedTimeNote:'适用于需要额外时间的学生。',skipToMain:'跳至主要内容',ofText:'之',
-      player:'玩家',
+      achDescGlobal:'玩游戏',reportsEmptyTitle:'尚无学生数据',reportsEmptyDesc:'学生用姓名和班级代码登录并完成练习后，报告将自动填充。',subPerfect:'完美无瑕——每道题都答对了！',subAmazing:'乘法技能卓越！',subGoodJob:'干得好——继续保持！',subKeepGoing:'熟能生巧——你在进步！',subTryAgain:'每次尝试都让你更强大！',dyslexicFont:'OpenDyslexic字体',colourBlindSafe:'色盲友好模式',reduceMotion:'减少动画',textSpacing:'文字间距',readAloud:'朗读问题',extendedTime:'延长时间',extendedTimeNote:'适用于需要额外时间的学生。',skipToMain:'跳至主要内容',ofText:'之',tableBox:'⊞ 表格方格',areaBox:'▭ 面积方格',boxFmtLabel:'方格显示格式',wizardLang:'1 · 语言',wizardCurr:'2 · 课程',wizardConfirm:'3 · 确认',whereTeaching:'您在哪里教学？',searchCurricula:'搜索课程（如 CAPS、BNCC、CCSS）...',confirmSetup:'✓ 确认您的设置',startNumara:'开始 Numara →',nextCurriculum:'下一步：选择课程 →',changeBtn:'更改',allRegions:'← 所有地区',
+      player:'玩家',tutBoxStep2:'第1步：分解数字',tutBoxStep6:'第6步：把所有部分相加！',tutBoxBody:'方格法帮助你直观地看到乘法。将数字按位值分解，自己填写每个格子，然后相加。',tutPPBody:'部分积法：我们分别乘每个部分，然后相加。你提供所有答案！',splitByPlaceValue:'按位值分解：',fillEveryCell:'你填写每个格子！',multiplyEveryPair:'乘每一对。',namesBox:['左上','右上','左下','右下'],namesPP:['第一','第二','第三','第四'],placeHintBox:['3个十 × 2个十','3个十 × 6个一','4个一 × 2个十','4个一 × 6个一'],placeHintPP:['4个十 × 3个十','4个十 × 7个一','2个一 × 3个十','2个一 × 7个一'],stepTitle2:'步骤',calculate:'计算：',whatIs:'是多少',equals:'= ?',progress2:'进度',
     }
   },
   yo: {
@@ -2140,7 +2554,7 @@ const LANGS = {
       achDescXP:'Dé Ìpele 5',
       achDescNohint:'Parí ìgbà láì nílò ìtọ́kasí',
       achDescBoth:'Parí àwọn ìkọni méjèjì',
-      achDescGlobal:'Ṣeré',reportsEmptyTitle:'Kò sí àwọn dátà akẹ́kọ̀ọ́ tí ó tó',reportsEmptyDesc:'Àwọn ìjábọ̀ yóò kun fúnra wọn lẹ́yìn tí àwọn akẹ́kọ̀ọ́ bá wọlé pẹ̀lú orúkọ wọn àti kóòdù kíláàsì.',subPerfect:'Àìdásílẹ̀ pipe — gbogbo ìdáhùn tọ́!',subAmazing:'Ìmọ̀ ìṣirò ìlọpo tó tayọ!',subGoodJob:'Iṣẹ́ rere — tẹ̀síwájú!',subKeepGoing:'Ìdárayá ń mú ìpé wá — o ń sún mọ́!',subTryAgain:'Ìgbìyànjú kọ̀ọ̀kan ń mú ọ́ lágbára!',dyslexicFont:'Fọ́ńtì OpenDyslexic',colourBlindSafe:'Àbò fún Afọ̀jú Àwọ̀',reduceMotion:'Dínkù Ìgbépadà',textSpacing:'Àlàfo Ọ̀rọ̀',readAloud:'Ka Àwọn Ìbéèrè Ní Àárọ̀',extendedTime:'Àkókò Àfikún',extendedTimeNote:'Fún àwọn akẹ́kọ̀ọ́ tí ó nílò àkókò àfikún.',skipToMain:'Lọ sí àkóónú àkọ́kọ́',ofText:'nínú',
+      achDescGlobal:'Ṣeré',reportsEmptyTitle:'Kò sí àwọn dátà akẹ́kọ̀ọ́ tí ó tó',reportsEmptyDesc:'Àwọn ìjábọ̀ yóò kun fúnra wọn lẹ́yìn tí àwọn akẹ́kọ̀ọ́ bá wọlé pẹ̀lú orúkọ wọn àti kóòdù kíláàsì.',subPerfect:'Àìdásílẹ̀ pipe — gbogbo ìdáhùn tọ́!',subAmazing:'Ìmọ̀ ìṣirò ìlọpo tó tayọ!',subGoodJob:'Iṣẹ́ rere — tẹ̀síwájú!',subKeepGoing:'Ìdárayá ń mú ìpé wá — o ń sún mọ́!',subTryAgain:'Ìgbìyànjú kọ̀ọ̀kan ń mú ọ́ lágbára!',dyslexicFont:'Fọ́ńtì OpenDyslexic',colourBlindSafe:'Àbò fún Afọ̀jú Àwọ̀',reduceMotion:'Dínkù Ìgbépadà',textSpacing:'Àlàfo Ọ̀rọ̀',readAloud:'Ka Àwọn Ìbéèrè Ní Àárọ̀',extendedTime:'Àkókò Àfikún',extendedTimeNote:'Fún àwọn akẹ́kọ̀ọ́ tí ó nílò àkókò àfikún.',skipToMain:'Lọ sí àkóónú àkọ́kọ́',ofText:'nínú',tableBox:'⊞ Àpótí Tábìlì',areaBox:'▭ Àpótí Àgbègbè',boxFmtLabel:'Ìdásílẹ̀ Àpótí',wizardLang:'1 · Èdè',wizardCurr:'2 · Ẹ̀kọ́',wizardConfirm:'3 · Jẹ́rìísí',whereTeaching:'Níbo ni o ń kọ́ni?',searchCurricula:'Wá ẹ̀kọ́ (fún àpẹẹrẹ: CAPS, CBC, NERDC)...',confirmSetup:'✓ Jẹ́rìísí ìtọ́kasí rẹ',startNumara:'Bẹ̀rẹ̀ Numara →',nextCurriculum:'Tókàn: Yan Ẹ̀kọ́ →',changeBtn:'Yí padà',allRegions:'← Gbogbo Àwọn Ẹkùn',
       player:'Olóṣeré',
       // Extended UI strings
       profileSetup:'Ṣeto profáìlì rẹ láti fi ìlọsíwájú rẹ pamọ́',
@@ -2272,7 +2686,7 @@ const LANGS = {
       achDescXP:'Kai Matakin 5',
       achDescNohint:'Kammala zama babu taimako',
       achDescBoth:'Kammala koyarwa biyu',
-      achDescGlobal:'Buga wasan',reportsEmptyTitle:'Babu bayanai na ɗalibai tukuna',reportsEmptyDesc:'Rahotannin za su cika ta atomatik ɗalibai sun shiga da sunansu da lambar aji.',subPerfect:'Cikakke gaba ɗaya — dukkan amsoshi daidai!',subAmazing:'Ƙwarewar ninkawa mai girma!',subGoodJob:'Kyakkyawan aiki — ci gaba!',subKeepGoing:'Gwajin yau da kullum yana inganta — kana ci gaba!',subTryAgain:'Kowane ƙoƙari yana ƙarfafa ka!',dyslexicFont:'Rubutu na OpenDyslexic',colourBlindSafe:'Amintacce ga Makaho Launi',reduceMotion:'Rage Motsi',textSpacing:'Sararin Rubutu',readAloud:'Karanta Tambayoyi da Murya',extendedTime:'Lokaci Mai Tsawo',extendedTimeNote:'Don ɗalibai masu buƙatar ƙarin lokaci.',skipToMain:'Je zuwa abubuwan ciki',ofText:'na',
+      achDescGlobal:'Buga wasan',reportsEmptyTitle:'Babu bayanai na ɗalibai tukuna',reportsEmptyDesc:'Rahotannin za su cika ta atomatik ɗalibai sun shiga da sunansu da lambar aji.',subPerfect:'Cikakke gaba ɗaya — dukkan amsoshi daidai!',subAmazing:'Ƙwarewar ninkawa mai girma!',subGoodJob:'Kyakkyawan aiki — ci gaba!',subKeepGoing:'Gwajin yau da kullum yana inganta — kana ci gaba!',subTryAgain:'Kowane ƙoƙari yana ƙarfafa ka!',dyslexicFont:'Rubutu na OpenDyslexic',colourBlindSafe:'Amintacce ga Makaho Launi',reduceMotion:'Rage Motsi',textSpacing:'Sararin Rubutu',readAloud:'Karanta Tambayoyi da Murya',extendedTime:'Lokaci Mai Tsawo',extendedTimeNote:'Don ɗalibai masu buƙatar ƙarin lokaci.',skipToMain:'Je zuwa abubuwan ciki',ofText:'na',tableBox:'⊞ Akwati Tebur',areaBox:'▭ Akwati Yanki',boxFmtLabel:'Tsarin Akwati',wizardLang:'1 · Harshe',wizardCurr:'2 · Manhaji',wizardConfirm:'3 · Tabbatar',whereTeaching:'A ina kake koyarwa?',searchCurricula:'Nema manhaji (misali: CAPS, CBC, NERDC)...',confirmSetup:'✓ Tabbatar da saitunanku',startNumara:'Fara Numara →',nextCurriculum:'Gaba: Zaɓi Manhaji →',changeBtn:'Canza',allRegions:'← Dukkan Yankuna',
       player:'Dan Wasa',
       profileSetup:'Kafa bayananku don adana ci gabanka',
       yourName:'Sunanka', classCode:'Lambar Aji (daga malami)',
@@ -2403,7 +2817,7 @@ const LANGS = {
       achDescXP:'Rụọ Ọkwa 5',
       achDescNohint:'Mechaa oge na-enweghị ntọala',
       achDescBoth:'Mechaa nkuzi abụọ',
-      achDescGlobal:'Kpoo egwuregwu',reportsEmptyTitle:'Ọ dịghị data nwa akwụkwọ ọ bụla ka ugbu a',reportsEmptyDesc:"Ọdịnaya ga-aza onwe ya ozugbo ụmụ akwụkwọ banyere site na aha ha na koodu klaasị.",subPerfect:'Zuru oke kpamkpam — azịza niile ziri ezi!',subAmazing:'Nka ọtụtụ dị elu!',subGoodJob:"Ọrụ ọma — gaa n'ihu!",subKeepGoing:'Omume na-eme mma — ị na-azụlite!',subTryAgain:'Nnwale ọ bụla na-eme gị ike!',dyslexicFont:'Mkpụrụedemede OpenDyslexic',colourBlindSafe:'Nchekwa maka Ọzọ Agba',reduceMotion:'Belata Mmegharị',textSpacing:'Oghere Ederede',readAloud:"Gụọ Ajụjụ n'olu elu",extendedTime:'Oge Agbatị',extendedTimeNote:'Maka ụmụ akwụkwọ chọrọ oge ọzọ.',skipToMain:'Gaa na ọdịnaya bụ isi',ofText:"n'ime",
+      achDescGlobal:'Kpoo egwuregwu',reportsEmptyTitle:'Ọ dịghị data nwa akwụkwọ ọ bụla ka ugbu a',reportsEmptyDesc:"Ọdịnaya ga-aza onwe ya ozugbo ụmụ akwụkwọ banyere site na aha ha na koodu klaasị.",subPerfect:'Zuru oke kpamkpam — azịza niile ziri ezi!',subAmazing:'Nka ọtụtụ dị elu!',subGoodJob:"Ọrụ ọma — gaa n'ihu!",subKeepGoing:'Omume na-eme mma — ị na-azụlite!',subTryAgain:'Nnwale ọ bụla na-eme gị ike!',dyslexicFont:'Mkpụrụedemede OpenDyslexic',colourBlindSafe:'Nchekwa maka Ọzọ Agba',reduceMotion:'Belata Mmegharị',textSpacing:'Oghere Ederede',readAloud:"Gụọ Ajụjụ n'olu elu",extendedTime:'Oge Agbatị',extendedTimeNote:'Maka ụmụ akwụkwọ chọrọ oge ọzọ.',skipToMain:'Gaa na ọdịnaya bụ isi',ofText:"n'ime",tableBox:'Igbe Tebụl',areaBox:'Igbe Mpaghara',boxFmtLabel:'Ụdị Igbe',wizardLang:'1 · Asụsụ',wizardCurr:'2 · Usoro Mmụta',wizardConfirm:'3 · Nkwenye',whereTeaching:'Ebee ka ị na-akụzi?',confirmSetup:'✓ Kwenye ntọala gị',startNumara:'Bido Numara →',nextCurriculum:'Ọzọ: Họrọ Usoro Mmụta →',changeBtn:'Gbanwee',allRegions:'← Mpaghara Niile',
       player:'Onye egwuregwu',
       profileSetup:'Haziere profaịlụ gị iji chekwaa ọganihu gị',
       yourName:'Aha gị', classCode:'Koodu Klaasị (sitere n\'onye nkuzi)',
@@ -2534,8 +2948,8 @@ const LANGS = {
       achDescXP:'Level 5 erreichen',
       achDescNohint:'Sitzung ohne Hinweise beenden',
       achDescBoth:'Beide Tutorials abschließen',
-      achDescGlobal:'Das Spiel spielen',reportsEmptyTitle:'Noch keine Schülerdaten vorhanden',reportsEmptyDesc:'Berichte werden automatisch gefüllt, sobald Schüler/innen sich mit ihrem Namen und Klassencode anmelden.',subPerfect:'Absolut makellos — jede Antwort richtig!',subAmazing:'Hervorragende Multiplikationsfähigkeiten!',subGoodJob:'Gute Arbeit — weiter so!',subKeepGoing:'Übung macht den Meister — du verbesserst dich!',subTryAgain:'Jeder Versuch macht dich stärker!',dyslexicFont:'OpenDyslexic-Schrift',colourBlindSafe:'Farbenblind-sicher',reduceMotion:'Bewegung reduzieren',textSpacing:'Textabstand',readAloud:'Fragen vorlesen',extendedTime:'Verlängerte Zeit',extendedTimeNote:'Für Schüler/innen mit sonderpädagogischem Förderbedarf.',skipToMain:'Zum Hauptinhalt springen',ofText:'von',
-      player:'Spieler',
+      achDescGlobal:'Das Spiel spielen',reportsEmptyTitle:'Noch keine Schülerdaten vorhanden',reportsEmptyDesc:'Berichte werden automatisch gefüllt, sobald Schüler/innen sich mit ihrem Namen und Klassencode anmelden.',subPerfect:'Absolut makellos — jede Antwort richtig!',subAmazing:'Hervorragende Multiplikationsfähigkeiten!',subGoodJob:'Gute Arbeit — weiter so!',subKeepGoing:'Übung macht den Meister — du verbesserst dich!',subTryAgain:'Jeder Versuch macht dich stärker!',dyslexicFont:'OpenDyslexic-Schrift',colourBlindSafe:'Farbenblind-sicher',reduceMotion:'Bewegung reduzieren',textSpacing:'Textabstand',readAloud:'Fragen vorlesen',extendedTime:'Verlängerte Zeit',extendedTimeNote:'Für Schüler/innen mit sonderpädagogischem Förderbedarf.',skipToMain:'Zum Hauptinhalt springen',ofText:'von',tableBox:'⊞ Tabellen-Kästchen',areaBox:'▭ Flächen-Kästchen',boxFmtLabel:'Kästchen-Format',wizardLang:'1 · Sprache',wizardCurr:'2 · Lehrplan',wizardConfirm:'3 · Bestätigen',whereTeaching:'Wo unterrichten Sie?',searchCurricula:'Lehrplan suchen (z.B. KMK, CAPS, CCSS)...',confirmSetup:'✓ Einstellungen bestätigen',startNumara:'Numara starten →',nextCurriculum:'Weiter: Lehrplan wählen →',changeBtn:'Ändern',allRegions:'← Alle Regionen',
+      player:'Spieler',tutBoxStep2:'Schritt 1: Zahlen zerlegen',tutBoxStep6:'Schritt 6: Alle Teile addieren!',tutBoxBody:'Die Kästchenmethode hilft dir, Multiplikation visuell zu sehen. Zerlege Zahlen, fülle jede Zelle selbst aus, dann addiere die Teile.',tutPPBody:'Teilprodukte: Wir multiplizieren jeden Teil separat und addieren. Du gibst alle Antworten!',splitByPlaceValue:'Nach Stellenwert zerlegen:',fillEveryCell:'Du füllst jede Zelle!',multiplyEveryPair:'Multipliziere jedes Paar.',namesBox:['Oben Links','Oben Rechts','Unten Links','Unten Rechts'],namesPP:['Erste','Zweite','Dritte','Vierte'],placeHintBox:['3 Zehner × 2 Zehner','3 Zehner × 6 Einer','4 Einer × 2 Zehner','4 Einer × 6 Einer'],placeHintPP:['4 Zehner × 3 Zehner','4 Zehner × 7 Einer','2 Einer × 3 Zehner','2 Einer × 7 Einer'],stepTitle2:'Schritt',calculate:'Berechne:',whatIs:'Was ist',equals:'= ?',progress2:'Fortschritt',
     }
   },
 };
@@ -2831,6 +3245,7 @@ const APP = {
   showFactTable: false,
   tts: false,
   extTimeMult: 1,
+  boxFormat: 'table',  // 'table' | 'area'
   student: null,
   opts: { algo:'both', diff:0, qcount:10, coopPlayers:3, coopMode:'turns' },
   G: {},
@@ -2889,7 +3304,11 @@ function showScreen(id){
 }
 
 /* ─ OFFLINE ─ */
-window.addEventListener('offline',()=>{ document.getElementById('offline-banner').classList.add('show'); });
+window.addEventListener('offline',()=>{
+  const msg=document.getElementById('offline-msg');
+  if(msg) msg.textContent=APP.t('offlineMsg')||'📡 Offline — this game works without internet!';
+  document.getElementById('offline-banner').classList.add('show');
+});
 window.addEventListener('online',()=>{ document.getElementById('offline-banner').classList.remove('show'); });
 
 /* ══════════════════════════════════════════════
@@ -2918,19 +3337,21 @@ function ttsRead(){
   const G=APP.G; if(!G||!G.steps) return;
   if(G.stepIdx<G.steps.length){
     const s=G.steps[G.stepIdx];
-    ttsSpeak(`${APP.t('whatIs')} ${s.a} times ${s.b}`,true);
+    const timesWord=APP.t('calculate')||'×';
+    ttsSpeak(`${APP.t('whatIs')} ${s.a} ${timesWord} ${s.b}`,true);
   }
 }
 function ttsFinal(){
   const G=APP.G; if(!G||!G.steps) return;
-  const parts=G.steps.map(s=>APP.fmtNum(s.val)).join(' plus ');
-  ttsSpeak(`${parts} equals`,true);
+  const parts=G.steps.map(s=>APP.fmtNum(s.val)).join(' + ');
+  ttsSpeak(`${parts} ${APP.t('equals')||'='}`,true);
 }
 function ttsQuestion(){
   if(!APP.tts) return;
   const G=APP.G; if(!G) return;
   const algo=G.algo==='box'?APP.t('boxMethod'):APP.t('partialProducts');
-  ttsSpeak(`${algo}. ${APP.t('problem')}: ${APP.fmtNum(G.n1)} times ${APP.fmtNum(G.n2)}.`,true);
+  const timesWord=APP.t('calculate')||'×';
+  ttsSpeak(`${algo}. ${APP.t('problem')}: ${APP.fmtNum(G.n1)} ${timesWord} ${APP.fmtNum(G.n2)}.`,true);
 }
 
 // ── Update ARIA labels dynamically ──
@@ -2938,23 +3359,23 @@ function updateGameARIA(){
   const G=APP.G; if(!G) return;
   const probAria=document.getElementById('g-prob-aria');
   if(probAria) probAria.setAttribute('aria-label',
-    `${APP.t('problem')}: ${APP.fmtNum(G.n1)} times ${APP.fmtNum(G.n2)}`);
+    `${APP.t('problem')}: ${APP.fmtNum(G.n1)} ${APP.t('calculate')||'×'} ${APP.fmtNum(G.n2)}`);
   const inp=document.getElementById('g-step-inp');
   if(inp&&G.stepIdx<(G.steps||[]).length){
     const s=G.steps[G.stepIdx];
     inp.setAttribute('aria-label',
-      `${APP.t('whatIs')} ${APP.fmtNum(s.a)} times ${APP.fmtNum(s.b)} equals`);
+      `${APP.t('whatIs')} ${APP.fmtNum(s.a)} ${APP.t('calculate')||'×'} ${APP.fmtNum(s.b)} ${APP.t('equals')||'='}`);
   }
   const finp=document.getElementById('g-final-inp');
   if(finp){
-    const parts=(G.steps||[]).map(s=>APP.fmtNum(s.val)).join(' plus ');
-    finp.setAttribute('aria-label',`${APP.t('finalAnswer')}: ${parts} equals`);
+    const parts=(G.steps||[]).map(s=>APP.fmtNum(s.val)).join(' + ');
+    finp.setAttribute('aria-label',`${APP.t('finalAnswer')}: ${parts} ${APP.t('equals')||'='}`);
   }
   const tw=document.getElementById('g-timer-wrap');
   if(tw&&G.timerMax){
     const pct=Math.round((G.timerVal||0)/G.timerMax*100);
     tw.setAttribute('aria-valuenow',pct);
-    tw.setAttribute('aria-valuetext',`${G.timerVal||0} seconds remaining`);
+    tw.setAttribute('aria-valuetext',`${G.timerVal||0}`);
   }
   const extBadge=document.getElementById('g-timer-ext-badge');
   if(extBadge){
@@ -2969,7 +3390,7 @@ let _timerAnn={15:false,10:false,5:false};
 function checkTimerAnnounce(secs){
   if(secs in _timerAnn && !_timerAnn[secs]){
     _timerAnn[secs]=true;
-    announce(`${secs} seconds remaining`,'polite');
+    announce(`${secs} — ${APP.t('timesUp').replace('!','')||secs}`,'polite');
   }
 }
 function resetTimerAnn(){ _timerAnn={15:false,10:false,5:false}; }
@@ -2983,7 +3404,7 @@ function handleGameKey(e){
 document.addEventListener('keydown', e=>{
   const scr=document.querySelector('.screen.active'); if(!scr) return;
   if(e.key==='?'&&e.shiftKey){
-    announce(`Keyboard shortcuts: H for hint, R to read question aloud, Enter to check answer`,'assertive');
+    announce(`${APP.t('hint')||'Hint'}: H. ${APP.t('readAloud')||'Read aloud'}: R. ${APP.t('check')||'Check'}: Enter`,'assertive');
   }
 });
 
@@ -2991,6 +3412,9 @@ document.addEventListener('keydown', e=>{
 function buildAccessibleBox(pv1,pv2,solvedMap,activeIdx){
   const CC=['bc1','bc2','bc3','bc4'];
   const prob=`${APP.fmtNum(APP.G.n1)} × ${APP.fmtNum(APP.G.n2)}`;
+  const tCalc=APP.t('calculate')||'×';
+  const tEq=APP.t('equals')||'=';
+  const tEnter=APP.t('yourAnswer')||'?';
   let idx=0;
   let html=`<div class="box-wrap"><table role="grid" aria-label="${APP.t('boxMethod')}: ${prob}" style="border-collapse:collapse;width:100%;">
   <thead><tr>
@@ -3005,9 +3429,9 @@ function buildAccessibleBox(pv1,pv2,solvedMap,activeIdx){
       const key=`${c}_${r}`,isSolved=solvedMap[key],isActive=idx===activeIdx;
       const val=c*r;
       const cellLabel=isSolved
-        ?`${APP.fmtNum(c)} times ${APP.fmtNum(r)} equals ${APP.fmtNum(val)}`
-        :isActive?`Enter answer: ${APP.fmtNum(c)} times ${APP.fmtNum(r)}`
-        :`${APP.fmtNum(c)} times ${APP.fmtNum(r)}, locked`;
+        ?`${APP.fmtNum(c)} ${tCalc} ${APP.fmtNum(r)} ${tEq} ${APP.fmtNum(val)}`
+        :isActive?`${tEnter}: ${APP.fmtNum(c)} ${tCalc} ${APP.fmtNum(r)}`
+        :`${APP.fmtNum(c)} ${tCalc} ${APP.fmtNum(r)}`;
       html+=`<td class="bcell dc ${CC[idx%4]}${isActive?' active-c':''}"
                role="gridcell" aria-label="${cellLabel}"
                style="border:1px solid #bbf7d0;text-align:center;min-height:56px;padding:9px 5px;">
@@ -3025,22 +3449,97 @@ function buildAccessibleBox(pv1,pv2,solvedMap,activeIdx){
 // ── Accessible PP list ──
 function buildAccessiblePP(steps,stepIdx,solvedArr){
   const RC=['r1','r2','r3','r4'];
+  const tStep=APP.t('stepTitle2')||'Step';
+  const tCalc=APP.t('calculate')||'×';
+  const tEq=APP.t('equals')||'=';
+  const tEnter=APP.t('yourAnswer')||'?';
   let html=`<div class="pp-wrap" role="list" aria-label="${APP.t('partialProducts')}">`;
   steps.forEach((s,i)=>{
     const isSolved=solvedArr[i],isActive=i===stepIdx,isInactive=!isSolved&&i>stepIdx;
     const itemLabel=isSolved
-      ?`Step ${i+1}: ${APP.fmtNum(s.a)} times ${APP.fmtNum(s.b)} equals ${APP.fmtNum(s.val)}`
-      :isActive?`Step ${i+1}: Enter answer: ${APP.fmtNum(s.a)} times ${APP.fmtNum(s.b)}`
-      :`Step ${i+1}: locked`;
+      ?`${tStep} ${i+1}: ${APP.fmtNum(s.a)} ${tCalc} ${APP.fmtNum(s.b)} ${tEq} ${APP.fmtNum(s.val)}`
+      :isActive?`${tStep} ${i+1}: ${tEnter}: ${APP.fmtNum(s.a)} ${tCalc} ${APP.fmtNum(s.b)}`
+      :`${tStep} ${i+1}`;
     html+=`<div class="pp-row-item ${RC[i%4]}${isActive?' active-r':''}${isInactive?' inactive-r':''}"
                role="listitem" aria-label="${itemLabel}" aria-current="${isActive?'step':'false'}">
       <div class="pp-lbl-row"><div class="pp-num" aria-hidden="true">${i+1}</div>
-      <div class="pp-eq-lbl" aria-hidden="true">${APP.fmtNum(s.a)} × ${APP.fmtNum(s.b)} =</div></div>
-      <div class="pp-val-disp" aria-hidden="true">${isSolved?APP.fmtNum(s.val):'?'}</div>
+      <div class="pp-eq-lbl" aria-hidden="true" dir="ltr">${APP.fmtNum(s.a)} × ${APP.fmtNum(s.b)} =</div></div>
+      <div class="pp-val-disp" aria-hidden="true" dir="ltr">${isSolved?APP.fmtNum(s.val):'?'}</div>
     </div>`;
   });
   html+=`</div>`;
   return html;
+}
+
+
+/* ─ BOX FORMAT CHOOSER ─ */
+function setBoxFormat(fmt, btn){
+  APP.boxFormat = fmt;
+  // Update ALL format pill buttons across game, tutorial, and tools
+  document.querySelectorAll('.box-fmt-pill').forEach(el=>{
+    const id=el.id||'';
+    const isArea=id.includes('area')||el.textContent.includes('Area');
+    const isTable=id.includes('table')||el.textContent.includes('Table');
+    const isThis=(fmt==='area'&&isArea)||(fmt==='table'&&isTable);
+    el.classList.toggle('active',isThis);
+    el.setAttribute('aria-pressed',isThis?'true':'false');
+  });
+  // Re-render game box if active
+  const G=APP.G;
+  if(G&&G.algo==='box'&&G.steps&&G.steps.length){
+    document.getElementById('g-step-content').innerHTML=buildGameBox();
+  }
+  // Re-render tutorial box if on that screen
+  if(document.getElementById('tut-box')?.classList.contains('active')){
+    renderBStep();
+  }
+  // Re-render demo in tools
+  genDemo();
+  // Announce to screen reader
+  announce(fmt==='table'?APP.t('tableBox'):APP.t('areaBox'),'polite');
+}
+
+/* ── Area Box Builder ── */
+function buildAreaBox(pv1,pv2,solvedMap,activeIdx,n1,n2){
+  const CC=['bc1','bc2','bc3','bc4'];
+  const tCalc=APP.t('calculate')||'×';
+  const tEq=APP.t('equals')||'=';
+  const tEnter=APP.t('yourAnswer')||'?';
+  let idx=0;
+  const prob=n1&&n2?`${APP.fmtNum(n1)} × ${APP.fmtNum(n2)}`:'';
+  let html=`<div class="area-box-wrap" role="grid" aria-label="${APP.t('boxMethod')}${prob?' — '+prob:''}">`;
+  // Column headers
+  html+=`<div class="area-col-headers">`;
+  pv1.forEach(c=>{ html+=`<div class="area-col-hdr">${APP.fmtNum(c)}</div>`; });
+  html+=`</div>`;
+  // Rows
+  pv2.forEach(r=>{
+    html+=`<div class="area-row">`;
+    html+=`<div class="area-row-hdr">${APP.fmtNum(r)}</div>`;
+    pv1.forEach(c=>{
+      const key=`${c}_${r}`,isSolved=solvedMap[key],isActive=idx===activeIdx;
+      const val=c*r;
+      const cellLabel=isSolved
+        ?`${APP.fmtNum(c)} ${tCalc} ${APP.fmtNum(r)} ${tEq} ${APP.fmtNum(val)}`
+        :isActive?`${tEnter}: ${APP.fmtNum(c)} ${tCalc} ${APP.fmtNum(r)}`
+        :`${APP.fmtNum(c)} ${tCalc} ${APP.fmtNum(r)}`;
+      html+=`<div class="area-cell ${CC[idx%4]}${isActive?' active-c':''}" role="gridcell" aria-label="${cellLabel}">
+        <span class="ceq" aria-hidden="true">${APP.fmtNum(c)}×${APP.fmtNum(r)}</span>
+        <span class="cval">${isSolved?APP.fmtNum(val):'?'}</span>
+      </div>`;
+      idx++;
+    });
+    html+=`</div>`;
+  });
+  html+=`</div>`;
+  return html;
+}
+
+/* ── Unified box builder — routes to table or area ── */
+function buildBox(pv1,pv2,solvedMap,activeIdx,n1,n2){
+  return APP.boxFormat==='area'
+    ? buildAreaBox(pv1,pv2,solvedMap,activeIdx,n1,n2)
+    : buildAccessibleBox(pv1,pv2,solvedMap,activeIdx);
 }
 
 /* ─ ACCESSIBILITY TOGGLES ─ */
@@ -3050,67 +3549,214 @@ function toggleAccess(type){
     document.body.classList.toggle(type);
     const cb=document.getElementById(`tgl-${type}`);
     if(cb) cb.checked=document.body.classList.contains(type);
-    // Announce the change
     announce(`${type} ${document.body.classList.contains(type)?'enabled':'disabled'}`,'polite');
   }
   if(type==='rtl'){
     const html=document.documentElement;
     const isRTL=html.dir==='rtl';
     html.dir=isRTL?'ltr':'rtl';
-    html.lang=isRTL?APP.lang:(APP.lang==='ar'?'ar':'ar');
+    // Set lang to the correct RTL language code, not always 'ar'
+    const rtlLangs={ar:'ar',he:'he',fa:'fa',ur:'ur'};
+    html.lang=isRTL?APP.lang:(rtlLangs[APP.lang]||APP.lang);
     const cb=document.getElementById('tgl-rtl'); if(cb) cb.checked=!isRTL;
-    announce(`Right-to-left layout ${!isRTL?'enabled':'disabled'}`,'polite');
+    announce(`${APP.t('rtlLayout')} ${!isRTL?'✓':'✗'}`,'polite');
+    // Re-render direction-sensitive UI if active
+    const activePanel=document.querySelector('.sh-panel.active');
+    if(activePanel?.id==='panel-progress') renderProgress();
+    if(document.getElementById('panel-tools')?.classList.contains('active')){
+      renderFactTable('fact-table-container'); genDemo();
+    }
+    if(document.querySelector('.screen.active')?.id==='teacher') renderTeacherDash();
   }
 }
 
-/* ─ REGION SELECT ─ */
+/* ─ REGION SELECT — 3-STEP WIZARD ─ */
+const CONTINENTS = {
+  'Americas':    { emoji:'🌎', label:'Americas',       keys:['ccss','ontario','sep','cxc','bncc','minedu'] },
+  'Europe':      { emoji:'🌍', label:'Europe',         keys:['uknat','france_en','kmk'] },
+  'Africa':      { emoji:'🌍', label:'Africa',         keys:['caps','nerdc','cbc_ke','confemen'] },
+  'Asia':        { emoji:'🌏', label:'Asia',           keys:['ncert','moe_sg','pep_cn','deped','merdeka'] },
+  'Middle East': { emoji:'🌙', label:'Middle East',    keys:['moe_me'] },
+  'Oceania':     { emoji:'🌊', label:'Oceania',        keys:['acara','nzc'] },
+};
+
 function initRegionSelect(){
-  // Languages
+  // ── Language grid ──
   const lg=document.getElementById('lang-grid');
   lg.innerHTML=Object.entries(LANGS).map(([k,v])=>`
-    <div class="lang-card${k==='en'?' selected':''}" onclick="selectLang('${k}',this)">
+    <div class="lang-card${k==='en'?' selected':''}" onclick="selectLang('${k}',this)" role="button" tabindex="0" aria-pressed="${k==='en'}">
       <span class="lang-flag">${v.flag}</span>
       <div class="lang-name">${v.name}</div>
       <div class="lang-native">${v.native}</div>
     </div>
   `).join('');
-  // Curricula
-  const cg=document.getElementById('curr-grid');
-  // Group by continent
-  const continents={};
-  Object.entries(CURRICULA).forEach(([k,v])=>{
-    const c=v.continent||'Other';
-    if(!continents[c]) continents[c]=[];
-    continents[c].push([k,v]);
-  });
-  const contOrder=['North America','Latin America','Europe','Africa','Asia','Middle East','Oceania'];
-  const contEmoji={'North America':'🌎','Latin America':'🌎','Europe':'🌍','Africa':'🌍','Asia':'🌏','Middle East':'🌙','Oceania':'🌊'};
-  cg.innerHTML=contOrder.map(cont=>{
-    const items=continents[cont]||[];
-    if(!items.length) return '';
-    return `<div style="grid-column:1/-1;margin:10px 0 6px;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.5);">${contEmoji[cont]||''} ${cont}</div>`+
-    items.map(([k,v])=>`
-      <div class="curr-card${k==='ccss'?' selected':''}" onclick="selectCurr('${k}',this)">
-        <div class="curr-flag">${v.flag}</div>
-        <div class="curr-name">${v.name}</div>
-        <div class="curr-code">${v.countries}</div>
-      </div>`).join('');
-  }).join('');
-  // Number formats
+
+  // ── Continent grid ──
+  const cg=document.getElementById('continent-grid');
+  cg.innerHTML=Object.entries(CONTINENTS).map(([k,v])=>`
+    <button class="continent-btn" onclick="selectContinent('${k}')" aria-label="Select ${v.label}">
+      <span class="continent-emoji">${v.emoji}</span>${v.label}
+    </button>
+  `).join('');
+
+  // ── Number formats ──
   const nf=document.getElementById('nf-options');
   nf.innerHTML=Object.entries(NUM_FORMATS).map(([k,v])=>`
-    <div class="nf-opt${k==='us'?' selected':''}" onclick="selectNumFmt('${k}',this)">
+    <div class="nf-opt${k==='us'?' selected':''}" onclick="selectNumFmt('${k}',this)" role="button" tabindex="0">
       <div class="nf-ex">${v.example}</div>
       <div class="nf-lbl">${v.regions.join(', ')}</div>
     </div>
   `).join('');
-  // Grade labels
+
+  // ── Grade labels ──
   const gl=document.getElementById('grade-lbl-options');
   gl.innerHTML=Object.entries(GRADE_LABELS).map(([k,v])=>`
-    <div class="nf-opt${k==='grade'?' selected':''}" onclick="selectGradeLabel('${k}',this)">
+    <div class="nf-opt${k==='grade'?' selected':''}" onclick="selectGradeLabel('${k}',this)" role="button" tabindex="0">
       <div class="nf-ex" style="font-size:16px;">${v}</div>
     </div>
   `).join('');
+}
+
+/* ── Wizard navigation ── */
+let wizardStep=1;
+function wizardNext(from){
+  wizardStep=from+1;
+  document.querySelectorAll('.wizard-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('wp'+wizardStep).classList.add('active');
+  // Update step indicators
+  for(let i=1;i<=3;i++){
+    const ind=document.getElementById('ws'+i);
+    ind.className='wizard-step-indicator '+(i<wizardStep?'done':i===wizardStep?'active':'');
+  }
+  if(wizardStep===3) updateConfirmCard();
+  window.scrollTo(0,0);
+}
+function wizardBack(from){
+  wizardStep=Math.max(1,from-1);
+  document.querySelectorAll('.wizard-pane').forEach(p=>p.classList.remove('active'));
+  document.getElementById('wp'+wizardStep).classList.add('active');
+  for(let i=1;i<=3;i++){
+    const ind=document.getElementById('ws'+i);
+    ind.className='wizard-step-indicator '+(i<wizardStep?'done':i===wizardStep?'active':'');
+  }
+  if(wizardStep===2){
+    document.getElementById('wp2a').style.display='block';
+    document.getElementById('wp2b').style.display='none';
+  }
+  window.scrollTo(0,0);
+}
+
+/* ── Continent selection ── */
+function selectContinent(key){
+  document.querySelectorAll('.continent-btn').forEach(b=>b.classList.remove('selected'));
+  event.target.closest('.continent-btn').classList.add('selected');
+  showContinent(key);
+}
+function showContinent(key){
+  if(!key){
+    document.getElementById('wp2a').style.display='block';
+    document.getElementById('wp2b').style.display='none';
+    return;
+  }
+  const cont=CONTINENTS[key]; if(!cont) return;
+  document.getElementById('wp2a').style.display='none';
+  document.getElementById('wp2b').style.display='block';
+  document.getElementById('wp2b-title').textContent=cont.emoji+' '+cont.label;
+  const cl=document.getElementById('country-list');
+  cl.innerHTML=cont.keys.map(k=>{
+    const c=CURRICULA[k]; if(!c) return '';
+    return `<div class="country-item${k===selCurr?' selected':''}" onclick="pickCurr('${k}',this)" role="button" tabindex="0" aria-pressed="${k===selCurr}">
+      <span class="country-flag">${c.flag}</span>
+      <div class="country-info">
+        <div class="country-name">${c.name}</div>
+        <div class="country-code">${c.countries}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function pickCurr(k,el){
+  selCurr=k;
+  document.querySelectorAll('.country-item').forEach(e=>{ e.classList.remove('selected'); e.setAttribute('aria-pressed','false'); });
+  el.classList.add('selected'); el.setAttribute('aria-pressed','true');
+  setTimeout(()=>wizardNext(2), 300);
+}
+
+/* ── Curriculum search ── */
+function filterCurricula(q){
+  const res=document.getElementById('curr-search-results');
+  if(!q.trim()){ res.style.display='none'; return; }
+  const matches=Object.entries(CURRICULA).filter(([k,v])=>
+    v.name.toLowerCase().includes(q.toLowerCase())||
+    v.countries.toLowerCase().includes(q.toLowerCase())||
+    k.toLowerCase().includes(q.toLowerCase())
+  );
+  res.style.display='block';
+  if(!matches.length){
+    res.innerHTML=`<div class="no-results">No curricula found for "${q}"</div>`;
+    return;
+  }
+  res.innerHTML=`<div class="country-list">`+matches.map(([k,v])=>`
+    <div class="country-item${k===selCurr?' selected':''}" onclick="pickCurr('${k}',this)" role="button" tabindex="0">
+      <span class="country-flag">${v.flag}</span>
+      <div class="country-info">
+        <div class="country-name">${v.name}</div>
+        <div class="country-code">${v.countries}</div>
+      </div>
+    </div>`).join('')+`</div>`;
+}
+
+/* ── Language search ── */
+function filterLangs(q){
+  const cards=document.querySelectorAll('#lang-grid .lang-card');
+  cards.forEach(c=>{
+    const txt=c.textContent.toLowerCase();
+    c.style.display=(!q||txt.includes(q.toLowerCase()))?'':'none';
+  });
+}
+
+/* ── Confirm card update ── */
+function updateConfirmCard(){
+  const lang=LANGS[selLang]; const curr=CURRICULA[selCurr];
+  if(lang){ document.getElementById('cf-lang').textContent=lang.flag+' '+lang.name+' ('+lang.native+')'; }
+  if(curr){ document.getElementById('cf-curr').textContent=curr.flag+' '+curr.name; document.getElementById('cf-region').textContent=curr.countries; }
+
+  // Auto-apply number format and grade label from curriculum
+  const fmtMap={ccss:'us',ontario:'us',cxc:'us',acara:'us',nzc:'us',caps:'us',nerdc:'us',cbc_ke:'us',deped:'us',merdeka:'us',moe_sg:'us',ncert:'in',bncc:'eu',minedu:'eu',sep:'us',france_en:'sp',kmk:'eu',confemen:'sp',pep_cn:'us',moe_me:'us',uknat:'us'};
+  const gradeMap={ccss:'grade',ontario:'grade',sep:'grade',cxc:'form',uknat:'year',france_en:'klass',kmk:'klass',acara:'year',nzc:'year',caps:'grade',nerdc:'primary',cbc_ke:'grade',confemen:'klass',ncert:'klass',moe_sg:'primary',pep_cn:'klass',deped:'grade',merdeka:'klass',moe_me:'grade',bncc:'year',minedu:'grade'};
+
+  selNumFmt = fmtMap[selCurr] || 'us';
+  selGradeLbl = gradeMap[selCurr] || 'grade';
+
+  // Show auto-applied values as readable text
+  const fmt = NUM_FORMATS[selNumFmt];
+  const gradeLbl = GRADE_LABELS[selGradeLbl];
+  const cfNumfmt = document.getElementById('cf-numfmt');
+  const cfGrade = document.getElementById('cf-grade');
+  if(cfNumfmt) cfNumfmt.textContent = fmt ? fmt.example + '  (' + fmt.label + ')' : selNumFmt;
+  if(cfGrade) cfGrade.textContent = gradeLbl || selGradeLbl;
+
+  // Sync override pickers to match auto-selection
+  document.querySelectorAll('#nf-options .nf-opt').forEach((e,i)=>{
+    e.classList.toggle('selected', Object.keys(NUM_FORMATS)[i]===selNumFmt);
+  });
+  document.querySelectorAll('#grade-lbl-options .nf-opt').forEach((e,i)=>{
+    e.classList.toggle('selected', Object.keys(GRADE_LABELS)[i]===selGradeLbl);
+  });
+
+  // Hide override panels (reset)
+  const nfo=document.getElementById('numfmt-override');
+  const glo=document.getElementById('gradelbl-override');
+  if(nfo) nfo.style.display='none';
+  if(glo) glo.style.display='none';
+}
+
+function showNumFmtOverride(){
+  const p=document.getElementById('numfmt-override');
+  if(p){ p.style.display=p.style.display==='none'?'block':'none'; }
+}
+function showGradeLblOverride(){
+  const p=document.getElementById('gradelbl-override');
+  if(p){ p.style.display=p.style.display==='none'?'block':'none'; }
 }
 
 let selLang='en', selCurr='ccss', selNumFmt='us', selGradeLbl='grade';
@@ -3141,8 +3787,11 @@ function applyI18n(){
   el('rs-continue-btn',t('continue'));
   el('land-sub',t('landSub'));
   // Landing
-  el('land-sub','International Edition · '+curr.name);
-  el('region-badge','🌍 '+t('grade')+' · '+curr.name+' · '+LANGS[APP.lang].native);
+  el('region-badge','🌍 '+t('changeRegion'));
+  var lb2=document.getElementById('land-curr-badge');
+  if(lb2) lb2.textContent=curr ? curr.name.split('(')[0].trim() : 'NERDC';
+  var ll=document.getElementById('land-lang-badge');
+  var langObj=LANGS[APP.lang]; if(ll&&langObj) ll.textContent=langObj.name;
   el('land-student-lbl',t('student'));
   el('land-student-desc',t('enterStudent'));
   el('land-student-btn',t('enterStudent'));
@@ -3227,8 +3876,14 @@ function applyI18n(){
   el('tgl-snd-lbl',t('soundEffects'));
   el('tgl-tts-lbl',t('readAloud'));
   el('tgl-ft-lbl',t('factTableInGame'));
+  // Landing quick-access buttons
+  el('hc-btn','🌗 '+t('highContrast'));
+  el('lg-btn','🔤 '+t('largeText'));
+  el('rtl-btn','↔ '+t('rtlLayout'));
   el('tgl-exttime-lbl',t('extendedTime'));
   el('exttime-note',t('extendedTimeNote'));
+  // Offline banner message (shown when network drops)
+  el('offline-msg',t('offlineMsg')||'📡 Offline — this game works without internet!');
   // Skip link
   const sl=document.getElementById('skip-link');
   if(sl) sl.textContent=t('skipToMain');
@@ -3294,7 +3949,6 @@ function applyI18n(){
   el('d-accuracy-lbl',t('accuracy'));
   el('d-streak-lbl',t('bestStreak'));
   el('d-struggling-lbl',t('needSupport'));
-  el('lb-title',t('liveLeaderboard'));
   el('log-title',t('liveActivity'));
   el('tp-students-title',t('individualPerf'));
   el('tp-reports-title',t('classReports'));
@@ -3324,9 +3978,6 @@ function applyI18n(){
   el('ctrl-pre-btn','▶ '+t('preAssessment').replace('▶ ',''));
   el('ctrl-post-btn','▶ '+t('postAssessment').replace('▶ ',''));
   el('ctrl-reset-btn',t('resetData'));
-  el('ctrl-start-sim-btn',t('startSimLbl'));
-  el('ctrl-stop-sim-btn',t('stopSimLbl'));
-  el('t-sim-btn',t('simulate'));
   el('ctrl-region-h4',t('regionLangTitle'));
   el('ctrl-region-desc',t('regionLangDesc'));
   el('ctrl-assess-h4',t('assessment'));
@@ -3349,7 +4000,7 @@ function renderProgStages(){
     <div class="card stage-card" style="border-left-color:${cols[i]};">
       <div class="stage-lbl" style="color:${cols[i]};">${s.lbl}</div>
       <div class="std-badge">${s.std}</div>
-      <div class="stage-ex" style="font-size:11px;color:var(--muted);">${i===0?'e.g. 3×24':i===1?'e.g. 23×47':i===2?'e.g. 234×16':'e.g. 342×167'}</div>
+      <div class="stage-ex" style="font-size:11px;color:var(--muted);" dir="ltr">${i===0?'3×24':i===1?'23×47':i===2?'234×16':'342×167'}</div>
     </div>
   `).join('');
 }
@@ -3459,13 +4110,14 @@ function shTab(tab,btn){
 function renderProgress(){
   const s=APP.student; if(!s) return;
   const tot=s.totalAttempts||0,cor=s.totalCorrect||0,acc=tot>0?Math.round(cor/tot*100):0;
+  const isRTL=document.documentElement.dir==='rtl';
   document.getElementById('progress-stats').innerHTML=`
-    <div class="stat-tile card"><div class="stat-val">${cor}</div><div class="stat-lbl">${APP.t('correct2')}</div></div>
-    <div class="stat-tile card"><div class="stat-val">${tot}</div><div class="stat-lbl">Total</div></div>
-    <div class="stat-tile card"><div class="stat-val">${acc}%</div><div class="stat-lbl">${APP.t('accuracy')}</div></div>
-    <div class="stat-tile card"><div class="stat-val">${s.bestStreak}</div><div class="stat-lbl">${APP.t('bestStreak')}</div></div>
-    <div class="stat-tile card"><div class="stat-val">Lv ${s.level}</div><div class="stat-lbl">${APP.t('level')}</div></div>
-    <div class="stat-tile card"><div class="stat-val">${s.bestScore||0}</div><div class="stat-lbl">${APP.t('score')}</div></div>
+    <div class="stat-tile card"><div class="stat-val" dir="ltr">${cor}</div><div class="stat-lbl">${APP.t('correct2')}</div></div>
+    <div class="stat-tile card"><div class="stat-val" dir="ltr">${tot}</div><div class="stat-lbl">${APP.t('attempts')}</div></div>
+    <div class="stat-tile card"><div class="stat-val" dir="ltr">${acc}%</div><div class="stat-lbl">${APP.t('accuracy')}</div></div>
+    <div class="stat-tile card"><div class="stat-val" dir="ltr">${s.bestStreak}</div><div class="stat-lbl">${APP.t('bestStreak')}</div></div>
+    <div class="stat-tile card"><div class="stat-val" dir="ltr">${APP.t('level')} ${s.level}</div><div class="stat-lbl">${APP.t('level')}</div></div>
+    <div class="stat-tile card"><div class="stat-val" dir="ltr">${APP.fmtNum(s.bestScore||0)}</div><div class="stat-lbl">${APP.t('score')}</div></div>
   `;
   const stages=APP.getStages();
   document.getElementById('skill-bars').innerHTML=stages.map((st,i)=>{
@@ -3473,8 +4125,8 @@ function renderProgress(){
     const pct=a!==null&&a!==undefined?a:0;
     const col=pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)';
     return `<div class="skill-bar-row"><div class="skill-bar-lbl">${st.lbl}</div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${pct}%;background:${col};"></div></div>
-      <div class="skill-bar-pct">${a!==null&&a!==undefined?pct+'%':'—'}</div></div>`;
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${pct}%;background:${col};${isRTL?'float:right;':''}"></div></div>
+      <div class="skill-bar-pct" dir="ltr">${a!==null&&a!==undefined?pct+'%':'—'}</div></div>`;
   }).join('');
   document.getElementById('ach-grid').innerHTML=ACHIEVEMENTS.map(a=>`
     <div class="ach-card card ${a.fn(s)?'earned':''}">
@@ -3485,15 +4137,15 @@ function renderProgress(){
     [...sessions].reverse().slice(0,10).map(ses=>`
       <div class="hist-row"><div class="hist-dot ${ses.acc>=60?'ok':'no'}"></div>
       <div style="flex:1"><div style="font-size:12px;font-weight:800;">${ses.diff} · ${ses.algo==='box'?APP.t('boxMethod'):APP.t('partialProducts')}</div>
-      <div style="font-size:10px;color:var(--muted);">${ses.correct}/${ses.total} · ${ses.acc}% · ${APP.t('score')}: ${ses.score}</div></div>
-      <div style="font-size:10px;color:var(--muted);">${ses.date}</div></div>`).join(''):
+      <div style="font-size:10px;color:var(--muted);" dir="ltr">${ses.correct}/${ses.total} · ${ses.acc}% · ${APP.t('score')}: ${APP.fmtNum(ses.score)}</div></div>
+      <div style="font-size:10px;color:var(--muted);" dir="ltr">${ses.date}</div></div>`).join(''):
     `<div style="color:var(--muted);text-align:center;padding:16px;font-size:13px;">${APP.t('noSessions')}</div>`;
 }
 
 /* ─ FACT TABLE ─ */
 function renderFactTable(cid){
   const el=document.getElementById(cid); if(!el) return;
-  let h=`<table class="fact-table"><tr><td class="fhdr">×</td>`;
+  let h=`<table class="fact-table" dir="ltr"><tr><td class="fhdr">×</td>`;
   for(let c=1;c<=12;c++) h+=`<td class="fhdr">${c}</td>`;
   h+=`</tr>`;
   for(let r=1;r<=12;r++){
@@ -3519,55 +4171,84 @@ function genDemo(){
   if(demoAlgo==='box'){
     const all=[];pv1.forEach(a=>pv2.forEach(b=>all.push({a,b,v:a*b})));
     const total=all.reduce((s,x)=>s+x.v,0);
-    el.innerHTML=`<div style="font-size:13px;font-weight:800;color:var(--green-dk);margin-bottom:7px;">${APP.fmtNum(n1)} × ${APP.fmtNum(n2)}</div>
+    el.innerHTML=`<div style="font-size:13px;font-weight:800;color:var(--green-dk);margin-bottom:7px;" dir="ltr">${APP.fmtNum(n1)} × ${APP.fmtNum(n2)}</div>
     ${buildFullBox(pv1,pv2,n1,n2)}
-    <div style="margin-top:7px;font-size:13px;font-weight:800;color:var(--green-dk);">
+    <div style="margin-top:7px;font-size:13px;font-weight:800;color:var(--green-dk);" dir="ltr">
       ${all.map(x=>APP.fmtNum(x.v)).join(' + ')} = <span style="font-family:'Fredoka One',cursive;font-size:18px;">${APP.fmtNum(total)}</span>
     </div>`;
   } else {
     const pairs=[];pv1.forEach(a=>pv2.forEach(b=>pairs.push({a,b,v:a*b})));
     const total=pairs.reduce((s,x)=>s+x.v,0);
     const RC=['r1','r2','r3','r4'];
-    el.innerHTML=`<div style="font-size:13px;font-weight:800;color:var(--orange-dk);margin-bottom:7px;">${APP.fmtNum(n1)} × ${APP.fmtNum(n2)}</div>
+    el.innerHTML=`<div style="font-size:13px;font-weight:800;color:var(--orange-dk);margin-bottom:7px;" dir="ltr">${APP.fmtNum(n1)} × ${APP.fmtNum(n2)}</div>
     <div class="pp-wrap" style="max-width:100%;">
       ${pairs.map((p,i)=>`<div class="pp-row-item ${RC[i%4]}">
-        <div class="pp-lbl-row"><div class="pp-num">${i+1}</div><div class="pp-eq-lbl">${APP.fmtNum(p.a)} × ${APP.fmtNum(p.b)} =</div></div>
-        <div class="pp-val-disp">${APP.fmtNum(p.v)}</div>
+        <div class="pp-lbl-row"><div class="pp-num">${i+1}</div><div class="pp-eq-lbl" dir="ltr">${APP.fmtNum(p.a)} × ${APP.fmtNum(p.b)} =</div></div>
+        <div class="pp-val-disp" dir="ltr">${APP.fmtNum(p.v)}</div>
       </div>`).join('')}
-      <div class="pp-total-row"><span style="font-size:12px;font-weight:800;color:var(--muted);">${pairs.map(p=>APP.fmtNum(p.v)).join(' + ')} =</span><span style="font-family:'Fredoka One',cursive;font-size:20px;color:#c2410c;">${APP.fmtNum(total)}</span></div>
+      <div class="pp-total-row"><span style="font-size:12px;font-weight:800;color:var(--muted);" dir="ltr">${pairs.map(p=>APP.fmtNum(p.v)).join(' + ')} =</span><span style="font-family:'Fredoka One',cursive;font-size:20px;color:#c2410c;" dir="ltr">${APP.fmtNum(total)}</span></div>
     </div>`;
   }
 }
 function buildFullBox(pv1,pv2,n1,n2){
-  const CC=['bc1','bc2','bc3','bc4'];
-  let g=`<div class="box-wrap"><div class="box-grid" style="grid-template-columns:56px repeat(${pv1.length},1fr);">`;
-  g+=`<div class="bcell corner"></div>`;
-  pv1.forEach(c=>{g+=`<div class="bcell hdr">${APP.fmtNum(c)}</div>`;});
-  pv2.forEach((r,ri)=>{
-    g+=`<div class="bcell hdr">${APP.fmtNum(r)}</div>`;
-    pv1.forEach((c,ci)=>{const idx=ri*pv1.length+ci; g+=`<div class="bcell dc ${CC[idx%4]}"><span class="ceq">${APP.fmtNum(c)}×${APP.fmtNum(r)}</span><span class="cval">${APP.fmtNum(c*r)}</span></div>`;});
-  });
-  g+=`</div></div>`;return g;
+  // All cells solved — build complete display
+  const solvedMap={};
+  pv1.forEach(a=>pv2.forEach(b=>{ solvedMap[`${a}_${b}`]=true; }));
+  return buildBox(pv1,pv2,solvedMap,-1,n1,n2);
 }
 
 /* ══════════════════════════════════════════════
    BOX TUTORIAL — fixed 34×26
 ══════════════════════════════════════════════ */
-const BN1=34,BN2=26,BCOLS=[30,4],BROWS=[20,6];
-const BCELLS=[
-  {eq:'30 × 20',col:30,row:20,val:600,cls:'bc1'},
-  {eq:'30 × 6', col:30,row:6, val:180,cls:'bc2'},
-  {eq:'4 × 20', col:4, row:20,val:80, cls:'bc3'},
-  {eq:'4 × 6',  col:4, row:6, val:24, cls:'bc4'},
-];
-const BTOTAL=BCELLS.reduce((a,c)=>a+c.val,0);
+// Tutorial example — regenerated randomly each session
+let BN1=34,BN2=26,BCOLS=[30,4],BROWS=[20,6],BCELLS=[],BTOTAL=0;
 const BIDX=[[0,2],[1,3]];
-let bStep=0,bSolved=[false,false,false,false],bHintUsed=false;
+let bStep=0,bSolved=BCELLS.map(()=>false),bHintUsed=false;
 const B_STEPS=7;
 
+// PP tutorial — also randomised
+let PN1=42,PN2=37,PP_ROWS_TUT=[];
+
+// Pool of "nice" 2-digit × 2-digit problems for tutorials
+// Each entry: [n1, n2] — chosen so partial products are round and pedagogically clear
+const TUT_PROBLEMS=[
+  [34,26],[42,37],[53,24],[61,38],[23,47],[44,32],[35,28],[62,43],[51,26],[73,24],
+  [32,45],[24,63],[56,31],[43,27],[71,34],[25,48],[64,23],[36,52],[47,21],[28,54],
+];
+
+function freshTutProblem(){
+  // Pick a random problem not recently used
+  const pair = TUT_PROBLEMS[Math.floor(Math.random()*TUT_PROBLEMS.length)];
+  return [pair[0], pair[1]];
+}
+
+function buildTutBCells(n1,n2){
+  const pv1=placeVals(n1), pv2=placeVals(n2);
+  const cls=['bc1','bc2','bc3','bc4'];
+  const cells=[];
+  let ci=0;
+  pv2.forEach(r=>pv1.forEach(c=>{
+    cells.push({eq:`${APP.fmtNum(c)} × ${APP.fmtNum(r)}`,col:c,row:r,val:c*r,cls:cls[ci%4]});
+    ci++;
+  }));
+  return cells;
+}
+
 function startTut(type){
-  if(type==='box'){bStep=0;bSolved=[false,false,false,false];bHintUsed=false;renderBStep();showScreen('tut-box');}
-  else{ppStep=0;ppSolved=[false,false,false,false];ppHintUsed=false;renderPPStep();showScreen('tut-pp');}
+  if(type==='box'){
+    [BN1,BN2]=freshTutProblem();
+    const pv1=placeVals(BN1), pv2=placeVals(BN2);
+    BCOLS=pv1; BROWS=pv2;
+    BCELLS=buildTutBCells(BN1,BN2);
+    BTOTAL=BCELLS.reduce((a,c)=>a+c.val,0);
+    bStep=0; bSolved=BCELLS.map(()=>false); bHintUsed=false;
+    renderBStep(); showScreen('tut-box');
+  } else {
+    [PN1,PN2]=freshTutProblem();
+    PP_ROWS_TUT=buildTutBCells(PN1,PN2);
+    ppStep=0; ppSolved=PP_ROWS_TUT.map(()=>false); ppHintUsed=false;
+    renderPPStep(); showScreen('tut-pp');
+  }
 }
 
 function renderBStep(){
@@ -3582,20 +4263,20 @@ function renderBStep(){
   let html='';
   if(bStep===0){
     html=`<div class="step-hdr"><div class="step-badge g">1</div><h2 class="g">${t('welcomeBox')}</h2></div>
-    <div class="step-body">${t('tutBoxBody')}<br><br>${t('calculate')} <strong>${APP.fmtNum(BN1)} × ${APP.fmtNum(BN2)}</strong></div>
+    <div class="step-body">${t('tutBoxBody')}<br><br>${t('calculate')} <strong dir="ltr">${APP.fmtNum(BN1)} × ${APP.fmtNum(BN2)}</strong></div>
     <div class="tut-std" id="tut-box-std2">${document.getElementById('tut-box-std')?.textContent||''}</div>
     <button class="btn btn-green" onclick="bNext()">${t('continue')}</button>`;
   } else if(bStep===1){
     html=`<div class="step-hdr"><div class="step-badge g">2</div><h2 class="g">${t('tutBoxStep2')}</h2></div>
-    <div class="step-body">${t('splitByPlaceValue')}<br><ul style="list-style:disc;padding-left:16px;margin:6px 0;"><li>${APP.fmtNum(BN1)} = ${APP.fmtNum(BCOLS[0])} + ${APP.fmtNum(BCOLS[1])}</li><li>${APP.fmtNum(BN2)} = ${APP.fmtNum(BROWS[0])} + ${APP.fmtNum(BROWS[1])}</li></ul>${t('fillEveryCell')}</div>
+    <div class="step-body">${t('splitByPlaceValue')}<br><ul style="list-style:disc;padding-left:16px;margin:6px 0;" dir="ltr"><li>${APP.fmtNum(BN1)} = ${APP.fmtNum(BCOLS[0])} + ${APP.fmtNum(BCOLS[1])}</li><li>${APP.fmtNum(BN2)} = ${APP.fmtNum(BROWS[0])} + ${APP.fmtNum(BROWS[1])}</li></ul>${t('fillEveryCell')}</div>
     ${buildBGrid(-1)}
     <button class="btn btn-green" style="margin-top:10px;" onclick="bNext()">${t('continue')}</button>`;
   } else if(bStep>=2&&bStep<=5){
     const ci=bStep-2, cell=BCELLS[ci];
     html=`<div class="step-hdr"><div class="step-badge g">${bStep+1}</div><h2 class="g">${t('stepTitle2')} ${ci+2}: ${namesBox[ci]}</h2></div>
-    <div class="step-body">${t('calculate')} <strong>${cell.eq}</strong></div>
+    <div class="step-body">${t('calculate')} <strong dir="ltr">${cell.eq}</strong></div>
     ${buildBGrid(ci)}
-    <div class="prompt"><span>💡</span> ${t('whatIs')} ${cell.eq} ${t('equals')}</div>
+    <div class="prompt"><span>💡</span> <span dir="ltr">${t('whatIs')} ${cell.eq} ${t('equals')}</span></div>
     <button class="hint-toggle" onclick="toggleSMBox('bh-${ci}')">${t('hint')}</button>
     <div class="show-me-box" id="bh-${ci}">${Array.isArray(placeHints)?placeHints[ci]:placeHints}</div>
     <div class="analysis-box" id="ba-${ci}"></div>
@@ -3608,7 +4289,7 @@ function renderBStep(){
     html=`<div class="step-hdr"><div class="step-badge g">7</div><h2 class="g">${t('tutBoxStep6')}</h2></div>
     <div class="step-body">${t('finalQ')}</div>
     ${buildBGrid(4)}
-    <div class="prompt"><span>💡</span> ${BCELLS.map(c=>APP.fmtNum(c.val)).join(' + ')} = ?</div>
+    <div class="prompt"><span>💡</span> <span dir="ltr">${BCELLS.map(c=>APP.fmtNum(c.val)).join(' + ')} = ?</span></div>
     <div class="ans-row">
       <input class="tut-inp" id="b-tot" type="number" placeholder="${t('totalAnswer')}" onkeydown="if(event.key==='Enter')checkBTotal()">
       <button class="btn btn-green btn-sm" onclick="checkBTotal()">${t('check')}</button>
@@ -3619,19 +4300,11 @@ function renderBStep(){
 }
 
 function buildBGrid(activeCell){
-  let g=`<div class="box-wrap"><div class="prob-title g" style="font-size:20px;">${APP.fmtNum(BN1)} × ${APP.fmtNum(BN2)}</div>`;
-  g+=`<div class="box-grid" style="grid-template-columns:58px repeat(${BCOLS.length},1fr);">`;
-  g+=`<div class="bcell corner"></div>`;
-  BCOLS.forEach(c=>{g+=`<div class="bcell hdr">${APP.fmtNum(c)}</div>`;});
-  BROWS.forEach((r,ri)=>{
-    g+=`<div class="bcell hdr">${APP.fmtNum(r)}</div>`;
-    BCOLS.forEach((c,ci)=>{
-      const idx=BIDX[ri][ci],cell=BCELLS[idx];
-      const isSolved=bSolved[idx]||(activeCell===4),isActive=activeCell===idx;
-      g+=`<div class="bcell dc ${cell.cls}${isActive?' active-c':''}"><span class="ceq">${APP.fmtNum(c)} × ${APP.fmtNum(r)}</span><span class="cval">${isSolved?APP.fmtNum(cell.val):'?'}</span></div>`;
-    });
-  });
-  g+=`</div></div>`;return g;
+  // Build solved map for unified builder
+  const solvedMap={};
+  BCELLS.forEach((cell,i)=>{ if(bSolved[i]||(activeCell===4)) solvedMap[`${cell.col}_${cell.row}`]=true; });
+  const activeIdx=(activeCell>=0&&activeCell<4)?activeCell:-1;
+  return buildBox(BCOLS,BROWS,solvedMap,activeIdx,BN1,BN2);
 }
 
 function toggleSMBox(id){const e=document.getElementById(id);if(e)e.classList.toggle('vis');bHintUsed=true;}
@@ -3640,7 +4313,7 @@ function checkBCell(ci){
   const val=parseInt(inp.value,10);
   if(isNaN(val)){inp.classList.add('shk');setTimeout(()=>inp.classList.remove('shk'),320);return;}
   if(val===BCELLS[ci].val){
-    inp.classList.add('ok');fb.innerHTML=`${APP.t('correct')} ${BCELLS[ci].eq} = ${APP.fmtNum(BCELLS[ci].val)}`;fb.className='fb ok';
+    inp.classList.add('ok');fb.innerHTML=`<span dir="ltr">${APP.t('correct')} ${BCELLS[ci].eq} = ${APP.fmtNum(BCELLS[ci].val)}</span>`;fb.className='fb ok';
     bSolved[ci]=true;beep(true);setTimeout(()=>bNext(),850);
   } else {
     inp.classList.add('no','shk');fb.textContent=APP.t('tryAgain');fb.className='fb no';
@@ -3653,7 +4326,7 @@ function checkBTotal(){
   const val=parseInt(inp.value,10);
   if(isNaN(val)){inp.classList.add('shk');setTimeout(()=>inp.classList.remove('shk'),320);return;}
   if(val===BTOTAL){
-    inp.classList.add('ok');fb.innerHTML=`${APP.t('correct')} ${APP.fmtNum(BN1)} × ${APP.fmtNum(BN2)} = ${APP.fmtNum(BTOTAL)}`;fb.className='fb ok';beep(true);
+    inp.classList.add('ok');fb.innerHTML=`<span dir="ltr">${APP.t('correct')} ${APP.fmtNum(BN1)} × ${APP.fmtNum(BN2)} = ${APP.fmtNum(BTOTAL)}</span>`;fb.className='fb ok';beep(true);
     if(APP.student){APP.student.boxDone=true;saveStudent();}
     spawnParticles();
     setTimeout(()=>{document.getElementById('box-card').innerHTML+=`<div class="done-banner">${APP.t('tutorialComplete')}</div>
@@ -3677,15 +4350,8 @@ function bNext(){
 /* ══════════════════════════════════════════════
    PP TUTORIAL — fixed 42×37
 ══════════════════════════════════════════════ */
-const PN1=42,PN2=37;
-const PP_ROWS=[
-  {eq:'40 × 30',a:40,b:30,val:1200,rc:'r1'},
-  {eq:'40 × 7', a:40,b:7, val:280, rc:'r2'},
-  {eq:'2 × 30', a:2, b:30,val:60,  rc:'r3'},
-  {eq:'2 × 7',  a:2, b:7, val:14,  rc:'r4'},
-];
-const PTOTAL=PP_ROWS.reduce((a,r)=>a+r.val,0);
-let ppStep=0,ppSolved=[false,false,false,false],ppHintUsed=false;
+// PP tutorial vars are now set dynamically in startTut()
+let ppStep=0,ppSolved=PP_ROWS_TUT.map(()=>false),ppHintUsed=false;
 const PP_STEPS=7;
 
 function renderPPStep(){
@@ -3694,25 +4360,28 @@ function renderPPStep(){
   document.getElementById('pprog-fill').style.width=`${n/PP_STEPS*100}%`;
   animCard('pp-card');
   const card=document.getElementById('pp-card');
+  const PP_ROWS=PP_ROWS_TUT; const PTOTAL=PP_ROWS.reduce((a,r)=>a+r.val,0);
   const t=k=>APP.t(k);
   const placeHintsPP=t('placeHintPP')||['Think: 4 tens × 3 tens','Think: 4 tens × 7 ones','Think: 2 ones × 3 tens','Think: 2 ones × 7 ones'];
   const namesPP=t('namesPP')||['First','Second','Third','Fourth'];
   let html='';
   if(ppStep===0){
     html=`<div class="step-hdr"><div class="step-badge o">1</div><h2 class="o">${t('welcomePP')}</h2></div>
-    <div class="step-body">${t('tutPPBody')} ${t('calculate')} <strong>${APP.fmtNum(PN1)} × ${APP.fmtNum(PN2)}</strong></div>
+    <div class="step-body">${t('tutPPBody')} ${t('calculate')} <strong dir="ltr">${APP.fmtNum(PN1)} × ${APP.fmtNum(PN2)}</strong></div>
     <button class="btn btn-orange" onclick="ppNext()">${t('continue')}</button>`;
   } else if(ppStep===1){
+    const pv1=placeVals(PN1), pv2=placeVals(PN2);
+    const breakdown1=pv1.join(' + '), breakdown2=pv2.join(' + ');
     html=`<div class="step-hdr"><div class="step-badge o">2</div><h2 class="o">${t('breakDown')}</h2></div>
-    <div class="step-body">${t('splitByPlaceValue')}<br><ul style="list-style:disc;padding-left:16px;margin:6px 0;"><li>${APP.fmtNum(PN1)} = 40 + 2</li><li>${APP.fmtNum(PN2)} = 30 + 7</li></ul>${t('multiplyEveryPair')}</div>
+    <div class="step-body">${t('splitByPlaceValue')}<br><ul style="list-style:disc;padding-left:16px;margin:6px 0;" dir="ltr"><li>${APP.fmtNum(PN1)} = ${breakdown1}</li><li>${APP.fmtNum(PN2)} = ${breakdown2}</li></ul>${t('multiplyEveryPair')}</div>
     ${buildPPList(-1)}
     <button class="btn btn-orange" style="margin-top:10px;" onclick="ppNext()">${t('continue')}</button>`;
   } else if(ppStep>=2&&ppStep<=5){
     const ri=ppStep-2,row=PP_ROWS[ri];
     html=`<div class="step-hdr"><div class="step-badge o">${ppStep+1}</div><h2 class="o">${t('stepTitle2')} ${ri+2}: ${namesPP[ri]}</h2></div>
-    <div class="step-body">${t('calculate')} <strong>${row.eq}</strong></div>
+    <div class="step-body">${t('calculate')} <strong dir="ltr">${row.eq}</strong></div>
     ${buildPPList(ri)}
-    <div class="prompt"><span>💡</span> ${t('whatIs')} ${row.eq} ${t('equals')}</div>
+    <div class="prompt"><span>💡</span> <span dir="ltr">${t('whatIs')} ${row.eq} ${t('equals')}</span></div>
     <button class="hint-toggle" onclick="toggleSMBox('ph-${ri}')">${t('hint')}</button>
     <div class="show-me-box" id="ph-${ri}">${Array.isArray(placeHintsPP)?placeHintsPP[ri]:placeHintsPP}</div>
     <div class="analysis-box" id="pa-${ri}"></div>
@@ -3725,7 +4394,7 @@ function renderPPStep(){
     html=`<div class="step-hdr"><div class="step-badge o">7</div><h2 class="o">${t('addAll')}</h2></div>
     <div class="step-body">${t('finalQ')}</div>
     ${buildPPList(4)}
-    <div class="prompt"><span>💡</span> ${PP_ROWS.map(r=>APP.fmtNum(r.val)).join(' + ')} = ?</div>
+    <div class="prompt"><span>💡</span> <span dir="ltr">${PP_ROWS.map(r=>APP.fmtNum(r.val)).join(' + ')} = ?</span></div>
     <div class="ans-row">
       <input class="tut-inp of" id="pp-tot" type="number" placeholder="${t('totalAnswer')}" onkeydown="if(event.key==='Enter')checkPPTotal()">
       <button class="btn btn-orange btn-sm" onclick="checkPPTotal()">${t('check')}</button>
@@ -3736,24 +4405,28 @@ function renderPPStep(){
 }
 
 function buildPPList(activeRow){
-  let html=`<div class="pp-wrap"><div class="prob-title o" style="font-size:20px;">${APP.fmtNum(PN1)} × ${APP.fmtNum(PN2)}</div>
-  <div class="prob-expand">(40 + 2) × (30 + 7)</div>`;
+  const PP_ROWS=PP_ROWS_TUT;
+  const pv1=placeVals(PN1), pv2=placeVals(PN2);
+  const expandText=`(${pv1.join(' + ')}) × (${pv2.join(' + ')})`;
+  let html=`<div class="pp-wrap"><div class="prob-title o" style="font-size:20px;" dir="ltr">${APP.fmtNum(PN1)} × ${APP.fmtNum(PN2)}</div>
+  <div class="prob-expand" dir="ltr">${expandText}</div>`;
   PP_ROWS.forEach((row,ri)=>{
     const isSolved=ppSolved[ri]||(activeRow===4),isActive=activeRow===ri,isInactive=!ppSolved[ri]&&activeRow>=0&&activeRow<4&&activeRow!==ri;
     html+=`<div class="pp-row-item ${row.rc}${isActive?' active-r':''}${isInactive?' inactive-r':''}">
-      <div class="pp-lbl-row"><div class="pp-num">${ri+1}</div><div class="pp-eq-lbl">${row.eq} =</div></div>
-      <div class="pp-val-disp">${isSolved?APP.fmtNum(row.val):'?'}</div></div>`;
+      <div class="pp-lbl-row"><div class="pp-num">${ri+1}</div><div class="pp-eq-lbl" dir="ltr">${row.eq} =</div></div>
+      <div class="pp-val-disp" dir="ltr">${isSolved?APP.fmtNum(row.val):'?'}</div></div>`;
   });
-  if(activeRow===4) html+=`<div class="pp-total-row"><span style="font-size:12px;font-weight:800;color:var(--muted);">${PP_ROWS.map(r=>APP.fmtNum(r.val)).join(' + ')} =</span><span style="font-family:'Fredoka One',cursive;font-size:20px;color:#c2410c">?</span></div>`;
+  if(activeRow===4) html+=`<div class="pp-total-row"><span style="font-size:12px;font-weight:800;color:var(--muted);" dir="ltr">${PP_ROWS.map(r=>APP.fmtNum(r.val)).join(' + ')} =</span><span style="font-family:'Fredoka One',cursive;font-size:20px;color:#c2410c">?</span></div>`;
   html+=`</div>`;return html;
 }
 
 function checkPPRow(ri){
+  const PP_ROWS=PP_ROWS_TUT;
   const inp=document.getElementById('pp-inp'),fb=document.getElementById('pp-fb');
   const val=parseInt(inp.value,10);
   if(isNaN(val)){inp.classList.add('shk');setTimeout(()=>inp.classList.remove('shk'),320);return;}
   if(val===PP_ROWS[ri].val){
-    inp.classList.add('ok');fb.innerHTML=`${APP.t('correct')} ${PP_ROWS[ri].eq} = ${APP.fmtNum(PP_ROWS[ri].val)}`;fb.className='fb ok';
+    inp.classList.add('ok');fb.innerHTML=`<span dir="ltr">${APP.t('correct')} ${PP_ROWS[ri].eq} = ${APP.fmtNum(PP_ROWS[ri].val)}</span>`;fb.className='fb ok';
     ppSolved[ri]=true;beep(true);setTimeout(()=>ppNext(),850);
   } else {
     inp.classList.add('no','shk');fb.textContent=APP.t('tryAgain');fb.className='fb no';
@@ -3762,11 +4435,12 @@ function checkPPRow(ri){
   }
 }
 function checkPPTotal(){
+  const PP_ROWS=PP_ROWS_TUT,PTOTAL=PP_ROWS_TUT.reduce((a,r)=>a+r.val,0);
   const inp=document.getElementById('pp-tot'),fb=document.getElementById('pp-tot-fb');
   const val=parseInt(inp.value,10);
   if(isNaN(val)){inp.classList.add('shk');setTimeout(()=>inp.classList.remove('shk'),320);return;}
   if(val===PTOTAL){
-    inp.classList.add('ok');fb.innerHTML=`${APP.t('correct')} ${APP.fmtNum(PN1)} × ${APP.fmtNum(PN2)} = ${APP.fmtNum(PTOTAL)}`;fb.className='fb ok';beep(true);
+    inp.classList.add('ok');fb.innerHTML=`<span dir="ltr">${APP.t('correct')} ${APP.fmtNum(PN1)} × ${APP.fmtNum(PN2)} = ${APP.fmtNum(PTOTAL)}</span>`;fb.className='fb ok';beep(true);
     if(APP.student){APP.student.ppDone=true;saveStudent();}
     spawnParticles();
     const card=document.getElementById('pp-card');
@@ -3851,9 +4525,9 @@ function renderCoopBar(){
     <div class="coop-player-card card${i===cs.currentPlayer?' active-turn':''}">
       <div style="font-size:22px;">${p.avatar}</div>
       <div style="font-size:12px;font-weight:800;">${p.name}</div>
-      <div class="coop-score" style="color:${p.color};">${p.score}</div>
+      <div class="coop-score" style="color:${p.color};" dir="ltr">${APP.fmtNum(p.score)}</div>
     </div>
-  `).join('')+(cs.mode==='target'?`<div class="team-banner" style="flex:1;min-width:160px;">🎯 ${APP.t('reachTarget')}: ${APP.fmtNum(cs.teamTarget)} — ${APP.t('score')}: ${APP.fmtNum(cs.teamScore)}</div>`:'');
+  `).join('')+(cs.mode==='target'?`<div class="team-banner" style="flex:1;min-width:160px;" dir="ltr">🎯 ${APP.t('reachTarget')}: ${APP.fmtNum(cs.teamTarget)} — ${APP.t('score')}: ${APP.fmtNum(cs.teamScore)}</div>`:'');
 }
 
 function nextQ(){
@@ -3900,7 +4574,7 @@ function renderGameStep(){
   if(G.stepIdx<G.steps.length){
     const s=G.steps[G.stepIdx];
     prompt.style.display='flex';
-    document.getElementById('g-prompt-txt').textContent=`${APP.t('whatIs')} ${APP.fmtNum(s.a)} × ${APP.fmtNum(s.b)} ${APP.t('equals')}`;
+    document.getElementById('g-prompt-txt').innerHTML=`<span dir="ltr">${APP.t('whatIs')} ${APP.fmtNum(s.a)} × ${APP.fmtNum(s.b)} ${APP.t('equals')}</span>`;
     ansRow.style.display='flex'; hBtn.style.display='block'; hBtn.textContent='💡 '+APP.t('hint');
     document.getElementById('g-hint-box').textContent=genHint(s.a,s.b);
     document.getElementById('g-hint-btn').setAttribute('aria-expanded','false');
@@ -3919,10 +4593,12 @@ function renderGameStep(){
 
 function buildGameBox(){
   const G=APP.G,pv1=placeVals(G.n1),pv2=placeVals(G.n2);
-  // Build solved map
   const solvedMap={};
   let idx=0; pv1.forEach(a=>pv2.forEach(b=>{ if(G.stepSolved[idx]) solvedMap[`${a}_${b}`]=true; idx++; }));
-  return buildAccessibleBox(pv1,pv2,solvedMap,G.stepIdx);
+  // Show format chooser only for box algo
+  const fc=document.getElementById('g-box-fmt-chooser');
+  if(fc) fc.style.display='flex';
+  return buildBox(pv1,pv2,solvedMap,G.stepIdx,G.n1,G.n2);
 }
 
 function buildGamePP(){
@@ -3991,13 +4667,13 @@ function genAnalysis(a,b,given,correct){
 function showFinalStep(){
   const G=APP.G,total=G.steps.reduce((a,s)=>a+s.val,0);
   const sumTxt=G.steps.map(s=>APP.fmtNum(s.val)).join(' + ')+' = ?';
-  document.getElementById('g-sum-disp').textContent=sumTxt;
+  document.getElementById('g-sum-disp').innerHTML=`<span dir="ltr">${sumTxt}</span>`;
   document.getElementById('g-final-card').style.display='block';
   document.getElementById('g-final-lbl').textContent=APP.t('finalQ');
   document.getElementById('g-final-inp').value=''; document.getElementById('g-final-inp').className='final-inp';
   updateGameARIA();
   announce(`${APP.t('addAll')} ${sumTxt}`,'polite');
-  ttsSpeak(`${APP.t('finalAnswer')}: ${G.steps.map(s=>APP.fmtNum(s.val)).join(' plus ')} equals`);
+  ttsSpeak(`${APP.t('finalAnswer')}: ${G.steps.map(s=>APP.fmtNum(s.val)).join(' + ')} ${APP.t('equals')||'='}`);
   setTimeout(()=>document.getElementById('g-final-inp').focus(),80);
 }
 
@@ -4021,7 +4697,7 @@ function submitFinal(){
     }
     gainXP(15+G.streak*2);inp.classList.add('ok');
     const corrMsg=`${APP.t('correct')} ${APP.fmtNum(G.n1)} × ${APP.fmtNum(G.n2)} = ${APP.fmtNum(total)}. +${pts} ${APP.t('score').toLowerCase()}`;
-    fb.textContent=corrMsg; fb.className='gfb ok';
+    fb.innerHTML=`<span dir="ltr">${corrMsg}</span>`; fb.className='gfb ok';
     announce(corrMsg,'assertive');
     ttsSpeak(corrMsg);
     spawnParticles();showFloat(`+${pts}`);beep(true);
@@ -4067,7 +4743,7 @@ function timeOut(){
   const G=APP.G,total=G.steps.reduce((a,s)=>a+s.val,0);
   G.streak=0;renderSdots();
   const touMsg=`${APP.t('timesUp')} ${APP.fmtNum(G.n1)} × ${APP.fmtNum(G.n2)} = ${APP.fmtNum(total)}`;
-  document.getElementById('g-gfb').textContent=touMsg;
+  document.getElementById('g-gfb').innerHTML=`<span dir="ltr">${touMsg}</span>`;
   document.getElementById('g-gfb').className='gfb no';
   document.getElementById('g-str').textContent=0;
   announce(touMsg,'assertive');
@@ -4118,13 +4794,16 @@ function endGame(){
   document.getElementById('r-sub').textContent=sub;
   document.getElementById('r-sc').textContent=APP.fmtNum(G.score);
   document.getElementById('r-cor').textContent=`${G.correct}/${G.totalQ}`;
+  document.getElementById('r-acc').setAttribute('dir','ltr');
   document.getElementById('r-acc').textContent=acc+'%';
+  document.getElementById('r-best').setAttribute('dir','ltr');
   document.getElementById('r-best').textContent=G.bestStreak;
+  document.getElementById('r-xp').setAttribute('dir','ltr');
   document.getElementById('r-xp').textContent='+'+G.xpEarned;
   // Errors
   const errs=Object.entries(G.wrongAttempts).filter(([,n])=>n>0);
   document.getElementById('r-error-list').innerHTML=errs.length?
-    errs.sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<div class="error-item"><span>⚠️</span><span style="font-weight:800;flex:1">${k}</span><span style="color:var(--red);font-weight:800">${n} ${APP.t('tryAgain').replace('✗ ','').split('—')[0].trim()}</span></div>`).join(''):
+    errs.sort((a,b)=>b[1]-a[1]).map(([k,n])=>`<div class="error-item"><span>⚠️</span><span style="font-weight:800;flex:1" dir="ltr">${k}</span><span style="color:var(--red);font-weight:800" dir="ltr">${n}×</span></div>`).join(''):
     `<div style="color:var(--green-dk);font-weight:800;padding:8px 0;">${APP.t('noErrors')}</div>`;
   // Skill bars
   const bA=G.skillData.box.total>0?Math.round(G.skillData.box.correct/G.skillData.box.total*100):null;
@@ -4133,22 +4812,22 @@ function endGame(){
     {lbl:APP.t('boxMethod'),acc:bA,col:'var(--green)'},
     {lbl:APP.t('partialProducts'),acc:pA,col:'var(--orange)'},
   ].map(r=>`<div class="skill-bar-row"><div class="skill-bar-lbl">${r.lbl}</div>
-    <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${r.acc||0}%;background:${r.col};"></div></div>
-    <div class="skill-bar-pct">${r.acc!==null?r.acc+'%':'—'}</div></div>`).join('');
+    <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${r.acc||0}%;background:${r.col};${document.documentElement.dir==='rtl'?'float:right;':''}"></div></div>
+    <div class="skill-bar-pct" dir="ltr">${r.acc!==null?r.acc+'%':'—'}</div></div>`).join('');
   // Coop results
   const coopSec=document.getElementById('coop-results-section');
   if(G.isCoop&&APP.coopState){
     coopSec.style.display='block';
     const cs=APP.coopState;
     const sorted=[...cs.players].sort((a,b)=>b.score-a.score);
-    coopSec.innerHTML=`<div class="coop-results"><div style="font-size:14px;font-weight:900;margin-bottom:10px;">🤝 Team Results</div>
+    coopSec.innerHTML=`<div class="coop-results"><div style="font-size:14px;font-weight:900;margin-bottom:10px;">🤝 ${APP.t('team')}</div>
       ${sorted.map((p,i)=>`<div class="lb-row" style="margin-bottom:7px;">
         <div class="lb-rank ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${['🥇','🥈','🥉','4️⃣'][i]}</div>
         <div class="lb-avatar">${p.avatar}</div>
         <div class="lb-info"><div class="lb-name" style="color:${p.color}">${p.name}</div></div>
-        <div class="lb-score" style="color:${p.color}">${APP.fmtNum(p.score)}</div>
+        <div class="lb-score" style="color:${p.color}" dir="ltr">${APP.fmtNum(p.score)}</div>
       </div>`).join('')}
-      <div style="font-size:14px;font-weight:800;color:var(--indigo);margin-top:10px;">Team Total: ${APP.fmtNum(cs.teamScore)} pts</div>
+      <div style="font-size:14px;font-weight:800;color:var(--indigo);margin-top:10px;" dir="ltr">${APP.t('score')}: ${APP.fmtNum(cs.teamScore)}</div>
     </div>`;
   } else { coopSec.style.display='none'; }
   // Badges
@@ -4168,6 +4847,7 @@ function enterTeacher(){
   document.getElementById('new-room-code').value=code;
   showScreen('teacher');renderTeacherDash();
   renderTeacherStandards();
+  setTimeout(function(){updateResearchBar();updateTopbarCondition();},50);
 }
 function tTab(tab,btn){
   document.querySelectorAll('.t-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
@@ -4180,13 +4860,19 @@ function tTab(tab,btn){
 function renderTeacherDash(){renderLeaderboard();renderActivityLog();updateDashTiles();}
 function updateDashTiles(){
   const n=simStudents.length,total=simStudents.reduce((a,s)=>a+s.attempts,0),correct=simStudents.reduce((a,s)=>a+s.correct,0);
-  const acc=total>0?Math.round(correct/total*100):0,best=simStudents.reduce((a,s)=>Math.max(a,s.streak),0),strug=simStudents.filter(s=>s.attempts>3&&s.correct/s.attempts<0.5).length;
+  const acc=total>0?Math.round(correct/total*100):0,strug=simStudents.filter(s=>s.attempts>3&&s.correct/s.attempts<0.5).length;
   document.getElementById('d-students').textContent=n;
   document.getElementById('t-online').textContent=simStudents.filter(s=>s.online).length;
   document.getElementById('d-attempts').textContent=total;
   document.getElementById('d-accuracy').textContent=acc+'%';
-  document.getElementById('d-streak').textContent=best;
+  // d-streak tile removed from overview; update d-struggling only
   document.getElementById('d-struggling').textContent=strug;
+  // Research counters
+  var assessCount=(APP.store.get('research_assessments')||[]).length;
+  var dc=document.getElementById('d-assessments-count'); if(dc) dc.textContent=assessCount;
+  var rb=document.getElementById('rbar-sessions');
+  if(rb) rb.textContent=(APP.store.get('research_sessions')||[]).length;
+  var ra=document.getElementById('rbar-assessments'); if(ra) ra.textContent=assessCount;
 }
 function renderLeaderboard(){
   const sorted=[...simStudents].sort((a,b)=>b.score-a.score),max=sorted[0]?.score||1;
@@ -4195,15 +4881,15 @@ function renderLeaderboard(){
     <div class="lb-row">
       <div class="lb-rank ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${ranks[i]||i+1}</div>
       <div class="lb-avatar" style="background:${s.color}22;">${s.avatar}</div>
-      <div class="lb-info"><div class="lb-name">${s.name}</div><div class="lb-detail">${s.correct}/${s.attempts} · ${s.attempts>0?Math.round(s.correct/s.attempts*100):0}%</div></div>
-      <div style="flex:1;height:6px;background:var(--border);border-radius:50px;overflow:hidden;"><div style="height:100%;width:${Math.round(s.score/max*100)}%;background:${s.color};border-radius:50px;"></div></div>
-      <div class="lb-score" style="color:${s.color}">${APP.fmtNum(s.score)}</div>
+      <div class="lb-info"><div class="lb-name">${s.name}</div><div class="lb-detail" dir="ltr">${s.correct}/${s.attempts} · ${s.attempts>0?Math.round(s.correct/s.attempts*100):0}%</div></div>
+      <div style="flex:1;height:6px;background:var(--border);border-radius:50px;overflow:hidden;"><div style="height:100%;width:${Math.round(s.score/max*100)}%;background:${s.color};border-radius:50px;float:${document.documentElement.dir==='rtl'?'right':'left'};"></div></div>
+      <div class="lb-score" style="color:${s.color}" dir="ltr">${APP.fmtNum(s.score)}</div>
       <div class="lb-status ${s.online?'on':'off'}"></div>
     </div>`).join('')||`<div style="color:var(--muted);padding:16px;text-align:center;font-size:13px;">${APP.t('noSessions')}</div>`;
 }
 function renderActivityLog(){
   document.getElementById('class-log').innerHTML=classLog.slice(0,14).map(e=>`
-    <div class="log-entry"><span>${e.name}: ${APP.fmtNum(e.n1)} × ${APP.fmtNum(e.n2)}</span><span class="${e.ok?'log-ok':'log-no'}">${e.ok?'✓ '+APP.fmtNum(e.ans):'✗'}</span></div>`).join('')||
+    <div class="log-entry"><span>${e.name}: <span dir="ltr">${APP.fmtNum(e.n1)} × ${APP.fmtNum(e.n2)}</span></span><span class="${e.ok?'log-ok':'log-no'}" dir="ltr">${e.ok?'✓ '+APP.fmtNum(e.ans):'✗'}</span></div>`).join('')||
     `<div style="color:var(--muted);font-size:12px;padding:10px;">${APP.t('noSessions')}</div>`;
 }
 function logClassActivity(ok,n1,n2,ans){
@@ -4263,19 +4949,19 @@ function updateRoomCode(){const c=document.getElementById('new-room-code')?.valu
 function renderStudentCards(){
   document.getElementById('student-cards-grid').innerHTML=simStudents.map(s=>{
     const acc=s.attempts>0?Math.round(s.correct/s.attempts*100):0,strug=s.attempts>3&&acc<50;
-    const onlineLbl=s.online?'🟢 '+APP.t('level').replace(APP.t('level'),APP.t('student')+' Online'):'⚫ '+APP.t('exit');
+    const onlineLbl=s.online?`🟢 ${APP.t('student')}`:`⚫ ${APP.t('exit')}`;
     return `<div class="card" style="padding:16px;border:2px solid ${strug?'var(--red)':'var(--border)'};">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
         <div style="font-size:28px;">${s.avatar}</div>
         <div><div style="font-size:14px;font-weight:900;">${s.name}</div>
         ${strug?`<div style="font-size:11px;color:var(--red);font-weight:800;">⚠ ${APP.t('keepGoing')}</div>`:''}
-        <div style="font-size:11px;color:var(--muted);">${s.online?'🟢':'⚫'}</div></div>
+        <div style="font-size:11px;color:var(--muted);">${onlineLbl}</div></div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
         <div style="text-align:center;"><div style="font-family:'Fredoka One',cursive;font-size:22px;color:${s.color}">${APP.fmtNum(s.score)}</div><div style="font-size:10px;font-weight:800;color:var(--muted);">${APP.t('score')}</div></div>
         <div style="text-align:center;"><div style="font-family:'Fredoka One',cursive;font-size:22px;">${acc}%</div><div style="font-size:10px;font-weight:800;color:var(--muted);">${APP.t('accuracy')}</div></div>
         <div style="text-align:center;"><div style="font-family:'Fredoka One',cursive;font-size:22px;">${s.correct}</div><div style="font-size:10px;font-weight:800;color:var(--muted);">${APP.t('correct2')}</div></div>
-        <div style="text-align:center;"><div style="font-family:'Fredoka One',cursive;font-size:22px;">${s.streak}</div><div style="font-size:10px;font-weight:800;color:var(--muted);">${APP.t('bestStreak').split(' ')[0]}</div></div>
+        <div style="text-align:center;"><div style="font-family:'Fredoka One',cursive;font-size:22px;" dir="ltr">${s.streak}</div><div style="font-size:10px;font-weight:800;color:var(--muted);">${APP.t('bestStreak').split(' ')[0]}</div></div>
       </div>
     </div>`;
   }).join('')||`<div style="color:var(--muted);">${APP.t('noSessions')}</div>`;
@@ -4315,12 +5001,13 @@ function renderReports(){
 
   // Error patterns from real gameplay
   const eps = Object.entries(classErrPatterns).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  const isRTL = document.documentElement.dir==='rtl';
   document.getElementById('class-error-patterns').innerHTML = eps.length ?
-    eps.map(([k,n])=>`<div class="ep-row"><span class="ep-prob">${k}</span>
+    eps.map(([k,n])=>`<div class="ep-row"><span class="ep-prob" dir="ltr">${k}</span>
       <div style="flex:1;height:7px;background:var(--border);border-radius:50px;overflow:hidden;margin:0 10px;">
-        <div style="height:100%;width:${Math.min(100,n*12)}%;background:var(--red);border-radius:50px;"></div>
+        <div style="height:100%;width:${Math.min(100,n*12)}%;background:var(--red);border-radius:50px;${isRTL?'float:right;':''}"></div>
       </div>
-      <span class="ep-count">${n}×</span></div>`).join('') :
+      <span class="ep-count" dir="ltr">${n}×</span></div>`).join('') :
     `<div style="color:var(--green-dk);font-weight:800;padding:8px 0;">✓ ${APP.t('noErrors')}</div>`;
 
   // Stage completion from real data
@@ -4331,8 +5018,8 @@ function renderReports(){
     const col = pct>=70?'var(--green)':pct>=40?'var(--yellow)':'var(--red)';
     return `<div class="skill-bar-row">
       <div class="skill-bar-lbl" style="font-size:12px;">${st.lbl}</div>
-      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${pct}%;background:${col};"></div></div>
-      <div class="skill-bar-pct">${pct}%</div>
+      <div class="skill-bar-track"><div class="skill-bar-fill" style="width:${pct}%;background:${col};${isRTL?'float:right;':''}"></div></div>
+      <div class="skill-bar-pct" dir="ltr">${pct}%</div>
     </div>`;
   }).join('');
 }
@@ -4376,6 +5063,662 @@ function doExit(){clearGTimer();document.getElementById('exit-modal').style.disp
 /* ── INIT ── */
 initRegionSelect();
 initLogin();
+
+/* ══════════════════════════════════════════════
+   SMART DEFAULT REGION-SELECT ENGINE
+   Replaces the 3-step wizard with a single
+   confirm card. Full selector revealed on demand.
+══════════════════════════════════════════════ */
+
+(function initSmartDefault(){
+  // Set Nigeria + NERDC + English as defaults
+  var defaultLang = 'en';
+  var defaultCurr = 'nerdc';
+  var defaultFmt  = 'us';
+
+  // Apply defaults if not already set
+  if(!selLang) selLang = defaultLang;
+  if(!selCurr) selCurr = defaultCurr;
+  if(!selNumFmt) selNumFmt = defaultFmt;
+
+  // Update confirm card display
+  function refreshConfirmCard(){
+    var langObj = LANGS[selLang];
+    var currObj = CURRICULA[selCurr];
+    var fmtObj  = NUM_FORMATS[selNumFmt];
+    var cfLang = document.getElementById('cf-lang');
+    var cfCurr = document.getElementById('cf-curr');
+    var cfReg  = document.getElementById('cf-region');
+    var cfFmt  = document.getElementById('cf-numfmt');
+    if(cfLang) cfLang.textContent = (langObj ? langObj.flag+' '+langObj.name : 'English');
+    if(cfCurr) cfCurr.textContent = (currObj ? currObj.name : 'NERDC (Nigeria)');
+    if(cfReg)  cfReg.textContent  = (currObj ? currObj.countries : 'Nigeria');
+    if(cfFmt)  cfFmt.textContent  = (fmtObj  ? fmtObj.example   : '1,200');
+  }
+  refreshConfirmCard();
+
+  // ── Populate language list (compact rows) ──
+  function buildLangList(filter){
+    var list = document.getElementById('adv-lang-list'); if(!list) return;
+    var q = (filter||'').toLowerCase();
+    var html = Object.entries(LANGS).filter(function(kv){
+      if(!q) return true;
+      return kv[1].name.toLowerCase().includes(q) || kv[1].native.toLowerCase().includes(q);
+    }).map(function(kv){
+      var k=kv[0], v=kv[1];
+      var sel = k===selLang;
+      return '<div class="lang-row'+(sel?' selected':'')+'" onclick="pickAdvLang(''+k+'')" role="button" tabindex="0" aria-pressed="'+sel+'">'
+        +'<span class="lang-row-flag">'+v.flag+'</span>'
+        +'<span class="lang-row-name">'+v.name+'</span>'
+        +'<span class="lang-row-native">'+v.native+'</span>'
+        +'<span class="lang-row-check">✓</span>'
+        +'</div>';
+    }).join('');
+    list.innerHTML = html || '<div style="color:var(--muted);padding:12px;text-align:center;font-size:13px;">No languages found</div>';
+  }
+
+  // ── Populate curriculum list (compact rows) ──
+  function buildCurrList(filter){
+    var list = document.getElementById('adv-curr-list'); if(!list) return;
+    var q = (filter||'').toLowerCase();
+    var html = Object.entries(CURRICULA).filter(function(kv){
+      if(!q) return true;
+      return kv[1].name.toLowerCase().includes(q) || kv[1].countries.toLowerCase().includes(q) || kv[0].toLowerCase().includes(q);
+    }).map(function(kv){
+      var k=kv[0], v=kv[1];
+      var sel = k===selCurr;
+      return '<div class="curr-row'+(sel?' selected':'')+'" onclick="pickAdvCurr(''+k+'')" role="button" tabindex="0" aria-pressed="'+sel+'">'
+        +'<span class="curr-row-flag">'+v.flag+'</span>'
+        +'<div style="flex:1;min-width:0;">'
+        +'<div class="curr-row-name">'+v.name+'</div>'
+        +'<div class="curr-row-region">'+v.countries+'</div>'
+        +'</div>'
+        +'<span class="curr-row-check">✓</span>'
+        +'</div>';
+    }).join('');
+    list.innerHTML = html || '<div style="color:var(--muted);padding:12px;text-align:center;font-size:13px;">No curricula found</div>';
+  }
+
+  // ── Populate number format list ──
+  function buildFormatList(){
+    var list = document.getElementById('adv-format-list'); if(!list) return;
+    list.innerHTML = Object.entries(NUM_FORMATS).map(function(kv){
+      var k=kv[0], v=kv[1];
+      var sel = k===selNumFmt;
+      return '<div class="lang-row'+(sel?' selected':'')+'" onclick="pickAdvFmt(''+k+'')" role="button" tabindex="0">'
+        +'<span style="font-family:'Fredoka One',cursive;font-size:18px;min-width:60px;">'+v.example+'</span>'
+        +'<span class="lang-row-name" style="font-size:13px;">'+v.regions.join(', ')+'</span>'
+        +'<span class="lang-row-check">✓</span>'
+        +'</div>';
+    }).join('');
+  }
+
+  // ── Open advanced selector ──
+  window.openAdvanced = function(focus){
+    document.getElementById('rs-default-view').style.display = 'none';
+    document.getElementById('rs-advanced-view').classList.add('open');
+    buildLangList(); buildCurrList(); buildFormatList();
+    // Scroll to relevant section
+    var titles = {lang:'Choose language & curriculum', curr:'Choose curriculum', format:'Choose number format'};
+    var adv = document.getElementById('rs-adv-title');
+    if(adv) adv.textContent = titles[focus] || 'Settings';
+    // Scroll target section into view
+    var sections = {lang:'adv-lang-section', curr:'adv-curr-section', format:'adv-format-section'};
+    var targetId = sections[focus];
+    if(targetId) setTimeout(function(){
+      var el = document.getElementById(targetId); if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    }, 80);
+  };
+
+  // ── Close advanced, return to confirm ──
+  window.closeAdvanced = function(){
+    document.getElementById('rs-advanced-view').classList.remove('open');
+    document.getElementById('rs-default-view').style.display = 'block';
+    refreshConfirmCard();
+  };
+
+  // ── Apply and go to landing ──
+  window.applyAdvanced = function(){
+    closeAdvanced();
+    // Small delay so confirm card updates visually before confirming
+    setTimeout(function(){ confirmRegion(); }, 120);
+  };
+
+  // ── Pick language ──
+  window.pickAdvLang = function(k){
+    selLang = k;
+    // Update ARIA
+    document.querySelectorAll('#adv-lang-list .lang-row').forEach(function(el){
+      el.classList.toggle('selected', el.onclick && el.getAttribute('onclick') && el.getAttribute('onclick').includes("'"+k+"'"));
+    });
+    buildLangList();
+  };
+
+  // ── Pick curriculum ──
+  window.pickAdvCurr = function(k){
+    selCurr = k;
+    buildCurrList();
+  };
+
+  // ── Pick format ──
+  window.pickAdvFmt = function(k){
+    selNumFmt = k;
+    buildFormatList();
+  };
+
+  // ── Filter functions ──
+  window.filterAdvLang = function(q){ buildLangList(q); };
+  window.filterAdvCurr = function(q){ buildCurrList(q); };
+
+  // ── Stub legacy wizard functions so existing JS doesn't crash ──
+  window.wizardNext  = function(){};
+  window.wizardBack  = function(){};
+  window.selectContinent = function(){};
+  window.showContinent   = function(){};
+  window.pickCurr        = function(k){ selCurr=k; buildCurrList(); };
+  window.filterCurricula = function(q){ buildCurrList(q); };
+  window.filterLangs     = function(q){ buildLangList(q); };
+  window.selectLang      = function(k){ selLang=k; buildLangList(); };
+  window.showNumFmtOverride   = function(){ openAdvanced('format'); };
+  window.showGradeLblOverride = function(){ openAdvanced('format'); };
+  window.updateConfirmCard    = refreshConfirmCard;
+
+  // ── When returning to region-select screen, reset to default view ──
+  var origShowScreen = showScreen;
+  showScreen = function(id){
+    origShowScreen(id);
+    if(id === 'region-select'){
+      var dv = document.getElementById('rs-default-view');
+      var av = document.getElementById('rs-advanced-view');
+      if(dv) dv.style.display = 'block';
+      if(av) av.classList.remove('open');
+      refreshConfirmCard();
+    }
+  };
+
+})();
+
+/* ══════════════════════════════════════════════
+   PHASE 0 RESEARCH ENGINE
+   Nigeria Pilot · NERDC Primary 4-6
+   Two-classroom RCT: Intervention vs Control
+══════════════════════════════════════════════ */
+
+// ── PILOT STATE ──
+const PILOT = {
+  condition: null,
+  school: '',
+  classLabel: '',
+  teacherId: '',
+  get isConfigured(){ return !!this.condition && !!this.school; },
+  load(){
+    const saved = APP.store.get('pilot_setup');
+    if(saved){ this.condition=saved.condition; this.school=saved.school; this.classLabel=saved.classLabel; this.teacherId=saved.teacherId; }
+  },
+  save(){
+    APP.store.set('pilot_setup',{condition:this.condition,school:this.school,classLabel:this.classLabel,teacherId:this.teacherId});
+  }
+};
+PILOT.load();
+
+function anonymiseId(name, code){
+  const raw = (name||'guest').toLowerCase().trim() + '|' + (code||'').toLowerCase().trim();
+  let h = 5381;
+  for(let i=0;i<raw.length;i++) h = ((h<<5)+h) + raw.charCodeAt(i);
+  return 'S' + (Math.abs(h) % 900000 + 100000);
+}
+
+function pilotId(){
+  return 'NGA-' + PILOT.school.replace(/\s+/g,'').toUpperCase().slice(0,6) + '-' + PILOT.classLabel.replace(/\s+/g,'').toUpperCase().slice(0,4);
+}
+
+// Session logging — hooked into endGame
+function logResearchSession(G, student){
+  if(!PILOT.isConfigured) return;
+  const anonId = student ? anonymiseId(student.name, student.code) : 'GUEST';
+  const entry = {
+    ts: new Date().toISOString(),
+    pilot_id: pilotId(),
+    condition: PILOT.condition,
+    school: PILOT.school,
+    class_label: PILOT.classLabel,
+    teacher_id: PILOT.teacherId,
+    anon_id: anonId,
+    stage: G.stage ? G.stage.lbl : '',
+    std_code: G.stage ? G.stage.std : '',
+    algorithm: G.algo || '',
+    q_total: G.totalQ || 0,
+    q_correct: G.correct || 0,
+    accuracy_pct: G.totalQ > 0 ? Math.round(G.correct/G.totalQ*100) : 0,
+    score: G.score || 0,
+    best_streak: G.bestStreak || 0,
+    hint_used: G.hintUsed ? 1 : 0,
+    xp_earned: G.xpEarned || 0,
+    box_correct: (G.skillData && G.skillData.box) ? G.skillData.box.correct : 0,
+    box_total: (G.skillData && G.skillData.box) ? G.skillData.box.total : 0,
+    pp_correct: (G.skillData && G.skillData.pp) ? G.skillData.pp.correct : 0,
+    pp_total: (G.skillData && G.skillData.pp) ? G.skillData.pp.total : 0,
+  };
+  const logs = APP.store.get('research_sessions') || [];
+  logs.push(entry);
+  APP.store.set('research_sessions', logs);
+}
+
+// Hook into endGame
+const _origEndGame = endGame;
+endGame = function(){
+  _origEndGame.apply(this, arguments);
+  setTimeout(function(){ if(APP.G && APP.student) logResearchSession(APP.G, APP.student); }, 200);
+};
+
+// ── CONDITION TAGGING ──
+function setCondition(cond, btn){
+  PILOT.condition = cond;
+  document.querySelectorAll('#cond-intervention,#cond-control').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var label = cond==='intervention' ? '🎮 Intervention (Box + Partial Products)' : '📝 Control (Standard Algorithm)';
+  var disp = document.getElementById('cond-display');
+  if(disp){ disp.textContent = label; disp.style.color = cond==='intervention' ? 'var(--indigo)' : 'var(--green-dk)'; }
+}
+
+function savePilotSetup(){
+  PILOT.school     = document.getElementById('pilot-school').value.trim();
+  PILOT.classLabel = document.getElementById('pilot-class').value.trim();
+  PILOT.teacherId  = document.getElementById('pilot-teacher').value.trim();
+  if(!PILOT.condition){ alert('Please select a classroom condition first.'); return; }
+  if(!PILOT.school)   { alert('Please enter a school name.'); return; }
+  PILOT.save();
+  var status = document.getElementById('pilot-setup-status');
+  if(status){ status.textContent = 'Saved — Pilot ID: ' + pilotId(); status.style.color='var(--green-dk)'; }
+  updateAssessCount();
+}
+
+function updateAssessCount(){
+  var assessments = APP.store.get('research_assessments') || [];
+  var sessions    = APP.store.get('research_sessions')    || [];
+  var el = document.getElementById('assess-count');
+  if(el) el.textContent = assessments.length;
+  var ea = document.getElementById('export-assess-count');
+  if(ea) ea.textContent = assessments.length + ' records';
+  var es = document.getElementById('export-session-count');
+  if(es) es.textContent = sessions.length + ' records';
+  var dc = document.getElementById('d-assessments-count');
+  if(dc) dc.textContent = assessments.length;
+  var ra = document.getElementById('rbar-assessments'); if(ra) ra.textContent=assessments.length;
+  var rs = document.getElementById('rbar-sessions');    if(rs) rs.textContent=sessions.length;
+}
+
+// ── FIXED NERDC ASSESSMENT INSTRUMENT ──
+// 20 items fixed across all students. P4 band (items 1-8), P5 (9-15), P6 (16-20).
+const NERDC_ITEMS = [
+  {id:'N01',n1:6,  n2:14, band:'P4',std:'NERDC Prim 4'},
+  {id:'N02',n1:8,  n2:23, band:'P4',std:'NERDC Prim 4'},
+  {id:'N03',n1:7,  n2:35, band:'P4',std:'NERDC Prim 4'},
+  {id:'N04',n1:9,  n2:42, band:'P4',std:'NERDC Prim 4'},
+  {id:'N05',n1:12, n2:13, band:'P4',std:'NERDC Prim 4'},
+  {id:'N06',n1:21, n2:14, band:'P4',std:'NERDC Prim 4'},
+  {id:'N07',n1:31, n2:12, band:'P4',std:'NERDC Prim 4'},
+  {id:'N08',n1:24, n2:11, band:'P4',std:'NERDC Prim 4'},
+  {id:'N09',n1:23, n2:47, band:'P5',std:'NERDC Prim 5'},
+  {id:'N10',n1:34, n2:26, band:'P5',std:'NERDC Prim 5'},
+  {id:'N11',n1:43, n2:38, band:'P5',std:'NERDC Prim 5'},
+  {id:'N12',n1:56, n2:24, band:'P5',std:'NERDC Prim 5'},
+  {id:'N13',n1:124,n2:6,  band:'P5',std:'NERDC Prim 5'},
+  {id:'N14',n1:213,n2:4,  band:'P5',std:'NERDC Prim 5'},
+  {id:'N15',n1:312,n2:3,  band:'P5',std:'NERDC Prim 5'},
+  {id:'N16',n1:134,n2:12, band:'P6',std:'NERDC Prim 6'},
+  {id:'N17',n1:243,n2:23, band:'P6',std:'NERDC Prim 6'},
+  {id:'N18',n1:312,n2:14, band:'P6',std:'NERDC Prim 6'},
+  {id:'N19',n1:421,n2:16, band:'P6',std:'NERDC Prim 6'},
+  {id:'N20',n1:234,n2:32, band:'P6',std:'NERDC Prim 6'},
+];
+
+var ASSESS = {type:null,items:[],idx:0,answers:[],startTs:null,anonId:''};
+
+function launchFixedAssessment(type){
+  if(!PILOT.isConfigured){
+    alert('Please complete the Pilot Setup first (school name and classroom condition required).');
+    return;
+  }
+  var name = prompt('Enter student name or ID (will be anonymised — not stored):');
+  if(!name) return;
+  ASSESS.type    = type;
+  ASSESS.items   = NERDC_ITEMS.slice();
+  ASSESS.idx     = 0;
+  ASSESS.answers = [];
+  ASSESS.startTs = new Date().toISOString();
+  ASSESS.anonId  = anonymiseId(name.trim(), PILOT.classLabel);
+  var typeLabel = type === 'pre' ? 'Pre-Assessment' : 'Post-Assessment';
+  var lbl = document.getElementById('assess-type-label');
+  if(lbl) lbl.textContent = typeLabel;
+  document.getElementById('assess-question-area').style.display='block';
+  document.getElementById('assess-result-area').style.display='none';
+  showScreen('assessment');
+  renderAssessItem();
+}
+
+function renderAssessItem(){
+  var item  = ASSESS.items[ASSESS.idx];
+  var total = ASSESS.items.length;
+  var pct   = Math.round((ASSESS.idx / total) * 100);
+  document.getElementById('assess-progress-fill').style.width = pct + '%';
+  document.getElementById('assess-counter').textContent = (ASSESS.idx+1) + ' / ' + total;
+  document.getElementById('assess-band').textContent = item.band + ' · ' + item.std;
+  document.getElementById('assess-n1').textContent = item.n1;
+  document.getElementById('assess-n2').textContent = item.n2;
+  var inp = document.getElementById('assess-inp');
+  inp.value = ''; inp.className = 'assess-inp';
+  inp.style.borderColor = 'var(--border)'; inp.style.background = 'var(--surface2)';
+  document.getElementById('assess-fb').textContent = '';
+  setTimeout(function(){ inp.focus(); }, 80);
+}
+
+function submitAssessAnswer(){
+  var inp     = document.getElementById('assess-inp');
+  var val     = parseInt(inp.value, 10);
+  if(isNaN(val)){
+    inp.classList.add('shk');
+    setTimeout(function(){ inp.classList.remove('shk'); }, 320);
+    return;
+  }
+  var item    = ASSESS.items[ASSESS.idx];
+  var correct = item.n1 * item.n2;
+  var isOk    = val === correct;
+  ASSESS.answers.push({
+    item_id: item.id, band: item.band, std: item.std,
+    n1: item.n1, n2: item.n2,
+    answer: val, correct: correct, is_correct: isOk ? 1 : 0,
+  });
+  inp.style.borderColor = isOk ? 'var(--green)' : 'var(--red)';
+  inp.style.background  = isOk ? 'var(--green-lt)' : 'var(--red-lt)';
+  var fb = document.getElementById('assess-fb');
+  fb.textContent = isOk ? 'Correct!' : (item.n1 + ' x ' + item.n2 + ' = ' + correct);
+  fb.style.color = isOk ? 'var(--green-dk)' : 'var(--red)';
+  setTimeout(function(){
+    ASSESS.idx++;
+    if(ASSESS.idx < ASSESS.items.length){ renderAssessItem(); }
+    else { finishAssessment(); }
+  }, isOk ? 600 : 1600);
+}
+
+function finishAssessment(){
+  var total   = ASSESS.answers.length;
+  var correct = ASSESS.answers.filter(function(a){return a.is_correct;}).length;
+  var acc     = Math.round(correct/total*100);
+  var byBand  = {};
+  ASSESS.answers.forEach(function(a){
+    if(!byBand[a.band]) byBand[a.band]={correct:0,total:0};
+    byBand[a.band].total++;
+    if(a.is_correct) byBand[a.band].correct++;
+  });
+  var record = {
+    ts: new Date().toISOString(), start_ts: ASSESS.startTs,
+    type: ASSESS.type, pilot_id: pilotId(),
+    condition: PILOT.condition, school: PILOT.school,
+    class_label: PILOT.classLabel, teacher_id: PILOT.teacherId,
+    anon_id: ASSESS.anonId,
+    total_items: total, total_correct: correct, accuracy_pct: acc,
+    p4_correct: byBand['P4'] ? byBand['P4'].correct : null,
+    p4_total:   byBand['P4'] ? byBand['P4'].total   : null,
+    p5_correct: byBand['P5'] ? byBand['P5'].correct : null,
+    p5_total:   byBand['P5'] ? byBand['P5'].total   : null,
+    p6_correct: byBand['P6'] ? byBand['P6'].correct : null,
+    p6_total:   byBand['P6'] ? byBand['P6'].total   : null,
+    item_responses: JSON.stringify(ASSESS.answers),
+  };
+  var assessments = APP.store.get('research_assessments') || [];
+  assessments.push(record);
+  APP.store.set('research_assessments', assessments);
+  document.getElementById('assess-result-type').textContent = ASSESS.type==='pre' ? 'Pre-Assessment Complete' : 'Post-Assessment Complete';
+  document.getElementById('assess-result-score').textContent = correct + ' / ' + total;
+  document.getElementById('assess-result-pct').textContent  = acc + '%';
+  document.getElementById('assess-result-id').textContent   = 'Anon ID: ' + ASSESS.anonId;
+  var bandHtml = Object.keys(byBand).map(function(b){
+    var d=byBand[b];
+    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="font-weight:800;">'+b+'</span><span dir="ltr">'+d.correct+'/'+d.total+' · '+Math.round(d.correct/d.total*100)+'%</span></div>';
+  }).join('');
+  document.getElementById('assess-band-breakdown').innerHTML = bandHtml;
+  document.getElementById('assess-question-area').style.display='none';
+  document.getElementById('assess-result-area').style.display='block';
+  updateAssessCount();
+}
+
+// ── CSV EXPORT ──
+function toCSV(rows){
+  if(!rows.length) return '';
+  var headers = Object.keys(rows[0]);
+  function esc(v){
+    var s=String(v==null?'':v);
+    return (s.indexOf(',')>=0||s.indexOf('"')>=0||s.indexOf('\n')>=0) ? '"'+s.replace(/"/g,'""')+'"' : s;
+  }
+  return [headers.join(',')].concat(rows.map(function(r){return headers.map(function(h){return esc(r[h]);}).join(',');})).join('\n');
+}
+
+function downloadCSV(csv, filename){
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url; a.download=filename; a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+}
+
+function exportSessionLogs(){
+  var logs=APP.store.get('research_sessions')||[];
+  if(!logs.length){setExportStatus('No session logs yet.',true);return;}
+  var d=new Date().toISOString().slice(0,10);
+  downloadCSV(toCSV(logs),'numara_sessions_'+d+'.csv');
+  setExportStatus('Exported '+logs.length+' session records');
+}
+
+function exportAssessmentData(){
+  var raw=APP.store.get('research_assessments')||[];
+  if(!raw.length){setExportStatus('No assessment records yet.',true);return;}
+  var d=new Date().toISOString().slice(0,10);
+  downloadCSV(toCSV(raw),'numara_assessments_'+d+'.csv');
+  setExportStatus('Exported '+raw.length+' assessment records');
+}
+
+function exportFullBundle(){
+  var sessions=APP.store.get('research_sessions')||[];
+  var assessments=APP.store.get('research_assessments')||[];
+  var bundle={
+    setup:{export_ts:new Date().toISOString(),pilot_id:pilotId(),condition:PILOT.condition,school:PILOT.school,class_label:PILOT.classLabel,teacher_id:PILOT.teacherId,session_count:sessions.length,assess_count:assessments.length,app_version:'Numara-Phase0-v1.0',curriculum:'NERDC Nigeria'},
+    sessions:sessions,
+    assessments:assessments
+  };
+  var blob=new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  var d=new Date().toISOString().slice(0,10);
+  a.href=url; a.download='numara_bundle_'+PILOT.condition+'_'+d+'.json'; a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  setExportStatus('Bundle: '+sessions.length+' sessions, '+assessments.length+' assessments');
+}
+
+function setExportStatus(msg,isError){
+  var el=document.getElementById('export-status');
+  if(el){el.textContent=msg; el.style.color=isError?'var(--red)':'var(--green-dk)';}
+}
+
+// Restore UI on load
+(function(){
+  if(PILOT.condition){
+    var btn=document.getElementById('cond-'+PILOT.condition);
+    if(btn) setCondition(PILOT.condition,btn);
+  }
+  if(PILOT.school){
+    var s=document.getElementById('pilot-school'); if(s) s.value=PILOT.school;
+    var c=document.getElementById('pilot-class');  if(c) c.value=PILOT.classLabel;
+    var t=document.getElementById('pilot-teacher');if(t) t.value=PILOT.teacherId;
+    var st=document.getElementById('pilot-setup-status');
+    if(st){st.textContent='Setup loaded — Condition: '+PILOT.condition; st.style.color='var(--green-dk)';}
+  }
+  updateAssessCount();
+  updateResearchBar();
+  updateTopbarCondition();
+})();
+
+/* ── TOPBAR CONDITION BADGE ── */
+function updateTopbarCondition(){
+  var badge=document.getElementById('t-condition-badge');
+  var chip=document.getElementById('t-pilot-id-chip');
+  if(!badge) return;
+  if(PILOT.condition==='intervention'){
+    badge.className='pilot-condition-badge intervention';
+    badge.textContent='🎮 Intervention';
+  } else if(PILOT.condition==='control'){
+    badge.className='pilot-condition-badge control';
+    badge.textContent='📝 Control';
+  } else {
+    badge.className='pilot-condition-badge none';
+    badge.textContent='⚠ No condition set';
+  }
+  if(chip) chip.textContent = PILOT.isConfigured ? pilotId() : '—';
+}
+
+/* ── RESEARCH OVERVIEW BAR ── */
+function updateResearchBar(){
+  var sessions    = (APP.store.get('research_sessions')    || []).length;
+  var assessments = (APP.store.get('research_assessments') || []).length;
+  var s=document.getElementById('rbar-sessions');    if(s) s.textContent=sessions;
+  var a=document.getElementById('rbar-assessments'); if(a) a.textContent=assessments;
+  var dc=document.getElementById('d-assessments-count'); if(dc) dc.textContent=assessments;
+  var lbl=document.getElementById('rbar-condition-lbl');
+  if(lbl){
+    if(PILOT.condition==='intervention') lbl.textContent='🎮 Intervention — Box method + Partial products';
+    else if(PILOT.condition==='control') lbl.textContent='📝 Control — Standard algorithm classroom';
+    else lbl.textContent='⚠ Configure condition in Pilot Setup tab';
+  }
+  updateTopbarCondition();
+}
+
+/* ── LANDING PAGE: update badges when region confirmed ── */
+var _origConfirmRegion = typeof confirmRegion === 'function' ? confirmRegion : null;
+if(_origConfirmRegion){
+  confirmRegion = function(){
+    _origConfirmRegion.apply(this, arguments);
+    updateLandingBadges();
+  };
+}
+function updateLandingBadges(){
+  var curr=APP.getCurriculum();
+  var cb=document.getElementById('land-curr-badge');
+  if(cb) cb.textContent=curr ? curr.name.split('(')[0].trim() : 'NERDC aligned';
+  var lb=document.getElementById('land-lang-badge');
+  var lang=typeof LANGS !== 'undefined' ? LANGS[APP.lang] : null;
+  if(lb && lang) lb.textContent=lang.name;
+}
+
+/* ── OVERRIDE setCondition to also update topbar ── */
+var _origSetCondition = setCondition;
+setCondition = function(cond, btn){
+  _origSetCondition(cond, btn);
+  updateTopbarCondition();
+};
+
+/* ── OVERRIDE savePilotSetup to also update bar ── */
+var _origSavePilotSetup = savePilotSetup;
+savePilotSetup = function(){
+  _origSavePilotSetup.apply(this, arguments);
+  updateTopbarCondition();
+  updateResearchBar();
+};
+
+/* ── OVERRIDE launchFixedAssessment to show anon ID in header ── */
+var _origLaunchFixedAssessment = launchFixedAssessment;
+launchFixedAssessment = function(type){
+  _origLaunchFixedAssessment.apply(this, arguments);
+  var chip=document.getElementById('assess-anon-id');
+  if(chip && ASSESS.anonId) chip.textContent='ID: '+ASSESS.anonId;
+};
+
+/* ── OVERRIDE finishAssessment to call updateResearchBar ── */
+var _origFinishAssessment = finishAssessment;
+finishAssessment = function(){
+  _origFinishAssessment.apply(this, arguments);
+  updateResearchBar();
+};
+
+/* ── OVERRIDE enterTeacher to also update bar on entry ── */
+var _origEnterTeacher = typeof enterTeacher === 'function' ? enterTeacher : null;
+if(_origEnterTeacher){
+  enterTeacher = function(){
+    _origEnterTeacher.apply(this, arguments);
+    setTimeout(updateResearchBar, 100);
+  };
+}
+
 </script>
+
+<!-- ASSESSMENT SCREEN — Nigeria Pilot Phase 0 -->
+<div class="screen" id="assessment">
+  <!-- Sticky top bar -->
+  <div class="assess-top">
+    <button class="btn btn-ghost btn-sm" onclick="showScreen('teacher')" style="flex-shrink:0;">← Back</button>
+    <div style="flex:1;">
+      <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);">Nigeria Pilot · NERDC fixed assessment</div>
+      <div id="assess-type-label" style="font-size:15px;font-weight:900;color:var(--indigo);">Assessment</div>
+    </div>
+    <div id="assess-anon-id" style="font-family:monospace;font-size:11px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:3px 8px;color:var(--muted);"></div>
+  </div>
+
+  <div class="assess-body">
+    <!-- Progress -->
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:6px;">
+        <span id="assess-band" style="color:var(--indigo);">P4 · NERDC Prim 4</span>
+        <span id="assess-counter" dir="ltr">1 / 20</span>
+      </div>
+      <div style="height:6px;background:var(--border);border-radius:50px;overflow:hidden;">
+        <div id="assess-progress-fill" style="height:100%;background:linear-gradient(90deg,var(--indigo),var(--purple));border-radius:50px;transition:width .35s ease;width:0%;"></div>
+      </div>
+    </div>
+
+    <!-- Question area -->
+    <div id="assess-question-area">
+      <div class="assess-question-card">
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);">Calculate</div>
+        <div class="problem" dir="ltr">
+          <span id="assess-n1">24</span>
+          <span style="color:var(--muted);font-size:48px;margin:0 6px;">×</span>
+          <span id="assess-n2">13</span>
+        </div>
+        <div style="font-size:13px;color:var(--muted);font-weight:700;">Work this out and enter your answer below</div>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+        <input id="assess-inp" type="number" inputmode="numeric" autocomplete="off"
+          style="flex:1;font-family:'Fredoka One',cursive;font-size:36px;padding:12px 18px;border:2px solid var(--border);border-radius:var(--rsm);outline:none;color:var(--text);background:var(--surface2);transition:border-color .2s,background .2s;text-align:center;"
+          placeholder="?" onkeydown="if(event.key==='Enter')submitAssessAnswer()" aria-label="Your answer">
+        <button class="btn btn-primary" onclick="submitAssessAnswer()" style="padding:14px 22px;font-size:15px;flex-shrink:0;border-radius:var(--rsm);">
+          ✓ Submit
+        </button>
+      </div>
+      <div id="assess-fb" style="font-size:16px;font-weight:800;min-height:24px;text-align:center;margin-bottom:12px;" dir="ltr"></div>
+      <div class="assess-lock-notice">🔒 Research instrument · 20 fixed items · No hints available</div>
+    </div>
+
+    <!-- Results area -->
+    <div id="assess-result-area" style="display:none;">
+      <div class="card" style="padding:32px 24px;text-align:center;margin-bottom:16px;border:2px solid var(--green);">
+        <div style="font-size:40px;margin-bottom:10px;">✅</div>
+        <div id="assess-result-type" style="font-size:18px;font-weight:900;margin-bottom:4px;">Assessment complete</div>
+        <div id="assess-result-id" style="font-size:11px;color:var(--muted);font-weight:800;font-family:monospace;margin-bottom:18px;"></div>
+        <div style="font-family:'Fredoka One',cursive;font-size:56px;color:var(--indigo);line-height:1;" id="assess-result-score" dir="ltr">0/20</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:28px;color:var(--muted);margin-top:4px;" id="assess-result-pct" dir="ltr">0%</div>
+      </div>
+      <div class="card" style="padding:18px;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:900;margin-bottom:12px;">Score by curriculum band</div>
+        <div id="assess-band-breakdown"></div>
+      </div>
+      <div style="background:var(--green-lt);border:1px solid var(--green);border-radius:var(--rsm);padding:12px 16px;font-size:12px;font-weight:800;color:var(--green-dk);text-align:center;margin-bottom:16px;">
+        ✓ Record saved and anonymised — no names stored. Export from the dashboard.
+      </div>
+      <button class="btn btn-primary btn-wide" onclick="showScreen('teacher');updateResearchBar();" style="border-radius:var(--rsm);">
+        ← Back to dashboard
+      </button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
